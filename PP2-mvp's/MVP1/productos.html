@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Publicar Producto</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="container">
+
+    <h1>Publicar Producto</h1>
+
+    <form id="productoForm">
+
+        <input
+            type="text"
+            id="nombreProducto"
+            placeholder="Nombre del producto"
+            required
+        >
+
+        <input
+            type="number"
+            id="precio"
+            placeholder="Precio"
+            required
+        >
+
+        <select id="categoria" required>
+            <option value="">Seleccione una categoría</option>
+            <option>Remeras</option>
+            <option>Pantalones</option>
+            <option>Buzos</option>
+            <option>Zapatillas</option>
+            <option>Accesorios</option>
+        </select>
+
+        <input
+            type="file"
+            id="imagen"
+            accept="image/*"
+            required
+        >
+
+        <button type="submit">
+            Publicar Producto
+        </button>
+
+    </form>
+
+    <p id="mensaje"></p>
+
+</div>
+
+<script src="js/producto.js"></script>
+
+</body>
+</html>
