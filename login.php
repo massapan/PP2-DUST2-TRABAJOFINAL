@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
     <title>Iniciar Sesión - Ituzaingó a un toque</title>
     <link rel="stylesheet" href="style.css">
 </head>

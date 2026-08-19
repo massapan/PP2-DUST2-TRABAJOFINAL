@@ -1,3 +1,32 @@
+body{
+    background:#00953c;
+    display:flex;
+    flex-direction: column;  /* Apila los elementos uno arriba del otro */
+    align-items: center;     /* Centra el contenido horizontalmente */
+    justify-content: center; /* Centra el contenido verticalmente */
+    height:100vh;
+}
+.TextoInicio {
+    text-align:center;
+    margin-bottom:20px;
+    color:#000000;
+}
+.container{
+    background:rgb(255, 255, 255);
+    padding: 2%;
+    border-radius:10px;
+    width:30%;
+    box-shadow: 50px 25px 5px rgba(0, 0, 0, 0.342);
+}
+.logo{
+    position:relative;
+    width:13%;
+    height: 23%;
+    border-radius: 20%;
+    margin-bottom: 3%;
+    box-shadow: 50px 25px 5px rgba(0, 0, 0, 0.342);
+}
+
 .sanguche{
     display:flex;
     justify-content:center;
@@ -11,30 +40,6 @@
     box-sizing:border-box;
     font-family:Arial, Helvetica, sans-serif;
 }
-
-body{
-    background:#126954;
-    display:flex;
-    flex-direction: column;  /* Apila los elementos uno arriba del otro */
-    align-items: center;     /* Centra el contenido horizontalmente */
-    justify-content: center; /* Centra el contenido verticalmente */
-    height:100vh;
-}
-
-.container{
-    background:white;
-    padding:30px;
-    border-radius:10px;
-    width:400px;
-    box-shadow:0 50px 50px rgba(0,0,0,0.1);
-}
-
-h1{
-    text-align:center;
-    margin-bottom:20px;
-    background:#f6f6f8;
-}
-
 input{
     width:100%;
     padding:12px;
@@ -135,22 +140,8 @@ header{
 }
 
 /*Logo*/
-.logo{
-    width:150px;
-    display:block;
-    margin:0 auto 20px;
-    border-radius:25px;
-    position:absolute;
-    top:20px;
-    left:50%;
-    transform:translateX(-50%);
-}
 
-.descripcion{
-    text-align:center;
-    margin-bottom:20px;
-    color:#555;
-}
+
 
 /*Logo header*/
 .logo-header{
