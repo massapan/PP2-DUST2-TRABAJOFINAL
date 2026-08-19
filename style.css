@@ -6,27 +6,55 @@ body{
     justify-content: center; /* Centra el contenido verticalmente */
     height:100vh;
 }
-.TextoInicio {
-    text-align:center;
-    margin-bottom:20px;
-    color:#000000;
+
+.fondo {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+
+    background-image: url('img/fondo.png');
+    background-repeat: no-repeat; /*evita mosaico*/
+    background-position: left center; /*cubre el contenedor completo*/
+    background-size: cover;
+                       /*de izq a der,  hasta donde se ve al 100, cuanto desaparece*/
+    mask-image: linear-gradient(to right, black 40%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, black 40%, transparent 100%);
 }
-.container{
-    background:rgb(255, 255, 255);
-    padding: 2%;
-    border-radius:10px;
-    width:30%;
-    box-shadow: 50px 25px 5px rgba(0, 0, 0, 0.342);
+
+.fondo::before {
+    content: '';
+    position: absolute;
+    inset: 0;      /* top, right, bottom, left = 0 */
+    background: #00953cce;
 }
 .logo{
     position:relative;
     width:13%;
     height: 23%;
-    border-radius: 20%;
+    border-radius: 10%;
     margin-bottom: 3%;
-    box-shadow: 50px 25px 5px rgba(0, 0, 0, 0.342);
+    box-shadow: 25px 25px 5px rgba(0, 0, 0, 0.342);
 }
-
+.container{
+    background:rgb(255, 255, 255);
+    padding: 2%;
+    border-radius:10%;
+    width:35%;
+    box-shadow: 25px 25px 5px rgba(0, 0, 0, 0.342);
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.NombreInicio{
+    text-align:center;
+    color:#000000;
+}
+.TextoInicio {
+    text-align:center;
+    margin-bottom:20px;
+    color:#000000;
+}
 .sanguche{
     display:flex;
     justify-content:center;
