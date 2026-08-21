@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
+    <div class="fondo"></div>
     <div class="container">
         
         <h1>Iniciar Sesión</h1>
@@ -31,11 +31,12 @@
             <button type="submit">Entrar</button>
             
         </form>
-<br>
+        <div>
         <p>¿Olvidaste tu contraseña? <a href="recuperar.html">Recuperala acá</a>.</p>
+        </div>
+        <div>
         <p>¿No tenés cuenta? <a href="registro.php">Registrate</a>.</p>
-
+        </div>
     </div>
-
 </body>
 </html>
