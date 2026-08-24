@@ -7,8 +7,8 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-    <div class="contenedor">
+    <div class="fondo"></div>
+    <div class="container">
         
         <?php
         include 'conexion.php';
@@ -43,7 +43,7 @@
             } else {
                 echo "<h2 style='color: red;'>Error</h2>";
                 echo "<p>No encontramos ninguna cuenta registrada con ese correo.</p>";
-                echo "<p><a href='recuperar.html'>Volver a intentar</a></p>";
+                echo "<p><a href='recuperar.html' class='Boton-secundario'>Volver a intentar</a></p>";
             }
 
             $stmt->close();
@@ -54,6 +54,7 @@
         }
         ?>
 
-    </div> </body>
+    </div> 
+</body>
 </html>
 <?php ob_end_flush(); ?>

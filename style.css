@@ -28,16 +28,16 @@ body{
     inset: 0;      /* top, right, bottom, left = 0 */
     background: #00953cce;
 }
-.logo{
+.logo{ 
     position:relative;
-    width:13%;
-    height: 23%;
+    width:8%;
+    height: 18%;
     border-radius: 10%;
     margin-bottom: 3%;
     box-shadow: 25px 25px 5px rgba(0, 0, 0, 0.342);
 }
 .container{
-    background:rgb(255, 255, 255);
+    background:rgb(255, 254, 254);
     padding: 2%;
     border-radius:10%;
     width:35%;
@@ -55,6 +55,26 @@ body{
     margin-bottom:20px;
     color:#000000;
 }
+.Boton-secundario{
+    display:block;
+    width:100%;
+    padding:12px;
+    border-radius:5px;
+    background:#2d77c7;
+    color:white;
+    text-align:center;
+    text-decoration:none;
+    box-sizing:border-box;
+}
+
+.Boton-secundario:hover{
+    background:#0057b3f6;
+}
+
+
+
+
+
 .sanguche{
     display:flex;
     justify-content:center;

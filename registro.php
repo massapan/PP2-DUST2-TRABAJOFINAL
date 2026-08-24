@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
+<div class="fondo"></div>
     
 <div class="container">
     <h1>Crear Cuenta</h1>

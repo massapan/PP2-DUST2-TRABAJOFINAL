@@ -7,9 +7,9 @@
 <body>
     <div class="fondo"></div>
     <div class="container">
-        
+        <div>
         <h1>Iniciar Sesión</h1>
-
+        </div>
         <?php
         if (isset($_GET['error'])) {
             if ($_GET['error'] == 'incorrecta') {
@@ -31,12 +31,21 @@
             <button type="submit">Entrar</button>
             
         </form>
-        <div>
-        <p>¿Olvidaste tu contraseña? <a href="recuperar.html">Recuperala acá</a>.</p>
+
+        <div style="margin-top: 10px;">
+        <p>¿Olvidaste tu contraseña?</p>
         </div>
         <div>
-        <p>¿No tenés cuenta? <a href="registro.php">Registrate</a>.</p>
+            <a href="recuperar.html" class="Boton-secundario">Recuperar contraseña</a>
         </div>
+
+        <div style="margin-top: 10px;">
+        <p>¿No tenés cuenta?</p>
+        </div>
+        <div>       
+        <a href="registro.php" class="Boton-secundario">Registrate</a>
+        </div>
+        
     </div>
 </body>
 </html>
