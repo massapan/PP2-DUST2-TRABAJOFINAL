@@ -16,12 +16,12 @@ if (!isset($_SESSION['usuario_id']) || $_SESSION['rol'] !== 'vendedor') {
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
+    <div class="fondo"></div>
     <div class="container">
         
         <h2>Registrar Local</h2>
         <br>
-        <p>Completá los datos de tu negocio para poder empezar a subir productos.</p>
+        <p>Completá los datos de tu negocio para empezar a subir productos.</p>
 <br>
         <form action="guardar_local.php" method="POST">
             

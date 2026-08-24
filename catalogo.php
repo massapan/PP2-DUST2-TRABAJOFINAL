@@ -19,7 +19,7 @@ $resultado = $conexion->query($sql);
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
+    <div class="fondo"></div>
     <div class="contenedor-catalogo">
         
         <h2>Catálogo de Productos</h2>

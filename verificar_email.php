@@ -8,8 +8,6 @@
 </head>
 <body>
     <div class="fondo"></div>
-    <div class="container">
-        
         <?php
         include 'conexion.php';
 
@@ -41,6 +39,7 @@
                 </div>  
                 <?php
             } else {
+                echo "<div class='container'>";
                 echo "<h2 style='color: red;'>Error</h2>";
                 echo "<p>No encontramos ninguna cuenta registrada con ese correo.</p>";
                 echo "<p><a href='recuperar.html' class='Boton-secundario'>Volver a intentar</a></p>";
@@ -53,8 +52,6 @@
             exit();
         }
         ?>
-
-    </div> 
 </body>
 </html>
 <?php ob_end_flush(); ?>

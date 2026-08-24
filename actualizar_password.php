@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
+    <div class="fondo"></div>
     <div class="container">
         
         <?php
@@ -34,7 +34,7 @@
                     echo "<h1 style='color: #178017;'>¡Contraseña actualizada!</h1>";
                     echo "<p>Tu clave se cambió con éxito en la base de datos.</p>";
                     // Apuntamos al login.php correcto
-                    echo "<br><p><a href='login.php' style='font-weight: bold;'>Ir a Iniciar Sesión</a></p>"; 
+                    echo "<br><p><a href='login.php' style='font-weight: bold;' class='Boton-secundario'>Ir a Iniciar Sesión</a></p>"; 
                 } else {
                     echo "<h2 style='color: red;'>Error</h2>";
                     echo "<p>Hubo un problema al actualizar: " . $stmt->error . "</p>";
