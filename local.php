@@ -15,7 +15,7 @@ if (!isset($_SESSION['usuario_id']) || $_SESSION['rol'] !== 'vendedor') {
     <title>Registrar Local - Ituzaingó a un toque</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="pagina-centrada">
     <div class="fondo"></div>
     <div class="container">
         

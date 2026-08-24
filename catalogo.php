@@ -15,10 +15,26 @@ $resultado = $conexion->query($sql);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catálogo de Productos - Ituzaingó a un toque</title>
+    <title>Catálogo de Productos</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+    <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom Header">
+        <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+            <span class="fs-4">Logo y nombre</span>
+        </a>
+        <ul class="nav nav-pills">
+            <li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Mapa</a></li>
+            <li class="nav-item"><a href="#" class="nav-link">Catálogo</a></li>
+            <li class="nav-item"><a href="#" class="nav-link">Favoritos</a></li>
+            <li class="nav-item"><a href="#" class="nav-link">???</a></li>
+            <li class="nav-item"><a href="#" class="nav-link">???</a></li>
+        </ul>
+    </header>
+
     <div class="fondo"></div>
     <div class="contenedor-catalogo">
         
@@ -30,9 +46,7 @@ $resultado = $conexion->query($sql);
         <div class="productos-grid" style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
             
             <?php 
-            // Verificamos si hay productos en la base de datos
             if ($resultado && $resultado->num_rows > 0): 
-                // El bucle while se repite por cada producto encontrado
                 while($producto = $resultado->fetch_assoc()): 
             ?>
                 

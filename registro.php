@@ -5,7 +5,7 @@
     <title>Registro - Ituzaingó a un toque</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="pagina-centrada">
 <div class="fondo"></div>
     
 <div class="container">

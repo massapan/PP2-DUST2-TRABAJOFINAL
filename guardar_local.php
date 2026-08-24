@@ -15,8 +15,9 @@ if (!isset($_SESSION['usuario_id']) || $_SESSION['rol'] !== 'vendedor') {
     <title>Resultado del Local - Ituzaingó a un toque</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
-
+<body class="pagina-centrada">
+    <div class="fondo"></div>
+    
     <div class="container">
         
         <?php
@@ -41,7 +42,7 @@ if (!isset($_SESSION['usuario_id']) || $_SESSION['rol'] !== 'vendedor') {
                     echo "<h2 style='color: #28a745;'>¡Tu local se ha registrado con éxito!</h2>";
                     echo "<p>El negocio <strong>$nombre_local</strong> ya está en nuestra base de datos.</p>";
                     echo "<p>Ya podés empezar a agregar tu mercadería para que la vean los compradores.</p>";
-                    echo "<br><a href='productos.php' style='font-weight: bold;'>Ir a cargar productos</a>";
+                    echo "<br><a href='productos.php' style='font-weight: bold;' class='Boton-secundario'>Ir a cargar productos</a>";
                 } else {
                     echo "<h2 style='color: red;'>Error al registrar</h2>";
                     echo "<p>Hubo un problema: " . $stmt->error . "</p>";

@@ -15,8 +15,8 @@ if (!isset($_SESSION['usuario_id']) || $_SESSION['rol'] !== 'vendedor') {
     <title>Cargar Producto - Ituzaingó a un toque</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
-
+<body class="pagina-centrada">
+    <div class="fondo"></div>
     <div class="container">
         
         <h2>Subir Nuevo Producto</h2>

@@ -1,9 +1,12 @@
 body{
     background:#00953c;
+}
+
+.pagina-centrada{
     display:flex;
-    flex-direction: column;  /* Apila los elementos uno arriba del otro */
-    align-items: center;     /* Centra el contenido horizontalmente */
-    justify-content: center; /* Centra el contenido verticalmente */
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     height:100vh;
 }
 
@@ -71,7 +74,31 @@ body{
     background:#0057b3f6;
 }
 
+ /*Header*/
 
+.Header{
+    background: #feffff;
+}
+
+.Header .nav-pills{
+    gap: 10px;
+}
+
+.Header .nav-link{
+    color: #00953cce;
+    border-color: #00953cce;
+    border: 1px solid #00953cce;
+    border-radius: 10px;
+}
+
+.Header .nav-link.active{
+    color: #ffffff;
+    background: #00953cce;
+}
+
+.Header span{
+    color: #00953cce;
+}
 
 
 
@@ -187,21 +214,8 @@ header{
     border-radius:5px;
 }
 
-/*Logo*/
-
-
-
-/*Logo header*/
-.logo-header{
-    width:80px;
-    display:block;
-    margin:0 auto 10px;
-    border-radius:15px;
-}
-
 .contenedor-catalogo {
-    position: absolute;
-    top: 5%;
+    margin: 20px auto;
     max-width: 1200px;
     background-color: rgb(255, 255, 255);
     padding: 30px;
