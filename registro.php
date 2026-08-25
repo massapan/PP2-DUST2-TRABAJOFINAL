@@ -15,6 +15,8 @@
         <?php
         if (isset($_GET['error']) && $_GET['error'] == 'duplicado') {
             echo "<p style='color: red; font-weight: bold; margin-bottom: 15px;'>Ese correo ya está en uso. Por favor, elegí otro.</p>";
+        } elseif (isset($_GET['error']) && $_GET['error'] == 'intentos') {
+            echo "<p style='color: red; font-weight: bold; margin-bottom: 15px;'>Demasiados intentos. Volvé a registrarte.</p>";
         }
         ?>
 

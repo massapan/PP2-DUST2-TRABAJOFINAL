@@ -11,6 +11,9 @@
         <h1>Iniciar Sesión</h1>
         </div>
         <?php
+        if (isset($_GET['registro']) && $_GET['registro'] == 'ok') {
+            echo "<p style='color: green; font-weight: bold;'>¡Cuenta verificada! Ya podés iniciar sesión.</p>";
+        }
         if (isset($_GET['error'])) {
             if ($_GET['error'] == 'incorrecta') {
                 echo "<p style='color: red; font-weight: bold;'>Contraseña incorrecta. Intentá de nuevo.</p>";
