@@ -41,9 +41,9 @@ if (hash_equals($pendiente['codigo'], $codigo_ingresado)) {
 
     // Misma redirección por rol que tenía el login original.
     if ($_SESSION['rol'] === 'comprador') {
-        header("Location: catalogo.php");
+        header("Location: index.php");
     } else {
-        header("Location: local.php");
+        header("Location: index.php");
     }
     exit();
 }
