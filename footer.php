@@ -4,7 +4,6 @@
         <a href="/" class="d-flex align-items-center mb-3 link-body-emphasis text-decoration-none">
             <span class="fs-4">Ituzaingó a un Toque</span>
         </a>
-        <p class="text-body-secondary">&copy; 2026</p>
     </div>
     <div class="col mb-3"></div>
     <div class="col mb-3">

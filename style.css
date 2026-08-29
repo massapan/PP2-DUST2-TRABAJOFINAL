@@ -1,5 +1,11 @@
 body{
     background:#00953c;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+#contenido{
+    flex: 1;
 }
 
 .pagina-centrada{
@@ -83,7 +89,8 @@ body{
  /*Header*/
 
 .Header{
-    background: #feffff;
+    background: #ffffff;
+    gap: 150px;
 }
 
 .Header .nav-pills{
@@ -91,10 +98,7 @@ body{
 }
 
 .Header .nav-link{
-    color: #00953cce;
-    border-color: #00953cce;
-    border: 1px solid #00953cce;
-    border-radius: 6.7px;
+    color: #000000ce;
 }
 
 .Header .nav-link.active{
@@ -103,17 +107,17 @@ body{
 }
 
 .Header span{
-    color: #00953cce;
+    color: #000000ce;
 }
 
 
 
 /*footer*/
 .Footer{
-    background:  rgba(255, 255, 255, 0.808);
+    background:  #ffffff;
 }
 .envoltorio-footer{
-    max-width: 100%;
+    min-width: 100%;
     margin: 0 auto;
     padding: 0 12px;
 }

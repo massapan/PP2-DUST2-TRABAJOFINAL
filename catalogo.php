@@ -11,7 +11,13 @@ $sql = "SELECT p.nombre_producto, p.precio, p.imagen_ruta, l.nombre_local
 $resultado = $conexion->query($sql);
 ?>
 
+
 <div class="fondo"></div>
+<div class="contenedor-catalogo">
+    <h2>Catálogo</h2>
+    <p>Acá va el contenido de catálogo (en construcción).</p>
+</div>
+<!-- <div class="fondo"></div> 
 <div class="contenedor-catalogo">
     
     <h2>Catálogo de Productos</h2>
@@ -56,4 +62,4 @@ $resultado = $conexion->query($sql);
 
     </div>
 
-</div>
+</div>-->
