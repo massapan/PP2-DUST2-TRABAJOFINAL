@@ -90,11 +90,20 @@ body{
 
 .Header{
     background: #ffffff;
-    gap: 150px;
+}
+
+.avatar-circulo{
+    background: #00953cce; 
+    margin-top:1;
+}
+.Header .buscador-input{
+    padding: 6px 12px 6px 35px;
+    margin-bottom: 0;
+    width: 500px;
 }
 
 .Header .nav-pills{
-    gap: 10px;
+    gap: 15px;
 }
 
 .Header .nav-link{
@@ -110,7 +119,21 @@ body{
     color: #000000ce;
 }
 
-
+.buscador-wrapper{
+    position: relative;
+    margin-top: 12px;
+}
+.buscador-icono{
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #6c757d;
+    pointer-events: none; /* así el click atraviesa el ícono y cae en el input */
+}
+.buscador-input{
+    padding-left: 35px; 
+}
 
 /*footer*/
 .Footer{

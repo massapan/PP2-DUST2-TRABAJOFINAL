@@ -1,17 +1,23 @@
 <?php
 session_start();
 include 'conexion.php';
-
-// Traemos los productos de la base de datos junto con el nombre de su respectivo local
-$sql = "SELECT p.nombre_producto, p.precio, p.imagen_ruta, l.nombre_local 
+ 
+// Traemos los productos de la base de datos junto con el nombre de su respectivo local.
+// imagen_ruta ya no es una columna de productos: ahora puede haber varias fotos
+// por producto en la tabla imagenes_producto, así que traemos la primera (orden ASC)
+// con una subconsulta, como "foto de portada" del producto.
+$sql = "SELECT p.nombre_producto, p.precio, l.nombre_local,
+               (SELECT ip.ruta FROM imagenes_producto ip
+                WHERE ip.producto_id = p.id
+                ORDER BY ip.orden ASC LIMIT 1) AS imagen_ruta
         FROM productos p 
         INNER JOIN locales l ON p.local_id = l.id
         ORDER BY p.creado_en DESC";
-
+ 
 $resultado = $conexion->query($sql);
 ?>
-
-
+ 
+ 
 <div class="fondo"></div>
 <div class="contenedor-catalogo">
     <h2>Catálogo</h2>
@@ -24,7 +30,7 @@ $resultado = $conexion->query($sql);
     <br>
     <p>Mirá los productos disponibles en los comercios de tu zona.</p>
     <br>
-
+ 
     <div class="productos-grid" style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
         
         <?php 
@@ -47,7 +53,7 @@ $resultado = $conexion->query($sql);
                 </p>
                 
             </div>
-
+ 
         <?php 
             endwhile; 
         else: 
@@ -59,7 +65,7 @@ $resultado = $conexion->query($sql);
         endif; 
         $conexion->close();
         ?>
-
+ 
     </div>
-
+ 
 </div>-->
