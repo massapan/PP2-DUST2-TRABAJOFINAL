@@ -1,0 +1,13 @@
+# Log de codigos 2FA: lo reescribe la app en cada login/registro.
+# Versionarlo genera conflictos de merge constantes entre companeros,
+# ademas de dejar codigos y emails reales en el historial del repo.
+codigos_2fa.log
+
+# Ruido del sistema operativo
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# Configuracion local de editores
+.vscode/
+.idea/
