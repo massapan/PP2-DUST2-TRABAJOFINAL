@@ -3,9 +3,6 @@ session_start();
 include 'conexion.php';
  
 // Traemos los productos de la base de datos junto con el nombre de su respectivo local.
-// imagen_ruta ya no es una columna de productos: ahora puede haber varias fotos
-// por producto en la tabla imagenes_producto, así que traemos la primera (orden ASC)
-// con una subconsulta, como "foto de portada" del producto.
 $sql = "SELECT p.nombre_producto, p.precio, l.nombre_local,
                (SELECT ip.ruta FROM imagenes_producto ip
                 WHERE ip.producto_id = p.id
@@ -19,9 +16,18 @@ $resultado = $conexion->query($sql);
  
  
 <div class="fondo"></div>
-<div class="contenedor-catalogo">
-    <h2>Catálogo</h2>
-    <p>Acá va el contenido de catálogo (en construcción).</p>
+<div class="container-fluid my-3">
+    <div class="row">
+        <aside class="col-md-3 border-end bg-white">
+            <?php include 'sidebar_prendas_locales.php'; ?>
+        </aside>
+        <div class="col-md-9">
+            <div class="contenedor-catalogo">
+                <h2>Favoritos</h2>
+                <p>Acá va el contenido de favoritos (en construcción).</p>
+            </div>
+        </div>
+    </div>
 </div>
 <!-- <div class="fondo"></div> 
 <div class="contenedor-catalogo">
