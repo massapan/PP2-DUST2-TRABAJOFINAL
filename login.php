@@ -4,9 +4,9 @@
     <title>Iniciar Sesión - Ituzaingó a un toque</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="pagina-centrada">
+<body class="pagina-centrada pagina-auth">
     <div class="fondo"></div>
-    <div class="container">
+    <div class="caja-auth">
         <div>
         <h1>Iniciar Sesión</h1>
         </div>

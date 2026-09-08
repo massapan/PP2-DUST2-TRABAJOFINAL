@@ -47,7 +47,7 @@ body{
     margin-bottom: 3%;
     box-shadow: 25px 25px 5px rgba(0, 0, 0, 0.342);
 }
-.container{
+.caja-auth{
     background:rgb(255, 254, 254);
     padding: 2%;
     border-radius:10%;
@@ -150,14 +150,7 @@ body{
     flex-direction: column;
 }
 
-/*sidebar*/
-input:not([type="checkbox"]):not([type="radio"]){
-    width:100%;
-    padding:12px;
-    margin-bottom:15px;
-    border:1px solid #ccc;
-    border-radius:5px;
-}
+
 
 
 .sanguche{
@@ -166,14 +159,15 @@ input:not([type="checkbox"]):not([type="radio"]){
     align-items:center;
     height:100vh;
 }
-/* Historia A1 */
-*{
+/* Estilos de las páginas standalone (login, registro, recuperar, etc.) */
+.pagina-auth *{
     margin:0;
     padding:0;
     box-sizing:border-box;
     font-family:Arial, Helvetica, sans-serif;
 }
-input{
+
+.pagina-auth input{
     width:100%;
     padding:12px;
     margin-bottom:15px;
@@ -181,7 +175,7 @@ input{
     border-radius:5px;
 }
 
-button{
+.pagina-auth button{
     width:100%;
     padding:12px;
     border:none;
@@ -191,24 +185,17 @@ button{
     cursor:pointer;
 }
 
-button:hover{
+.pagina-auth button:hover{
     background:#0056b3;
 }
 
-#mensaje{
-    text-align:center;
-    margin-top:10px;
-    font-weight:bold;
-}
-
-a{
+.pagina-auth a{
     display:block;
     text-align:center;
     margin-top:15px;
 }
 
-/* historia A3 */
-textarea{
+.pagina-auth textarea{
     width:100%;
     padding:12px;
     border:1px solid #ccc;
@@ -217,8 +204,7 @@ textarea{
     resize:none;
 }
 
-/* historia A4 */
-select{
+.pagina-auth select{
     width:100%;
     padding:12px;
     margin-bottom:15px;
@@ -226,12 +212,17 @@ select{
     border-radius:5px;
 }
 
-/* historia A5 */
-header{
+.pagina-auth header{
     background:#007bff;
     color:white;
     padding:20px;
     text-align:center;
+}
+
+#mensaje{
+    text-align:center;
+    margin-top:10px;
+    font-weight:bold;
 }
 
 .productos{

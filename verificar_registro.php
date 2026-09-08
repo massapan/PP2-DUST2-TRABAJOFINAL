@@ -18,9 +18,9 @@ $pendiente = $_SESSION['registro_pendiente'];
     <title>Verificá tu correo - Ituzaingó a un toque</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="pagina-centrada">
+<body class="pagina-centrada pagina-auth">
     <div class="fondo"></div>
-    <div class="container">
+    <div class="caja-auth">
         <h1>Verificá tu correo</h1>
         <p>Para terminar el registro, ingresá el código de 6 dígitos que
            enviamos a <strong><?php echo htmlspecialchars($pendiente['email']); ?></strong>.</p>

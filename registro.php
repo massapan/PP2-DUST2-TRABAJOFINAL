@@ -5,10 +5,11 @@
     <title>Registro - Ituzaingó a un toque</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="pagina-centrada">
+
+<body class="pagina-centrada pagina-auth">
 <div class="fondo"></div>
     
-<div class="container">
+<div class="caja-auth">
     <h1>Crear Cuenta</h1>
     <form action="procesar_registro.php" method="POST">
         

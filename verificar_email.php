@@ -6,7 +6,7 @@
     <title>Recuperar Contraseña</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="pagina-centrada">
+<body class="pagina-centrada pagina-auth">
     <div class="fondo"></div>
         <?php
         include 'conexion.php';

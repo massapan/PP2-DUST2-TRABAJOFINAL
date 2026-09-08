@@ -6,9 +6,9 @@
     <title>Contraseña Actualizada - Ituzaingó a un toque</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="pagina-centrada">
+<body class="pagina-centrada pagina-auth">
     <div class="fondo"></div>
-    <div class="container">
+    <div class="caja-auth">
         
         <?php
         include 'conexion.php';
