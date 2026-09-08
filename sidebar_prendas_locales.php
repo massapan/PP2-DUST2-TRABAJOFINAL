@@ -1,27 +1,27 @@
 <div class="p-3">
     <h5>Categorías</h5>
     <div class="form-check mb-2">
-        <input class="form-check-input" type="checkbox" id="catRemeras" value="remeras">
+        <input class="form-check-input filtro-categoria" type="checkbox" id="catRemeras" value="remeras">
         <label class="form-check-label" for="catRemeras">Remeras</label>
     </div>
     <div class="form-check mb-2">
-        <input class="form-check-input" type="checkbox" id="catPantalones" value="pantalones">
+        <input class="form-check-input filtro-categoria" type="checkbox" id="catPantalones" value="pantalones">
         <label class="form-check-label" for="catPantalones">Pantalones</label>
     </div>
     <div class="form-check mb-2">
-        <input class="form-check-input" type="checkbox" id="catCamperas" value="camperas">
+        <input class="form-check-input filtro-categoria" type="checkbox" id="catCamperas" value="camperas">
         <label class="form-check-label" for="catCamperas">Camperas</label>
     </div>
     <div class="form-check mb-2">
-        <input class="form-check-input" type="checkbox" id="catVestidos" value="vestidos">
+        <input class="form-check-input filtro-categoria" type="checkbox" id="catVestidos" value="vestidos">
         <label class="form-check-label" for="catVestidos">Vestidos</label>
     </div>
     <div class="form-check mb-2">
-        <input class="form-check-input" type="checkbox" id="catCalzado" value="calzado">
+        <input class="form-check-input filtro-categoria" type="checkbox" id="catCalzado" value="calzado">
         <label class="form-check-label" for="catCalzado">Calzado</label>
     </div>
     <div class="form-check mb-3">
-        <input class="form-check-input" type="checkbox" id="catAccesorios" value="accesorios">
+        <input class="form-check-input filtro-categoria" type="checkbox" id="catAccesorios" value="accesorios">
         <label class="form-check-label" for="catAccesorios">Accesorios</label>
     </div>
 
@@ -51,5 +51,3 @@
 
     <button type="button" class="btn btn-success w-100" id="btnAplicarFiltros">Aplicar</button>
 </div>
-
-    

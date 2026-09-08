@@ -2,13 +2,14 @@
 session_start();
 include 'conexion.php';
  
-// Traemos los productos de la base de datos junto con el nombre de su respectivo local.
-$sql = "SELECT p.nombre_producto, p.precio, l.nombre_local,
+// Traemos los productos junto con su local y su categoría (para poder filtrarlos en el JS).
+$sql = "SELECT p.id, p.nombre_producto, p.precio, l.nombre_local, c.nombre AS categoria_nombre,
                (SELECT ip.ruta FROM imagenes_producto ip
                 WHERE ip.producto_id = p.id
                 ORDER BY ip.orden ASC LIMIT 1) AS imagen_ruta
         FROM productos p 
         INNER JOIN locales l ON p.local_id = l.id
+        LEFT JOIN categorias_producto c ON p.categoria_id = c.id
         ORDER BY p.creado_en DESC";
  
 $resultado = $conexion->query($sql);
@@ -23,55 +24,49 @@ $resultado = $conexion->query($sql);
         </aside>
         <div class="col-md-9">
             <div class="contenedor-catalogo">
-                <h2>Catálogo</h2>
-                <p>Acá va el contenido de catálogo (en construcción).</p>
+                <h2>Catálogo de Productos</h2>
+                <p>Mirá los productos disponibles en los comercios de tu zona.</p>
+
+                <div id="grillaProductos" class="row g-3">
+                    <?php
+                    if ($resultado && $resultado->num_rows > 0):
+                        while ($producto = $resultado->fetch_assoc()):
+                            $categoriaSlug = $producto['categoria_nombre'] ? strtolower($producto['categoria_nombre']) : '';
+                    ?>
+                        <div class="col-6 col-lg-4 tarjeta-producto"
+                             data-categoria="<?php echo htmlspecialchars($categoriaSlug); ?>"
+                             data-precio="<?php echo $producto['precio']; ?>">
+                            <div class="card h-100">
+                                <img src="<?php echo htmlspecialchars($producto['imagen_ruta']); ?>"
+                                     class="card-img-top" style="height:200px; object-fit:cover;"
+                                     alt="<?php echo htmlspecialchars($producto['nombre_producto']); ?>">
+                                <div class="card-body text-center">
+                                    <h3 class="h6"><?php echo htmlspecialchars($producto['nombre_producto']); ?></h3>
+                                    <p class="fw-bold text-success mb-1">
+                                        $<?php echo number_format($producto['precio'], 2, ',', '.'); ?>
+                                    </p>
+                                    <p class="text-muted small fst-italic mb-0">
+                                        Local: <?php echo htmlspecialchars($producto['nombre_local']); ?>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    <?php
+                        endwhile;
+                    else:
+                    ?>
+                        <div class="col-12 text-center py-5">
+                            <p class="fs-5 text-muted">Todavía no hay productos publicados. ¡Sé el primero en subir uno!</p>
+                        </div>
+                    <?php
+                    endif;
+                    $conexion->close();
+                    ?>
+                </div>
+                <p id="sinResultadosFiltro" class="text-center text-muted py-4 d-none">
+                    Ningún producto coincide con los filtros seleccionados.
+                </p>
             </div>
         </div>
     </div>
 </div>
-<!-- <div class="fondo"></div> 
-<div class="contenedor-catalogo">
-    
-    <h2>Catálogo de Productos</h2>
-    <br>
-    <p>Mirá los productos disponibles en los comercios de tu zona.</p>
-    <br>
- 
-    <div class="productos-grid" style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
-        
-        <?php 
-        if ($resultado && $resultado->num_rows > 0): 
-            while($producto = $resultado->fetch_assoc()): 
-        ?>
-            
-            <div class="tarjeta-producto" style="border: 1px solid #126954; padding: 15px; border-radius: 8px; width: 250px; background: #e0e0e0; box-shadow: 0 5px 5px rgba(0, 0, 0, 0.66); text-align: center;">
-                
-                <img src="<?php echo $producto['imagen_ruta']; ?>" alt="<?php echo $producto['nombre_producto']; ?>" style="width: 100%; height: 200px; object-fit: cover; border-radius: 4px; margin-bottom: 10px;">
-                
-                <h3 style="margin: 10px 0 5px 0; font-size: 1.2em;"><?php echo $producto['nombre_producto']; ?></h3>
-                
-                <p class="precio" style="font-weight: bold; color: #28a745; margin: 5px 0; font-size: 1.1em;">
-                    $<?php echo number_format($producto['precio'], 2, ',', '.'); ?>
-                </p>
-                
-                <p class="local-origen" style="font-size: 0.9em; color: #666; font-style: italic; margin-top: 5px;">
-                    Local: <?php echo $producto['nombre_local']; ?>
-                </p>
-                
-            </div>
- 
-        <?php 
-            endwhile; 
-        else: 
-        ?>
-            <div style="width: 100%; text-align: center; padding: 40px 0;">
-                <p style="font-size: 1.2em; color: #777;">Todavía no hay productos publicados. ¡Sé el primero en subir uno!</p>
-            </div>
-        <?php 
-        endif; 
-        $conexion->close();
-        ?>
- 
-    </div>
- 
-</div>-->
