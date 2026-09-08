@@ -23,8 +23,8 @@ $resultado = $conexion->query($sql);
         </aside>
         <div class="col-md-9">
             <div class="contenedor-catalogo">
-                <h2>Favoritos</h2>
-                <p>Acá va el contenido de favoritos (en construcción).</p>
+                <h2>Catálogo</h2>
+                <p>Acá va el contenido de catálogo (en construcción).</p>
             </div>
         </div>
     </div>
