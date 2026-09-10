@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Registro - Ituzaingó a un toque</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="img/logo-removebg-preview.png" type="image/png">
 </head>
 
 <body class="pagina-centrada pagina-auth">

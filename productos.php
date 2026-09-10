@@ -18,6 +18,7 @@ if (!isset($_SESSION['usuario_id']) || $_SESSION['rol'] !== 'vendedor') {
 <body class="pagina-centrada">
     <div class="fondo"></div>
     <div class="container">
+    <div class="caja-auth">
         
         <h2>Subir Nuevo Producto</h2>
         <p>Completá los detalles y subí una buena foto de tu artículo.</p>

@@ -1,12 +1,10 @@
 <?php
-// Si la sesión no está iniciada todavía, la iniciamos acá.
-// (usamos session_status() para no pisar una sesión que ya haya
-// arrancado otro archivo incluido después, como catalogo.php)
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
 $logueado = isset($_SESSION['usuario_id']);
+$rol = $_SESSION['rol'] ?? null; // 'comprador' | 'vendedor' | null
 ?>
 
 <header class="d-flex flex-wrap justify-content-between align-items-center py-3 border-bottom Header">
@@ -17,6 +15,15 @@ $logueado = isset($_SESSION['usuario_id']);
         <li class="nav-item"><a href="mapa.php" class="nav-link">Mapa</a></li>
         <li class="nav-item"><a href="catalogo.php" class="nav-link" aria-current="page">Catálogo</a></li>
         <li class="nav-item"><a href="favoritos.php" class="nav-link">Favoritos</a></li>
+
+        <?php if ($logueado && $rol === 'vendedor'): ?>
+            <li class="nav-item">
+                <a href="productos.php" class="nav-link nav-link-vendedor">Mis Productos</a>
+            </li>
+            <li class="nav-item">
+                <a href="SubidaLocal.php" class="nav-link nav-link-vendedor">Mi Local</a>
+            </li>
+        <?php endif; ?>
     </ul>
 
     <form class="d-flex ms-md-4 buscador-wrapper col-md-3" role="search">
@@ -24,11 +31,17 @@ $logueado = isset($_SESSION['usuario_id']);
     </form>
 
     <?php if ($logueado): ?>
-        <div class="dropdown">
-            <a href="#" class="d-flex align-items-center justify-content-center rounded-circle text-white avatar-circulo" style="width: 40px; height: 40px;" data-bs-toggle="dropdown">
+        <div class="dropdown d-flex align-items-center" style="gap: 10px; margin-right: 20px;">
+
+            <a href="#" class="d-flex align-items-center justify-content-center rounded-circle text-white avatar-circulo <?php echo $rol === 'vendedor' ? 'avatar-vendedor' : ''; ?>" style="width: 40px; height: 40px;" data-bs-toggle="dropdown">
                 <i class="bi bi-person-circle"></i>
             </a>
             <ul class="dropdown-menu dropdown-menu-end">
+                <?php if ($rol === 'vendedor'): ?>
+                    <li><a class="dropdown-item" href="SubidaLocal.php">Mi Local</a></li>
+                    <li><a class="dropdown-item" href="productos.php">Subir Producto</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                <?php endif; ?>
                 <li><a class="dropdown-item" href="cerrar_sesion.php">Cerrar sesión</a></li>
             </ul>
         </div>

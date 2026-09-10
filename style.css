@@ -270,3 +270,37 @@ body{
     border-radius: 10px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
+
+/* Distinción visual de rol vendedor */
+.badge-rol{
+    font-size: 12px;
+    font-weight: bold;
+    padding: 4px 10px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.badge-vendedor{
+    background: #dc3545;
+    color: #fbfbfb;
+}
+
+.badge-comprador{
+    background: #6c757d;
+    color: #fbfbfb;
+}
+
+.avatar-vendedor{
+    background: #dc3545 !important;
+}
+
+.nav-link-vendedor{
+    color: #dc3545 !important;
+    font-weight: bold;
+}
+
+.nav-link-vendedor.active{
+    background: #dc3545 !important;
+    color: #fbfbfb !important;
+}
