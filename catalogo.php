@@ -1,5 +1,7 @@
 <?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 include 'conexion.php';
  
 // Traemos los productos junto con su local y su categoría (para poder filtrarlos en el JS).
@@ -14,18 +16,17 @@ $sql = "SELECT p.id, p.nombre_producto, p.precio, l.nombre_local, c.nombre AS ca
  
 $resultado = $conexion->query($sql);
 ?>
- 
+
  
 <div class="fondo"></div>
-<div class="container-fluid my-3">
+<div class="container-fluid">
     <div class="row">
-        <aside class="col-md-3 border-end bg-white">
+        <aside class="col-md-2 border-end bg-white">
             <?php include 'sidebar_prendas_locales.php'; ?>
         </aside>
-        <div class="col-md-9">
+        <div class="col-md-10 my-3">
             <div class="contenedor-catalogo">
                 <h2>Catálogo de Productos</h2>
-                <p>Mirá los productos disponibles en los comercios de tu zona.</p>
 
                 <div id="grillaProductos" class="row g-3">
                     <?php
@@ -33,7 +34,7 @@ $resultado = $conexion->query($sql);
                         while ($producto = $resultado->fetch_assoc()):
                             $categoriaSlug = $producto['categoria_nombre'] ? strtolower($producto['categoria_nombre']) : '';
                     ?>
-                        <div class="col-6 col-lg-4 tarjeta-producto"
+                        <div class="col-6 col-lg-3 tarjeta-producto"
                              data-categoria="<?php echo htmlspecialchars($categoriaSlug); ?>"
                              data-precio="<?php echo $producto['precio']; ?>">
                             <div class="card h-100">
@@ -41,13 +42,13 @@ $resultado = $conexion->query($sql);
                                      class="card-img-top" style="height:200px; object-fit:cover;"
                                      alt="<?php echo htmlspecialchars($producto['nombre_producto']); ?>">
                                 <div class="card-body text-center">
-                                    <h3 class="h6"><?php echo htmlspecialchars($producto['nombre_producto']); ?></h3>
-                                    <p class="fw-bold text-success mb-1">
-                                        $<?php echo number_format($producto['precio'], 2, ',', '.'); ?>
-                                    </p>
-                                    <p class="text-muted small fst-italic mb-0">
+                                    <h3 class="h6 text-start" ><?php echo htmlspecialchars($producto['nombre_producto']); ?></h3>
+                                    <p class="text-muted small fst-italic mb-0 text-start">
                                         Local: <?php echo htmlspecialchars($producto['nombre_local']); ?>
                                     </p>
+                                    <p class="fw-bold text-success mb-1 text-start ps-0">
+                                        $<?php echo number_format($producto['precio'], 2, ',', '.'); ?>
+                                    </p>                                   
                                 </div>
                             </div>
                         </div>

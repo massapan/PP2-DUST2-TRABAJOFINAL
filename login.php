@@ -36,14 +36,14 @@
             
         </form>
 
-        <div style="margin-top: 10px;">
+        <div>
         <p>¿Olvidaste tu contraseña?</p>
         </div>
         <div>
             <a href="recuperar.html" class="Boton-secundario">Recuperar contraseña</a>
         </div>
 
-        <div style="margin-top: 10px;">
+        <div>
         <p>¿No tenés cuenta?</p>
         </div>
         <div>       
