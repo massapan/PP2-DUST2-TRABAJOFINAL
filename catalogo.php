@@ -44,12 +44,12 @@ $resultado = $conexion->query($sql);
                                      alt="<?php echo htmlspecialchars($producto['nombre_producto']); ?>">
                                 <div class="card-body text-center">
                                     <h3 class="h6"><?php echo htmlspecialchars($producto['nombre_producto']); ?></h3>
-                                    <p class="fw-bold text-success mb-1">
-                                        $<?php echo number_format($producto['precio'], 2, ',', '.'); ?>
-                                    </p>
                                     <p class="text-muted small fst-italic mb-0">
                                         Local: <?php echo htmlspecialchars($producto['nombre_local']); ?>
                                     </p>
+                                    <p class="fw-bold text-success mb-1">
+                                        $<?php echo number_format($producto['precio'], 2, ',', '.'); ?>
+                                    </p>                                   
                                 </div>
                             </div>
                         </div>
