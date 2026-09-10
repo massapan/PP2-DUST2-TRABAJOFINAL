@@ -19,12 +19,12 @@ $resultado = $conexion->query($sql);
 
  
 <div class="fondo"></div>
-<div class="container-fluid my-3">
+<div class="container-fluid">
     <div class="row">
         <aside class="col-md-3 border-end bg-white">
             <?php include 'sidebar_prendas_locales.php'; ?>
         </aside>
-        <div class="col-md-9">
+        <div class="col-md-9 my-3">
             <div class="contenedor-catalogo">
                 <h2>Catálogo de Productos</h2>
                 <p>Mirá los productos disponibles en los comercios de tu zona.</p>

@@ -1,3 +1,11 @@
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+}
 body{
     background:#00953c;
     display: flex;
@@ -13,7 +21,7 @@ body{
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height:100vh;
+    min-height:100vh; 
 }
 
 .fondo {
@@ -49,14 +57,12 @@ body{
 }
 .caja-auth{
     background:rgb(255, 254, 254);
-    padding: 2%;
     border-radius:10%;
-    height: auto;
+    padding: 20px;
     width: 35%;
     box-shadow: 25px 25px 5px rgba(0, 0, 0, 0.342);
     display: flex;
     flex-direction: column;
-    gap: 5px;
 }
 .NombreInicio{
     text-align:center;

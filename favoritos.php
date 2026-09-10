@@ -7,7 +7,7 @@ $logueado = isset($_SESSION['usuario_id']);
 ?>
 
 <div class="fondo"></div>
-<div class="container-fluid my-3">
+<div class="container-fluid">
     <div class="row">
         <aside class="col-md-3 border-end bg-white">
             <?php include 'sidebar_prendas_locales.php'; ?>

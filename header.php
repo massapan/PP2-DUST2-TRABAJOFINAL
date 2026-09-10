@@ -9,7 +9,7 @@ if (session_status() === PHP_SESSION_NONE) {
 $logueado = isset($_SESSION['usuario_id']);
 ?>
 
-<header class="d-flex flex-wrap justify-content-between align-items-center py-3 mb-1 border-bottom Header">
+<header class="d-flex flex-wrap justify-content-between align-items-center py-3 border-bottom Header">
     <a href="/" class="d-flex align-items-center mb-3 mb-md-0 link-body-emphasis text-decoration-none">
         <span class="fs-4">Ituzaingó a un toque</span>
     </a>
