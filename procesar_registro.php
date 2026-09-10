@@ -9,7 +9,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST['password'];
     $rol = $_POST['rol'];
 
-    // 1) Antes de nada, verificamos que el correo no esté ya registrado.
+    // Validamos que la contraseña tenga al menos 8 caracteres
+    if (strlen($password) < 8) {
+    header("Location: registro.php?error=password_corta");
+    exit();
+    }
+
+    // Validamos que el email tenga formato válido
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    header("Location: registro.php?error=email_invalido");
+    exit();     
+    }
+
+    //verificamos que el correo no esté ya registrado.
     $sql = "SELECT id FROM usuarios WHERE email = ?";
     $stmt = $conexion->prepare($sql);
     $stmt->bind_param("s", $email);
@@ -24,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     $stmt->close();
 
-    // 2) Todavía NO creamos la cuenta. Primero verificamos el email.
+    //    Todavía NO creamos la cuenta. Primero verificamos el email.
     //    Guardamos el "registro pendiente" en la sesión (incluida la
     //    contraseña ya encriptada) y mandamos un código de verificación.
     $codigo = generar_codigo_2fa();
