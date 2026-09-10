@@ -4,7 +4,7 @@
         <aside class="col-md-3 border-end bg-white">
             <?php include 'sidebar_mapa.php'; ?>
         </aside>
-        <div class="col-md-9">
+        <div class="col-md-9  my-3">
             <div class="contenedor-catalogo">
                 <h2>Mapa</h2>
                 <p>Acá va el contenido de mapa (en construcción).</p>

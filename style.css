@@ -18,10 +18,11 @@ body{
 
 .pagina-centrada{
     display:flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
     min-height:100vh; 
+    gap: 20%;
 }
 
 .fondo {
@@ -56,7 +57,7 @@ body{
     margin-bottom: 0.4%;
 }
 .caja-auth{
-    background:rgb(255, 254, 254);
+    background:#fbfbfb;
     border-radius:10%;
     padding: 20px;
     width: 35%;
@@ -79,7 +80,8 @@ body{
     padding:12px;
     border-radius:5px;
     background:#2d77c7;
-    color:white;
+    color:#fbfbfb;
+    justify-content:center;
     text-align:center;
     text-decoration:none;
     box-sizing:border-box;
@@ -96,7 +98,7 @@ body{
  /*Header*/
 
 .Header{
-    background: #ffffff;
+    background: #fbfbfb;
 }
 
 .avatar-circulo{
@@ -118,7 +120,7 @@ body{
 }
 
 .Header .nav-link.active{
-    color: #ffffff;
+    color: #fbfbfb;
     background: #00953cce;
 }
 
@@ -128,23 +130,11 @@ body{
 
 .buscador-wrapper{
     position: relative;
-    margin-top: 12px;
-}
-.buscador-icono{
-    position: absolute;
-    left: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #6c757d;
-    pointer-events: none; /* así el click atraviesa el ícono y cae en el input */
-}
-.buscador-input{
-    padding-left: 35px; 
 }
 
 /*footer*/
 .Footer{
-    background:  #ffffff;
+    background:  #fbfbfb;
 }
 .envoltorio-footer{
     min-width: 100%;
@@ -185,7 +175,7 @@ body{
     padding:12px;
     border:none;
     background:#2d77c7;
-    color:white;
+    color:#fbfbfb ;
     border-radius:5px;
     cursor:pointer;
 }
@@ -219,7 +209,7 @@ body{
 
 .pagina-auth header{
     background:#007bff;
-    color:white;
+    color:#fbfbfb;
     padding:20px;
     text-align:center;
 }
@@ -238,12 +228,16 @@ body{
     padding:20px;
 }
 
-.card{
-    width:250px;
-    background:white;
-    border-radius:10px;
-    overflow:hidden;
-    box-shadow:0 0 10px rgba(0,0,0,0.1);
+.card {
+    display: flex;         
+    flex-direction: column;   
+    align-items: flex-start;   
+    width: 100%;
+    max-width: 350px;
+    max-width: 1200px;
+    background: #fbfbfb;
+    border-radius: 10px;
+    box-shadow: 4px 2px 2px rgba(0, 0, 0, 0.100);
 }
 
 .card img{
@@ -263,16 +257,15 @@ body{
 
 .info span{
     background:#007bff;
-    color:white;
+    color:#fbfbfb;
     padding:5px 10px;
     border-radius:5px;
 }
 
 .contenedor-catalogo {
-    margin: 20px ;
     margin-top:0;
-    max-width: 1200px;
-    background-color: rgb(255, 255, 255);
+    width: 100%;
+    background-color: #fbfbfb;
     padding: 30px;
     border-radius: 10px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);

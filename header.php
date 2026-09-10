@@ -11,7 +11,7 @@ $logueado = isset($_SESSION['usuario_id']);
 
 <header class="d-flex flex-wrap justify-content-between align-items-center py-3 border-bottom Header">
     <a href="/" class="d-flex align-items-center mb-3 mb-md-0 link-body-emphasis text-decoration-none">
-        <span class="fs-4">Ituzaingó a un toque</span>
+        <span class="fs-4" style="margin-left: 20px;">Ituzaingó a un toque</span>
     </a>
     <ul class="nav nav-pills">
         <li class="nav-item"><a href="mapa.php" class="nav-link">Mapa</a></li>
@@ -19,7 +19,7 @@ $logueado = isset($_SESSION['usuario_id']);
         <li class="nav-item"><a href="favoritos.php" class="nav-link">Favoritos</a></li>
     </ul>
 
-    <form class="d-flex ms-md-4 buscador-wrapper" role="search">
+    <form class="d-flex ms-md-4 buscador-wrapper col-md-3" role="search">
         <input type="search" class="form-control buscador-input" placeholder="Buscar locales o prendas...">
     </form>
 
@@ -33,6 +33,6 @@ $logueado = isset($_SESSION['usuario_id']);
             </ul>
         </div>
     <?php else: ?>
-        <a href="iniciar.html" class="btn btn-success">Iniciar sesión / Registrarse</a>
+        <a href="iniciar.html" class="btn btn-success" style=" margin-right: 20px;">Iniciar sesión / Registrarse</a>
     <?php endif; ?>
 </header>
