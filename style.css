@@ -42,11 +42,10 @@ body{
 .logo{ 
     position:relative;
     align-items:center;
-    width:8%;
-    height: 18%;
+    width:13%;
+    height: 28%;
     border-radius: 10%;
-    margin-bottom: 3%;
-    box-shadow: 25px 25px 5px rgba(0, 0, 0, 0.342);
+    margin-bottom: 0.4%;
 }
 .caja-auth{
     background:rgb(255, 254, 254);

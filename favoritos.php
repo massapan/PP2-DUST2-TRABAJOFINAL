@@ -7,7 +7,10 @@
         <div class="col-md-9">
             <div class="contenedor-catalogo">
                 <h2>Favoritos</h2>
-                <p>Acá va el contenido de favoritos (en construcción).</p>
+                <p>Para ver tus prendas favoritas, necesitas estar logueado.</p>
+                <?php if (!isset($_SESSION['usuario'])): ?>
+                    <a href="iniciar.html" class="btn btn-primary">Iniciar sesión</a>
+                <?php endif; ?>
             </div>
         </div>
     </div>
