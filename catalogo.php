@@ -1,5 +1,7 @@
 <?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 include 'conexion.php';
  
 // Traemos los productos junto con su local y su categoría (para poder filtrarlos en el JS).
@@ -14,7 +16,7 @@ $sql = "SELECT p.id, p.nombre_producto, p.precio, l.nombre_local, c.nombre AS ca
  
 $resultado = $conexion->query($sql);
 ?>
- 
+
  
 <div class="fondo"></div>
 <div class="container-fluid my-3">
