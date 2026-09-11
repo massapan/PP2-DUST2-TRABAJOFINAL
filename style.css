@@ -108,7 +108,10 @@ body{
 .Header .buscador-input{
     padding: 6px 12px 6px 35px;
     margin-bottom: 0;
-    width: 500px;
+    /* 100% del contenedor con tope: en desktop llega a 500px, en mobile
+       se encoge en vez de desbordar la pantalla. */
+    width: 100%;
+    max-width: 500px;
 }
 
 .Header .nav-pills{
