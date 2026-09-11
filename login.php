@@ -3,10 +3,11 @@
 <head>
     <title>Iniciar Sesión - Ituzaingó a un toque</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="img/logo-removebg-preview.png" type="image/png">
 </head>
-<body class="pagina-centrada">
+<body class="pagina-centrada pagina-auth">
     <div class="fondo"></div>
-    <div class="container">
+    <div class="caja-auth">
         <div>
         <h1>Iniciar Sesión</h1>
         </div>
@@ -35,14 +36,14 @@
             
         </form>
 
-        <div style="margin-top: 10px;">
+        <div>
         <p>¿Olvidaste tu contraseña?</p>
         </div>
         <div>
             <a href="recuperar.html" class="Boton-secundario">Recuperar contraseña</a>
         </div>
 
-        <div style="margin-top: 10px;">
+        <div>
         <p>¿No tenés cuenta?</p>
         </div>
         <div>       

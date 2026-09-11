@@ -1,7 +1,7 @@
 <?php
 ob_start();
 session_start();
-
+ 
 // Validación estricta: Solo vendedores logueados
 if (!isset($_SESSION['usuario_id']) || $_SESSION['rol'] !== 'vendedor') {
     header("Location: login.php");
@@ -21,7 +21,7 @@ if (!isset($_SESSION['usuario_id']) || $_SESSION['rol'] !== 'vendedor') {
         
         <?php
         include 'conexion.php';
-
+ 
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $usuario_id = $_SESSION['usuario_id'];
             
@@ -48,14 +48,24 @@ if (!isset($_SESSION['usuario_id']) || $_SESSION['rol'] !== 'vendedor') {
                 // Movemos la foto a la carpeta
                 if (move_uploaded_file($_FILES["imagen"]["tmp_name"], $ruta_final)) {
                     
-                    // 4. Guardamos en MySQL
-                    $sql_prod = "INSERT INTO productos (local_id, nombre_producto, precio, imagen_ruta) VALUES (?, ?, ?, ?)";
+                    // 4. Guardamos el producto en MySQL (ya no lleva imagen_ruta:
+                    //    ahora la/s foto/s del producto van en su propia tabla)
+                    $sql_prod = "INSERT INTO productos (local_id, nombre_producto, precio) VALUES (?, ?, ?)";
                     $stmt_prod = $conexion->prepare($sql_prod);
                     
-                    // "isds" = integer, string, double, string
-                    $stmt_prod->bind_param("isds", $local_id, $nombre_producto, $precio, $ruta_final);
+                    // "isd" = integer, string, double
+                    $stmt_prod->bind_param("isd", $local_id, $nombre_producto, $precio);
                     
                     if ($stmt_prod->execute()) {
+                        // 5. Con el id que acaba de generar el producto, guardamos su foto
+                        //    en imagenes_producto (orden 0 = foto principal por ahora)
+                        $producto_id = $conexion->insert_id;
+                        $sql_img = "INSERT INTO imagenes_producto (producto_id, ruta, orden) VALUES (?, ?, 0)";
+                        $stmt_img = $conexion->prepare($sql_img);
+                        $stmt_img->bind_param("is", $producto_id, $ruta_final);
+                        $stmt_img->execute();
+                        $stmt_img->close();
+ 
                         echo "<h2 style='color: #28a745;'>¡Producto subido con éxito!</h2>";
                         echo "<p>El artículo <strong>$nombre_producto</strong> ya está guardado en tu local.</p>";
                         echo "<br><p><a href='productos.php' style='font-weight: bold;'>Subir otro producto</a></p>";
@@ -82,13 +92,13 @@ if (!isset($_SESSION['usuario_id']) || $_SESSION['rol'] !== 'vendedor') {
             exit();
         }
         ?>
-
+ 
         <hr style="margin-top: 20px; margin-bottom: 20px; border: 0; border-top: 1px solid #eee;">
         
         <b><p><a href="catalogo.php">Catálogo público</a></p></b>
-
+ 
     </div>
-
+ 
 </body>
 </html>
 <?php ob_end_flush(); ?>

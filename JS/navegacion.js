@@ -8,6 +8,16 @@ document.addEventListener('click', function(evento) {
 
     evento.preventDefault();
 
+    // Sacamos "active" de todos los links del menú
+    document.querySelectorAll('.nav-pills .nav-link').forEach(function(otroLink) {
+        otroLink.classList.remove('active');
+        otroLink.removeAttribute('aria-current');
+    });
+
+    // Se la ponemos solo al que se clickeó
+    link.classList.add('active');
+    link.setAttribute('aria-current', 'page');
+
     fetch(url)
         .then(function(respuesta) {
             return respuesta.text();

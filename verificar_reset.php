@@ -2,13 +2,12 @@
 session_start();
 include 'config_2fa.php';
 
-// Si no hay un registro pendiente, no hay nada que verificar.
-if (!isset($_SESSION['registro_pendiente'])) {
-    header("Location: registro.php");
+if (!isset($_SESSION['reset_pendiente'])) {
+    header("Location: recuperar.html");
     exit();
 }
 
-$pendiente = $_SESSION['registro_pendiente'];
+$pendiente = $_SESSION['reset_pendiente'];
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -17,16 +16,16 @@ $pendiente = $_SESSION['registro_pendiente'];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Verificá tu correo - Ituzaingó a un toque</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="img/logo-removebg-preview.png" type="image/png">
 </head>
-<body class="pagina-centrada">
+<body class="pagina-centrada pagina-auth">
     <div class="fondo"></div>
-    <div class="container">
+    <div class="caja-auth">
         <h1>Verificá tu correo</h1>
-        <p>Para terminar el registro, ingresá el código de 6 dígitos que
+        <p>Para verificar tu identidad, ingresá el código de 6 dígitos que
            enviamos a <strong><?php echo htmlspecialchars($pendiente['email']); ?></strong>.</p>
 
         <?php
-        // Mensajes de error que vienen de procesar_verificar_registro.php
         if (isset($_GET['error'])) {
             if ($_GET['error'] == 'incorrecto') {
                 echo "<p style='color: red; font-weight: bold;'>Código incorrecto. Intentá de nuevo.</p>";
@@ -35,7 +34,6 @@ $pendiente = $_SESSION['registro_pendiente'];
             }
         }
 
-        // --- MODO DEMO: mostramos el código en pantalla ---
         if (MODO_2FA === 'demo') {
             echo "<div style='margin:15px 0; padding:10px; border:2px dashed #888; border-radius:8px;'>";
             echo "<p style='margin:0;'><strong>[MODO DEMO]</strong> Tu código es:</p>";
@@ -46,21 +44,17 @@ $pendiente = $_SESSION['registro_pendiente'];
         }
         ?>
 
-        <form action="procesar_verificar_registro.php" method="POST">
+        <form action="procesar_verificar_reset.php" method="POST">
             <label for="codigo">Código de verificación:</label>
             <input type="text" id="codigo" name="codigo"
                    inputmode="numeric" pattern="[0-9]{6}" maxlength="6"
                    placeholder="000000" required autofocus>
 
-            <button type="submit">Verificar y crear cuenta</button>
+            <button type="submit">Verificar</button>
         </form>
 
-        <div style="margin-top: 10px;">
-            <a href="reenviar_registro.php" class="Boton-secundario">Reenviar código</a>
-        </div>
-        <div style="margin-top: 10px;">
-            <a href="registro.php" class="Boton-secundario">Cancelar</a>
-        </div>
+        <a href="reenviar_reset.php" class="Boton-secundario">Reenviar código</a>
+        <a href="recuperar.html" class="Boton-secundario">Cancelar</a>
     </div>
 </body>
 </html>

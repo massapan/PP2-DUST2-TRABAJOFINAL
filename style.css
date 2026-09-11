@@ -1,13 +1,28 @@
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+}
 body{
     background:#00953c;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+#contenido{
+    flex: 1;
 }
 
 .pagina-centrada{
     display:flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
-    height:100vh;
+    min-height:100vh; 
+    gap: 20%;
 }
 
 .fondo {
@@ -35,21 +50,20 @@ body{
 }
 .logo{ 
     position:relative;
-    width:8%;
-    height: 18%;
+    align-items:center;
+    width:13%;
+    height: 28%;
     border-radius: 10%;
-    margin-bottom: 3%;
-    box-shadow: 25px 25px 5px rgba(0, 0, 0, 0.342);
+    margin-bottom: 0.4%;
 }
-.container{
-    background:rgb(255, 254, 254);
-    padding: 2%;
+.caja-auth{
+    background:#fbfbfb;
     border-radius:10%;
-    width:35%;
+    padding: 20px;
+    width: 35%;
     box-shadow: 25px 25px 5px rgba(0, 0, 0, 0.342);
     display: flex;
     flex-direction: column;
-    gap: 5px;
 }
 .NombreInicio{
     text-align:center;
@@ -66,7 +80,8 @@ body{
     padding:12px;
     border-radius:5px;
     background:#2d77c7;
-    color:white;
+    color:#fbfbfb;
+    justify-content:center;
     text-align:center;
     text-decoration:none;
     box-sizing:border-box;
@@ -83,37 +98,46 @@ body{
  /*Header*/
 
 .Header{
-    background: #feffff;
+    background: #fbfbfb;
+}
+
+.avatar-circulo{
+    background: #00953cce; 
+    margin-top:1;
+}
+.Header .buscador-input{
+    padding: 6px 12px 6px 35px;
+    margin-bottom: 0;
+    width: 500px;
 }
 
 .Header .nav-pills{
-    gap: 10px;
+    gap: 15px;
 }
 
 .Header .nav-link{
-    color: #00953cce;
-    border-color: #00953cce;
-    border: 1px solid #00953cce;
-    border-radius: 6.7px;
+    color: #000000ce;
 }
 
 .Header .nav-link.active{
-    color: #ffffff;
+    color: #fbfbfb;
     background: #00953cce;
 }
 
 .Header span{
-    color: #00953cce;
+    color: #000000ce;
 }
 
-
+.buscador-wrapper{
+    position: relative;
+}
 
 /*footer*/
 .Footer{
-    background:  rgba(255, 255, 255, 0.808);
+    background:  #fbfbfb;
 }
 .envoltorio-footer{
-    max-width: 100%;
+    min-width: 100%;
     margin: 0 auto;
     padding: 0 12px;
 }
@@ -126,21 +150,19 @@ body{
 
 
 
-
 .sanguche{
     display:flex;
     justify-content:center;
     align-items:center;
     height:100vh;
 }
-/* Historia A1 */
-*{
-    margin:0;
-    padding:0;
+/* Estilos de las páginas standalone (login, registro, recuperar, etc.) */
+.pagina-auth *{
     box-sizing:border-box;
     font-family:Arial, Helvetica, sans-serif;
 }
-input{
+
+.pagina-auth input{
     width:100%;
     padding:12px;
     margin-bottom:15px;
@@ -148,34 +170,27 @@ input{
     border-radius:5px;
 }
 
-button{
+.pagina-auth button{
     width:100%;
     padding:12px;
     border:none;
     background:#2d77c7;
-    color:white;
+    color:#fbfbfb ;
     border-radius:5px;
     cursor:pointer;
 }
 
-button:hover{
+.pagina-auth button:hover{
     background:#0056b3;
 }
 
-#mensaje{
-    text-align:center;
-    margin-top:10px;
-    font-weight:bold;
-}
-
-a{
+.pagina-auth a{
     display:block;
     text-align:center;
     margin-top:15px;
 }
 
-/* historia A3 */
-textarea{
+.pagina-auth textarea{
     width:100%;
     padding:12px;
     border:1px solid #ccc;
@@ -184,8 +199,7 @@ textarea{
     resize:none;
 }
 
-/* historia A4 */
-select{
+.pagina-auth select{
     width:100%;
     padding:12px;
     margin-bottom:15px;
@@ -193,12 +207,17 @@ select{
     border-radius:5px;
 }
 
-/* historia A5 */
-header{
+.pagina-auth header{
     background:#007bff;
-    color:white;
+    color:#fbfbfb;
     padding:20px;
     text-align:center;
+}
+
+#mensaje{
+    text-align:center;
+    margin-top:10px;
+    font-weight:bold;
 }
 
 .productos{
@@ -209,12 +228,16 @@ header{
     padding:20px;
 }
 
-.card{
-    width:250px;
-    background:white;
-    border-radius:10px;
-    overflow:hidden;
-    box-shadow:0 0 10px rgba(0,0,0,0.1);
+.card {
+    display: flex;         
+    flex-direction: column;   
+    align-items: flex-start;   
+    width: 100%;
+    max-width: 350px;
+    max-width: 1200px;
+    background: #fbfbfb;
+    border-radius: 10px;
+    box-shadow: 4px 2px 2px rgba(0, 0, 0, 0.100);
 }
 
 .card img{
@@ -234,16 +257,50 @@ header{
 
 .info span{
     background:#007bff;
-    color:white;
+    color:#fbfbfb;
     padding:5px 10px;
     border-radius:5px;
 }
 
 .contenedor-catalogo {
-    margin: 20px auto;
-    max-width: 1200px;
-    background-color: rgb(255, 255, 255);
+    margin-top:0;
+    width: 100%;
+    background-color: #fbfbfb;
     padding: 30px;
     border-radius: 10px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+/* Distinción visual de rol vendedor */
+.badge-rol{
+    font-size: 12px;
+    font-weight: bold;
+    padding: 4px 10px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.badge-vendedor{
+    background: #dc3545;
+    color: #fbfbfb;
+}
+
+.badge-comprador{
+    background: #6c757d;
+    color: #fbfbfb;
+}
+
+.avatar-vendedor{
+    background: #dc3545 !important;
+}
+
+.nav-link-vendedor{
+    color: #dc3545 !important;
+    font-weight: bold;
+}
+
+.nav-link-vendedor.active{
+    background: #dc3545 !important;
+    color: #fbfbfb !important;
 }
