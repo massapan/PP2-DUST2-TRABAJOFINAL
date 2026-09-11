@@ -12,8 +12,8 @@
    no cargan nada externo, asi siguen andando sin internet y sin pedir
    un archivo mas. currentColor hace que tomen el color del boton. */
 
-// Ojo abierto: se muestra cuando la contrasena esta OCULTA,
-// porque tocarlo es la accion de "mostrar".
+// Ojo abierto: se muestra cuando la contrasena esta VISIBLE.
+// El icono refleja el estado actual del campo, no la accion del boton.
 var ICONO_OJO_ABIERTO =
     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"' +
     ' stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">' +
@@ -21,8 +21,7 @@ var ICONO_OJO_ABIERTO =
     '<circle cx="12" cy="12" r="3"/>' +
     '</svg>';
 
-// Ojo cerrado con pestanas: se muestra cuando la contrasena esta VISIBLE,
-// porque tocarlo es la accion de "ocultar".
+// Ojo cerrado con pestanas: se muestra cuando la contrasena esta OCULTA.
 var ICONO_OJO_CERRADO =
     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"' +
     ' stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">' +
@@ -61,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // un lector de pantalla: no es opcional.
         function pintarBoton() {
             var visible = input.type === 'text';
-            boton.innerHTML = visible ? ICONO_OJO_CERRADO : ICONO_OJO_ABIERTO;
+            boton.innerHTML = visible ? ICONO_OJO_ABIERTO : ICONO_OJO_CERRADO;
             boton.setAttribute(
                 'aria-label',
                 visible ? 'Ocultar contrasena' : 'Mostrar contrasena'
