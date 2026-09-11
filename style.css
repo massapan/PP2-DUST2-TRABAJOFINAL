@@ -307,3 +307,43 @@ body{
     background: #dc3545 !important;
     color: #fbfbfb !important;
 }
+
+/* ============================================================
+   RESPONSIVE - Pantallas chicas (celulares y tablets verticales)
+   ============================================================
+   El diseno original esta pensado para desktop y dimensiona con
+   porcentajes del viewport (.caja-auth 35%, .logo 13%), que en un
+   celular de 375px dan 131px y 49px respectivamente: ilegible.
+
+   Todo lo de abajo aplica SOLO a 768px o menos, asi que la vista
+   de escritorio queda exactamente igual que antes.
+   ============================================================ */
+
+@media (max-width: 768px) {
+
+    /* Paginas de login / registro / recuperar / carga de productos.
+       De fila a columna: el logo y la tarjeta se apilan en vez de
+       pelear por el ancho. El gap de 20% se come media pantalla. */
+    .pagina-centrada{
+        flex-direction: column;
+        justify-content: flex-start;
+        gap: 24px;
+        padding: 32px 16px;
+    }
+
+    .caja-auth{
+        width: 100%;
+        max-width: 420px;
+        /* border-radius en % deforma la caja cuando es angosta y alta */
+        border-radius: 16px;
+        padding: 24px 20px;
+        /* la sombra de 25px se salia de la pantalla */
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+    }
+
+    .logo{
+        width: 45%;
+        max-width: 160px;
+        height: auto;
+    }
+}
