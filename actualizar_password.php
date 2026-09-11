@@ -31,10 +31,18 @@
         $envio_valido = false;
 
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            // La comparacion va del lado del servidor y no solo en el
-            // navegador: el required del HTML se saltea mandando el POST
-            // a mano. El ?? '' evita el warning si el campo no llega.
-            if (($_POST['nueva_password'] ?? '') !== ($_POST['nueva_password2'] ?? '')) {
+            // Las dos validaciones van del lado del servidor y no solo en
+            // el navegador: tanto el required como el minlength del HTML se
+            // saltean mandando el POST a mano. El ?? '' evita el warning si
+            // el campo no llega.
+            $nueva_1 = $_POST['nueva_password'] ?? '';
+            $nueva_2 = $_POST['nueva_password2'] ?? '';
+
+            // Mismo orden que procesar_registro.php (largo y despues
+            // coincidencia) para que las dos pantallas se comporten igual.
+            if (strlen($nueva_1) < 8) {
+                $error_password = 'La contraseña debe tener al menos 8 caracteres.';
+            } elseif ($nueva_1 !== $nueva_2) {
                 $error_password = 'Las contraseñas no coinciden. Escribí la misma en los dos campos.';
             } else {
                 $envio_valido = true;
