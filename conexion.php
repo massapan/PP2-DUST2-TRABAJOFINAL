@@ -15,7 +15,3 @@ if ($conexion->connect_error) {
 
 //Configurar la codificación de caracteres (para no tener problemas con ñ y tildes)
 $conexion->set_charset("utf8mb4");
-
-
-// echo "¡Conexión exitosa con mysqli!";
-?>
