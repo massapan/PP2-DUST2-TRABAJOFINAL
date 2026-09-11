@@ -371,7 +371,7 @@ body{
 .pagina-auth .campo-password input{
     margin-bottom: 0;
     /* deja lugar para que el texto no pase por debajo del boton */
-    padding-right: 85px;
+    padding-right: 44px;
 }
 
 .pagina-auth .ver-password{
@@ -379,20 +379,29 @@ body{
     top: 0;
     right: 0;
     height: 100%;
-    width: auto;
-    padding: 0 12px;
+    width: 44px;
+    /* flex para centrar el icono en los dos ejes sin depender del
+       line-height, que cambia segun la pagina */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
     border: none;
     border-radius: 0 5px 5px 0;
     background: transparent;
-    color: #2d77c7;
-    font-size: 13px;
-    font-weight: bold;
+    color: #6c757d;
     cursor: pointer;
+}
+
+.pagina-auth .ver-password svg{
+    width: 20px;
+    height: 20px;
+    display: block;
 }
 
 .pagina-auth .ver-password:hover{
     background: transparent;
-    text-decoration: underline;
+    color: #2d77c7;
 }
 
 .pagina-auth .ver-password:focus-visible{
