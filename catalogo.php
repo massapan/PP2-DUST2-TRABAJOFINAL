@@ -21,7 +21,18 @@ $resultado = $conexion->query($sql);
 <div class="fondo"></div>
 <div class="container-fluid">
     <div class="row">
-        <aside class="col-md-2 border-end bg-white">
+        <!-- Boton de filtros: solo en mobile. En desktop el panel va siempre
+             visible, asi que este boton se oculta con d-md-none. -->
+        <div class="col-12 d-md-none pt-3">
+            <button class="btn btn-success w-100" type="button"
+                    data-bs-toggle="collapse" data-bs-target="#panelFiltros"
+                    aria-expanded="false" aria-controls="panelFiltros">
+                <i class="bi bi-funnel"></i> Filtros
+            </button>
+        </div>
+        <!-- collapse lo oculta en mobile hasta que se toca el boton;
+             d-md-block lo fuerza visible de 768px para arriba. -->
+        <aside class="col-md-2 border-end bg-white collapse d-md-block" id="panelFiltros">
             <?php include 'sidebar_prendas_locales.php'; ?>
         </aside>
         <div class="col-md-10 my-3">
