@@ -347,3 +347,55 @@ body{
         height: auto;
     }
 }
+
+
+/* ============================================================
+   Boton "Mostrar / Ocultar" de los campos de contrasena
+   ============================================================
+   El envoltorio .campo-password lo crea JS/ver-password.js en
+   tiempo de ejecucion; aca van solo los estilos.
+
+   Se usa .pagina-auth .ver-password (dos clases) para ganarle en
+   especificidad a .pagina-auth button, que pone width:100% y fondo
+   azul en todos los botones de estos formularios.
+   ============================================================ */
+
+.campo-password{
+    position: relative;
+    /* toma la separacion que antes tenia el input, asi el alto del
+       envoltorio coincide exacto con el del campo y el boton puede
+       estirarse al 100% sin desalinearse */
+    margin-bottom: 15px;
+}
+
+.pagina-auth .campo-password input{
+    margin-bottom: 0;
+    /* deja lugar para que el texto no pase por debajo del boton */
+    padding-right: 85px;
+}
+
+.pagina-auth .ver-password{
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: auto;
+    padding: 0 12px;
+    border: none;
+    border-radius: 0 5px 5px 0;
+    background: transparent;
+    color: #2d77c7;
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.pagina-auth .ver-password:hover{
+    background: transparent;
+    text-decoration: underline;
+}
+
+.pagina-auth .ver-password:focus-visible{
+    outline: 2px solid #2d77c7;
+    outline-offset: -2px;
+}

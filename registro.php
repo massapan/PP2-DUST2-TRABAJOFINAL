@@ -46,5 +46,6 @@
         <button type="submit">Registrarse</button>
     </form>
 </div>
+    <script src="JS/ver-password.js"></script>
 </body>
 </html>

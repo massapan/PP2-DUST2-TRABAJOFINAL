@@ -69,6 +69,7 @@
         ?>
 
     </div>
+    <script src="JS/ver-password.js"></script>
 </body>
 </html>
 <?php ob_end_flush(); ?>

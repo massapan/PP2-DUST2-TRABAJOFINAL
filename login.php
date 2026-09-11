@@ -52,5 +52,6 @@
         </div>
         
     </div>
+    <script src="JS/ver-password.js"></script>
 </body>
 </html>
