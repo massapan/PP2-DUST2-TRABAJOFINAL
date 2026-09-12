@@ -24,10 +24,11 @@
                 $usuario = $resultado->fetch_assoc();
                 ?>
                 
-                <div class="container">
+                <div class="caja-auth">
                 <h2>Recuperar Contraseña</h2>
                 <p>Cuenta encontrada: <strong><?php echo $usuario['email']; ?></strong></p>
                 
+                <div>
                 <form action="actualizar_password.php" method="POST">
                     <input type="hidden" name="usuario_id" value="<?php echo $usuario['id']; ?>">
                     
@@ -36,13 +37,15 @@
                     
                     <button type="submit">Guardar Cambios</button>
                 </form>
+                </div>
                 </div>  
                 <?php
             } else {
-                echo "<div class='container'>";
+                echo "<div class='caja-auth'>";
                 echo "<h2 style='color: red;'>Error</h2>";
                 echo "<p>No encontramos ninguna cuenta registrada con ese correo.</p>";
                 echo "<p><a href='recuperar.html' class='Boton-secundario'>Volver a intentar</a></p>";
+                echo "</div>";
             }
 
             $stmt->close();
