@@ -15,15 +15,6 @@ $rol = $_SESSION['rol'] ?? null; // 'comprador' | 'vendedor' | null
         <li class="nav-item"><a href="mapa.php" class="nav-link">Mapa</a></li>
         <li class="nav-item"><a href="catalogo.php" class="nav-link" aria-current="page">Catálogo</a></li>
         <li class="nav-item"><a href="favoritos.php" class="nav-link">Favoritos</a></li>
-
-        <?php if ($logueado && $rol === 'vendedor'): ?>
-            <li class="nav-item">
-                <a href="productos.php" class="nav-link nav-link-vendedor">Mis Productos</a>
-            </li>
-            <li class="nav-item">
-                <a href="SubidaLocal.php" class="nav-link nav-link-vendedor">Mi Local</a>
-            </li>
-        <?php endif; ?>
     </ul>
 
     <form class="d-flex ms-md-4 buscador-wrapper col-md-3" role="search">
