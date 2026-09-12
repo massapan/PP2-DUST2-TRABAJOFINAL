@@ -231,10 +231,7 @@ body{
 .card {
     display: flex;         
     flex-direction: column;   
-    align-items: flex-start;   
     width: 100%;
-    max-width: 350px;
-    max-width: 1200px;
     background: #fbfbfb;
     border-radius: 10px;
     box-shadow: 4px 2px 2px rgba(0, 0, 0, 0.100);
@@ -303,4 +300,103 @@ body{
 .nav-link-vendedor.active{
     background: #dc3545 !important;
     color: #fbfbfb !important;
+}
+
+.caja-local-prenda{
+    background-color: #fbfbfb;
+    margin-top:0;
+    max-width: 95%;
+    min-height: 40%;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    margin:auto;
+    margin-top: 20px;
+}
+
+.superior{
+    display:flex;
+    justify-content:space-between;
+    flex-direction:row;
+    margin-top:2%;
+}
+.caja1{
+   
+    max-width: 100%;
+    min-height: 40%;
+    padding: 30px;
+    flex: 1;
+}
+.caja2{
+  
+    max-width: 100%;
+    min-height: 40%;
+    padding: 30px;
+    flex: 1;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+#nombre-local{
+    width: 60%;
+    font-size: 70px;
+    margin-bottom:5%;
+}
+#nombre-prenda{
+    width: 60%;
+    font-size: 70px;
+    margin-bottom:5%;
+}
+
+#direccion-local{
+    
+    width: 40%;
+    color:gray;
+}
+
+#entre-calles{
+    
+    width: 40%;
+    margin-bottom:5%;
+    color:gray;
+}
+#ver-en-mapa{
+    background-color: #00953cce;
+    border: 1px solid #870303;
+    width: 20%;
+    color:rgb(255, 255, 255);
+}
+#descripcion-local{
+    border: 1px solid #870303;
+    width: 40%;
+    margin-bottom:5%;
+    padding-bottom:15%;
+}
+#imagen-local{
+    border: 1px solid #870303;
+    width: 90%;
+    height: 80%;
+    margin-bottom:5%;
+}
+#imagen-prenda{
+    border: 1px solid #870303;
+    width: 90%;
+    height: 80%;
+    margin-bottom:5%;
+}
+#mas-imagenes-prenda{
+    border: 1px solid #870303;
+    width: 90%;
+    height: 15%;
+    margin-bottom:5%;
+}
+#mas-imagenes-local{
+    border: 1px solid #870303;
+    width: 90%;
+    height: 15%;
+    margin-bottom:5%;
+}
+.inferior{
+    margin-top:5%;
+    
 }
