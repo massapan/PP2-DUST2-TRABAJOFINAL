@@ -403,6 +403,18 @@ body{
     margin-top:5%;
     
 }
+.btn-favorito {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+    z-index: 2;
+    cursor: pointer;
+}
+
 /* ============================================================
    RESPONSIVE - Pantallas chicas (celulares y tablets verticales)
    ============================================================
