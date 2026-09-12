@@ -5,7 +5,7 @@ if (session_status() === PHP_SESSION_NONE) {
 include 'conexion.php';
  
 // Traemos los productos junto con su local y su categoría (para poder filtrarlos en el JS).
-$sql = "SELECT p.id, p.nombre_producto, p.precio, l.nombre_local, c.nombre AS categoria_nombre,
+$sql = "SELECT p.id, p.nombre_producto, p.precio, l.id AS local_id, l.nombre_local, c.nombre AS categoria_nombre,
                (SELECT ip.ruta FROM imagenes_producto ip
                 WHERE ip.producto_id = p.id
                 ORDER BY ip.orden ASC LIMIT 1) AS imagen_ruta
@@ -38,17 +38,23 @@ $resultado = $conexion->query($sql);
                              data-categoria="<?php echo htmlspecialchars($categoriaSlug); ?>"
                              data-precio="<?php echo $producto['precio']; ?>">
                             <div class="card h-100">
-                                <img src="<?php echo htmlspecialchars($producto['imagen_ruta']); ?>"
-                                     class="card-img-top" style="height:200px; object-fit:cover;"
-                                     alt="<?php echo htmlspecialchars($producto['nombre_producto']); ?>">
-                                <div class="card-body text-center">
-                                    <h3 class="h6 text-start" ><?php echo htmlspecialchars($producto['nombre_producto']); ?></h3>
-                                    <p class="text-muted small fst-italic mb-0 text-start">
+                                <a href="prenda.php?id=<?php echo $producto['id']; ?>"
+                                   class="enlace-interno enlace-producto d-block text-decoration-none text-dark">
+                                    <img src="<?php echo htmlspecialchars($producto['imagen_ruta']); ?>"
+                                         class="card-img-top" style="height:200px; object-fit:cover;"
+                                         alt="<?php echo htmlspecialchars($producto['nombre_producto']); ?>">
+                                    <div class="card-body text-center pb-0">
+                                        <h3 class="h6 text-start" ><?php echo htmlspecialchars($producto['nombre_producto']); ?></h3>
+                                        <p class="fw-bold text-success mb-1 text-start ps-0">
+                                            $<?php echo number_format($producto['precio'], 2, ',', '.'); ?>
+                                        </p>
+                                    </div>
+                                </a>
+                                <div class="card-body pt-0 text-center">
+                                    <a href="local.php?id=<?php echo $producto['local_id']; ?>"
+                                       class="enlace-interno enlace-local text-muted small fst-italic text-start d-block text-decoration-none">
                                         Local: <?php echo htmlspecialchars($producto['nombre_local']); ?>
-                                    </p>
-                                    <p class="fw-bold text-success mb-1 text-start ps-0">
-                                        $<?php echo number_format($producto['precio'], 2, ',', '.'); ?>
-                                    </p>                                   
+                                    </a>
                                 </div>
                             </div>
                         </div>

@@ -231,10 +231,7 @@ body{
 .card {
     display: flex;         
     flex-direction: column;   
-    align-items: flex-start;   
     width: 100%;
-    max-width: 350px;
-    max-width: 1200px;
     background: #fbfbfb;
     border-radius: 10px;
     box-shadow: 4px 2px 2px rgba(0, 0, 0, 0.100);

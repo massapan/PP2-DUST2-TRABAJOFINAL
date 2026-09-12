@@ -25,6 +25,7 @@
 
             if ($resultado->num_rows === 1) {
                 $usuario = $resultado->fetch_assoc();
+<<<<<<< HEAD
 
                 $codigo = generar_codigo_2fa();
 
@@ -41,11 +42,35 @@
                 header("Location: verificar_reset.php");
                 exit();
 
+=======
+                ?>
+                
+                <div class="caja-auth">
+                <h2>Recuperar Contraseña</h2>
+                <p>Cuenta encontrada: <strong><?php echo $usuario['email']; ?></strong></p>
+                
+                <div>
+                <form action="actualizar_password.php" method="POST">
+                    <input type="hidden" name="usuario_id" value="<?php echo $usuario['id']; ?>">
+                    
+                    <label for="nueva_password">Escribe tu nueva contraseña:</label>
+                    <input type="password" id="nueva_password" name="nueva_password" required>
+                    
+                    <button type="submit">Guardar Cambios</button>
+                </form>
+                </div>
+                </div>  
+                <?php
+>>>>>>> german
             } else {
                 echo "<div class='caja-auth'>";
                 echo "<h2 style='color: red;'>Error</h2>";
                 echo "<p>No encontramos ninguna cuenta registrada con ese correo.</p>";
+<<<<<<< HEAD
                 echo "<a href='recuperar.html' class='Boton-secundario'>Volver a intentar</a>";
+=======
+                echo "<p><a href='recuperar.html' class='Boton-secundario'>Volver a intentar</a></p>";
+>>>>>>> german
                 echo "</div>";
             }
 

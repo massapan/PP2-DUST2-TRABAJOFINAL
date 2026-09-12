@@ -1,6 +1,9 @@
 document.addEventListener('click', function(evento) {
 
-    const link = evento.target.closest('a.nav-link');
+    // a.nav-link -> los links del menú de arriba (Mapa/Catálogo/Favoritos)
+    // a.enlace-interno -> cualquier otro link que navegue "dentro" de la SPA
+    //                     (ej: nombre de producto o de local en una card)
+    const link = evento.target.closest('a.nav-link, a.enlace-interno');
     if (!link) return;
 
     const url = link.getAttribute('href');
@@ -8,15 +11,15 @@ document.addEventListener('click', function(evento) {
 
     evento.preventDefault();
 
-    // Sacamos "active" de todos los links del menú
-    document.querySelectorAll('.nav-pills .nav-link').forEach(function(otroLink) {
-        otroLink.classList.remove('active');
-        otroLink.removeAttribute('aria-current');
-    });
-
-    // Se la ponemos solo al que se clickeó
-    link.classList.add('active');
-    link.setAttribute('aria-current', 'page');
+    // El resaltado de "activo" solo tiene sentido para el menú superior
+    if (link.classList.contains('nav-link')) {
+        document.querySelectorAll('.nav-pills .nav-link').forEach(function(otroLink) {
+            otroLink.classList.remove('active');
+            otroLink.removeAttribute('aria-current');
+        });
+        link.classList.add('active');
+        link.setAttribute('aria-current', 'page');
+    }
 
     fetch(url)
         .then(function(respuesta) {
