@@ -76,10 +76,8 @@ document.addEventListener('click', function (evento) {
     const link = evento.target.closest('a.nav-link, a.enlace-interno');
     if (!link) return;
 
-    // Los links marcados como "recarga completa" (ej: Mis Productos, Mi
-    // Local, que son páginas HTML completas y no fragmentos) no deben
-    // pasar por fetch()+innerHTML: dejamos que el navegador los abra
-    // normalmente, como si esto ni existiera.
+    // Los links marcados como "recarga completa" no deben pasar por
+    // fetch()+innerHTML: dejamos que el navegador los abra normalmente.
     if (link.hasAttribute('data-recarga-completa')) return;
 
     const url = link.getAttribute('href');

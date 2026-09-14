@@ -3,7 +3,25 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 include 'conexion.php';
- 
+
+$logueado = isset($_SESSION['usuario_id']);
+$favoritos_producto_ids = [];
+
+// Si hay sesión, traemos los ids de productos que el usuario ya
+// marcó como favoritos, para pintar el corazón lleno desde el arranque.
+if ($logueado) {
+    $usuario_id = $_SESSION['usuario_id'];
+    $sql_fav = "SELECT producto_id FROM favoritos_productos WHERE usuario_id = ?";
+    $stmt_fav = $conexion->prepare($sql_fav);
+    $stmt_fav->bind_param("i", $usuario_id);
+    $stmt_fav->execute();
+    $resultado_fav = $stmt_fav->get_result();
+    while ($fila_fav = $resultado_fav->fetch_assoc()) {
+        $favoritos_producto_ids[] = (int) $fila_fav['producto_id'];
+    }
+    $stmt_fav->close();
+}
+
 // Traemos los productos junto con su local y su categoría (para poder filtrarlos en el JS).
 $sql = "SELECT p.id, p.nombre_producto, p.precio, l.id AS local_id, l.nombre_local, c.nombre AS categoria_nombre,
                (SELECT ip.ruta FROM imagenes_producto ip
@@ -21,7 +39,18 @@ $resultado = $conexion->query($sql);
 <div class="fondo"></div>
 <div class="container-fluid">
     <div class="row">
-        <aside class="col-md-2 border-end bg-white">
+        <!-- Boton de filtros: solo en mobile. En desktop el panel va siempre
+             visible, asi que este boton se oculta con d-md-none. -->
+        <div class="col-12 d-md-none pt-3">
+            <button class="btn btn-success w-100" type="button"
+                    data-bs-toggle="collapse" data-bs-target="#panelFiltros"
+                    aria-expanded="false" aria-controls="panelFiltros">
+                <i class="bi bi-funnel"></i> Filtros
+            </button>
+        </div>
+        <!-- collapse lo oculta en mobile hasta que se toca el boton;
+             d-md-block lo fuerza visible de 768px para arriba. -->
+        <aside class="col-md-2 border-end bg-white collapse d-md-block" id="panelFiltros">
             <?php include 'sidebar_prendas_locales.php'; ?>
         </aside>
         <div class="col-md-10 my-3">
@@ -33,13 +62,22 @@ $resultado = $conexion->query($sql);
                     if ($resultado && $resultado->num_rows > 0):
                         while ($producto = $resultado->fetch_assoc()):
                             $categoriaSlug = $producto['categoria_nombre'] ? strtolower($producto['categoria_nombre']) : '';
+                            $esFavorito = in_array((int) $producto['id'], $favoritos_producto_ids, true);
                     ?>
                         <div class="col-6 col-lg-3 tarjeta-producto"
                              data-categoria="<?php echo htmlspecialchars($categoriaSlug); ?>"
                              data-precio="<?php echo $producto['precio']; ?>">
-                            <div class="card h-100">
+                            <div class="card h-100 position-relative">
+                                <button type="button"
+                                        class="btn-favorito position-absolute top-0 end-0 m-2 bg-white rounded-circle"
+                                        style="z-index: 3;"
+                                        data-tipo="producto"
+                                        data-id="<?php echo $producto['id']; ?>"
+                                        aria-label="Marcar como favorito">
+                                    <i class="bi <?php echo $esFavorito ? 'bi-heart-fill text-danger' : 'bi-heart'; ?>"></i>
+                                </button>
                                 <a href="index.php?pagina=prenda&id=<?php echo $producto['id']; ?>"
-                                   class="enlace-interno enlace-producto d-block text-decoration-none text-dark">
+                                   class="enlace-interno text-decoration-none text-dark stretched-link">
                                     <img src="<?php echo htmlspecialchars($producto['imagen_ruta']); ?>"
                                          class="card-img-top" style="height:200px; object-fit:cover;"
                                          alt="<?php echo htmlspecialchars($producto['nombre_producto']); ?>">
@@ -52,7 +90,8 @@ $resultado = $conexion->query($sql);
                                 </a>
                                 <div class="card-body pt-0 text-center">
                                     <a href="index.php?pagina=local&id=<?php echo $producto['local_id']; ?>"
-                                       class="enlace-interno enlace-local text-muted small fst-italic text-start d-block text-decoration-none">
+                                       class="enlace-interno position-relative text-muted small fst-italic text-start d-block text-decoration-none"
+                                       style="z-index: 2;">
                                         Local: <?php echo htmlspecialchars($producto['nombre_local']); ?>
                                     </a>
                                 </div>
