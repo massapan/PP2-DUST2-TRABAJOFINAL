@@ -1,40 +1,74 @@
-<?php ob_start(); ?>
+<?php ob_start(); session_start(); ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Contraseña Actualizada - Ituzaingó a un toque</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nueva Contraseña - Ituzaingó a un toque</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="img/logo-removebg-preview.png" type="image/png">
 </head>
 <body class="pagina-centrada pagina-auth">
     <div class="fondo"></div>
     <div class="caja-auth">
-        
+
         <?php
+        // Si no pasaste por la verificación del código, no podés estar acá.
+        if (!isset($_SESSION['reset_autorizado'])) {
+            header("Location: recuperar.html");
+            exit();
+        }
+
         include 'conexion.php';
 
+        // Mensaje a mostrar arriba del formulario, si hace falta.
+        $error_password = '';
+
+        // Solo se considera envio valido si vino por POST Y las dos
+        // contrasenas coinciden. Si no coinciden se vuelve a mostrar el
+        // formulario SIN tocar $_SESSION['reset_autorizado'], asi puede
+        // reintentar sin volver a pedir el codigo de verificacion.
+        $envio_valido = false;
+
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            // Recibimos los datos ocultos y la nueva contraseña
-            $usuario_id = $_POST['usuario_id'];
+            // Las dos validaciones van del lado del servidor y no solo en
+            // el navegador: tanto el required como el minlength del HTML se
+            // saltean mandando el POST a mano. El ?? '' evita el warning si
+            // el campo no llega.
+            $nueva_1 = $_POST['nueva_password'] ?? '';
+            $nueva_2 = $_POST['nueva_password2'] ?? '';
+
+            // Mismo orden que procesar_registro.php (largo y despues
+            // coincidencia) para que las dos pantallas se comporten igual.
+            if (strlen($nueva_1) < 8) {
+                $error_password = 'La contraseña debe tener al menos 8 caracteres.';
+            } elseif ($nueva_1 !== $nueva_2) {
+                $error_password = 'Las contraseñas no coinciden. Escribí la misma en los dos campos.';
+            } else {
+                $envio_valido = true;
+            }
+        }
+
+        if ($envio_valido) {
+            // El id sale de la sesión (ya verificado), no del formulario.
+            $usuario_id = $_SESSION['reset_autorizado'];
             $nueva_password = $_POST['nueva_password'];
 
-            // Encriptamos la contraseña nueva
             $password_encriptada = password_hash($nueva_password, PASSWORD_DEFAULT);
 
-            // Preparamos la consulta para actualizar el registro
             $sql = "UPDATE usuarios SET password = ? WHERE id = ?";
             $stmt = $conexion->prepare($sql);
-            
-           
+
             if ($stmt) {
-                // "si" = string, integer
                 $stmt->bind_param("si", $password_encriptada, $usuario_id);
-                
+
                 if ($stmt->execute()) {
+                    // Ya se usó: limpiamos para que no se pueda reusar la sesión.
+                    unset($_SESSION['reset_autorizado']);
+
                     echo "<h1 style='color: #178017;'>¡Contraseña actualizada!</h1>";
                     echo "<p>Tu clave se cambió con éxito en la base de datos.</p>";
-                    // Apuntamos al login.php correcto
-                    echo "<br><p><a href='login.php' style='font-weight: bold;' class='Boton-secundario'>Ir a Iniciar Sesión</a></p>"; 
+                    echo "<br><p><a href='login.php' style='font-weight: bold;' class='Boton-secundario'>Ir a Iniciar Sesión</a></p>";
                 } else {
                     echo "<h2 style='color: red;'>Error</h2>";
                     echo "<p>Hubo un problema al actualizar: " . $stmt->error . "</p>";
@@ -45,15 +79,32 @@
                 echo "<p>" . $conexion->error . "</p>";
             }
             $conexion->close();
+
         } else {
-            // Si entran directo por URL, los mandamos a recuperar
-            header("Location: recuperar.html");
-            exit();
+            // Todavía no mandó el formulario, o las contraseñas no coincidieron.
+            ?>
+            <h1>Elegí tu nueva contraseña</h1>
+            <p>Ya verificamos tu identidad. Escribí la nueva contraseña para tu cuenta.</p>
+
+            <?php if ($error_password !== '') { ?>
+                <p style="color: red; font-weight: bold; margin-bottom: 15px;"><?php echo $error_password; ?></p>
+            <?php } ?>
+
+            <form action="actualizar_password.php" method="POST">
+                <label for="nueva_password">Nueva contraseña:</label>
+                <input type="password" id="nueva_password" name="nueva_password" minlength="8" required>
+
+                <label for="nueva_password2">Repetir nueva contraseña:</label>
+                <input type="password" id="nueva_password2" name="nueva_password2" minlength="8" required>
+
+                <button type="submit">Guardar Cambios</button>
+            </form>
+            <?php
         }
         ?>
 
     </div>
-
+    <script src="JS/ver-password.js"></script>
 </body>
 </html>
 <?php ob_end_flush(); ?>

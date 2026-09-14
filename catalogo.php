@@ -38,7 +38,7 @@ $resultado = $conexion->query($sql);
                              data-categoria="<?php echo htmlspecialchars($categoriaSlug); ?>"
                              data-precio="<?php echo $producto['precio']; ?>">
                             <div class="card h-100">
-                                <a href="prenda.php?id=<?php echo $producto['id']; ?>"
+                                <a href="index.php?pagina=prenda&id=<?php echo $producto['id']; ?>"
                                    class="enlace-interno enlace-producto d-block text-decoration-none text-dark">
                                     <img src="<?php echo htmlspecialchars($producto['imagen_ruta']); ?>"
                                          class="card-img-top" style="height:200px; object-fit:cover;"
@@ -51,7 +51,7 @@ $resultado = $conexion->query($sql);
                                     </div>
                                 </a>
                                 <div class="card-body pt-0 text-center">
-                                    <a href="local.php?id=<?php echo $producto['local_id']; ?>"
+                                    <a href="index.php?pagina=local&id=<?php echo $producto['local_id']; ?>"
                                        class="enlace-interno enlace-local text-muted small fst-italic text-start d-block text-decoration-none">
                                         Local: <?php echo htmlspecialchars($producto['nombre_local']); ?>
                                     </a>

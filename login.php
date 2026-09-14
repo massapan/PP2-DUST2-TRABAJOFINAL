@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iniciar Sesión - Ituzaingó a un toque</title>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="img/logo-removebg-preview.png" type="image/png">
@@ -51,5 +52,6 @@
         </div>
         
     </div>
+    <script src="JS/ver-password.js"></script>
 </body>
 </html>

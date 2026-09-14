@@ -12,9 +12,9 @@ $rol = $_SESSION['rol'] ?? null; // 'comprador' | 'vendedor' | null
         <span class="fs-4" style="margin-left: 20px;">Ituzaingó a un toque</span>
     </a>
     <ul class="nav nav-pills">
-        <li class="nav-item"><a href="mapa.php" class="nav-link">Mapa</a></li>
-        <li class="nav-item"><a href="catalogo.php" class="nav-link" aria-current="page">Catálogo</a></li>
-        <li class="nav-item"><a href="favoritos.php" class="nav-link">Favoritos</a></li>
+        <li class="nav-item"><a href="index.php?pagina=mapa" class="nav-link">Mapa</a></li>
+        <li class="nav-item"><a href="index.php?pagina=catalogo" class="nav-link" aria-current="page">Catálogo</a></li>
+        <li class="nav-item"><a href="index.php?pagina=favoritos" class="nav-link">Favoritos</a></li>
 
         <?php if ($logueado && $rol === 'vendedor'): ?>
             <li class="nav-item">

@@ -108,7 +108,10 @@ body{
 .Header .buscador-input{
     padding: 6px 12px 6px 35px;
     margin-bottom: 0;
-    width: 500px;
+    /* 100% del contenedor con tope: en desktop llega a 500px, en mobile
+       se encoge en vez de desbordar la pantalla. */
+    width: 100%;
+    max-width: 500px;
 }
 
 .Header .nav-pills{
@@ -399,4 +402,116 @@ body{
 .inferior{
     margin-top:5%;
     
+}
+.btn-favorito {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+    z-index: 2;
+    cursor: pointer;
+}
+
+/* ============================================================
+   RESPONSIVE - Pantallas chicas (celulares y tablets verticales)
+   ============================================================
+   El diseno original esta pensado para desktop y dimensiona con
+   porcentajes del viewport (.caja-auth 35%, .logo 13%), que en un
+   celular de 375px dan 131px y 49px respectivamente: ilegible.
+
+   Todo lo de abajo aplica SOLO a 768px o menos, asi que la vista
+   de escritorio queda exactamente igual que antes.
+   ============================================================ */
+
+@media (max-width: 768px) {
+
+    /* Paginas de login / registro / recuperar / carga de productos.
+       De fila a columna: el logo y la tarjeta se apilan en vez de
+       pelear por el ancho. El gap de 20% se come media pantalla. */
+    .pagina-centrada{
+        flex-direction: column;
+        justify-content: flex-start;
+        gap: 24px;
+        padding: 32px 16px;
+    }
+
+    .caja-auth{
+        width: 100%;
+        max-width: 420px;
+        /* border-radius en % deforma la caja cuando es angosta y alta */
+        border-radius: 16px;
+        padding: 24px 20px;
+        /* la sombra de 25px se salia de la pantalla */
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+    }
+
+    .logo{
+        width: 45%;
+        max-width: 160px;
+        height: auto;
+    }
+}
+
+
+/* ============================================================
+   Boton "Mostrar / Ocultar" de los campos de contrasena
+   ============================================================
+   El envoltorio .campo-password lo crea JS/ver-password.js en
+   tiempo de ejecucion; aca van solo los estilos.
+
+   Se usa .pagina-auth .ver-password (dos clases) para ganarle en
+   especificidad a .pagina-auth button, que pone width:100% y fondo
+   azul en todos los botones de estos formularios.
+   ============================================================ */
+
+.campo-password{
+    position: relative;
+    /* toma la separacion que antes tenia el input, asi el alto del
+       envoltorio coincide exacto con el del campo y el boton puede
+       estirarse al 100% sin desalinearse */
+    margin-bottom: 15px;
+}
+
+.pagina-auth .campo-password input{
+    margin-bottom: 0;
+    /* deja lugar para que el texto no pase por debajo del boton */
+    padding-right: 44px;
+}
+
+.pagina-auth .ver-password{
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 44px;
+    /* flex para centrar el icono en los dos ejes sin depender del
+       line-height, que cambia segun la pagina */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: none;
+    border-radius: 0 5px 5px 0;
+    background: transparent;
+    color: #6c757d;
+    cursor: pointer;
+}
+
+.pagina-auth .ver-password svg{
+    width: 20px;
+    height: 20px;
+    display: block;
+}
+
+.pagina-auth .ver-password:hover{
+    background: transparent;
+    color: #2d77c7;
+}
+
+.pagina-auth .ver-password:focus-visible{
+    outline: 2px solid #2d77c7;
+    outline-offset: -2px;
 }

@@ -1,11 +1,19 @@
 // Navegación de la SPA: fetch()+innerHTML para no recargar la página,
-// + History API para que las flechitas de atrás/adelante del navegador
-// funcionen DENTRO de la SPA en vez de sacarte de index.php.
+// + History API para que las flechitas de atrás/adelante funcionen
+// DENTRO de la SPA en vez de sacarte de index.php.
+//
+// Cada "página" es una URL real y completa: index.php?pagina=X(&id=Y).
+// Si el navegador alguna vez necesita cargar esa URL de verdad (F5,
+// algún comportamiento raro del botón atrás, etc.), index.php sabe
+// armar la página completa con header/footer -- nunca se ve un
+// fragmento pelado ni se termina en una URL vieja sin sentido.
+//
+// Para diferenciar "esto es un fetch de la SPA" de "esto es una carga
+// de verdad", mandamos el header X-Requested-With, que index.php revisa
+// del lado del servidor.
 
-// Carga un fragmento en #contenido y, si corresponde, resalta el link
-// del menú superior que coincida con esa URL.
 function cargarContenido(url) {
-    fetch(url)
+    fetch(url, { headers: { 'X-Requested-With': 'XMLHttpRequest' } })
         .then(function (respuesta) { return respuesta.text(); })
         .then(function (html) {
             document.getElementById('contenido').innerHTML = html;
@@ -17,15 +25,26 @@ function cargarContenido(url) {
         });
 }
 
-// El resaltado de "activo" en el menú de arriba se recalcula siempre
-// (tanto al hacer click como al volver con la flechita de atrás),
-// comparando el archivo (sin el ?id=...) contra los href del menú.
+// Saca el valor de ?pagina= de una URL (relativa o absoluta), resolviéndola
+// contra la ubicación actual para que funcione tanto si el sitio vive en
+// la raíz del dominio como si vive en una subcarpeta (típico de XAMPP).
+function obtenerPagina(url) {
+    try {
+        return new URL(url, location.href).searchParams.get('pagina') || 'catalogo';
+    } catch (e) {
+        return 'catalogo';
+    }
+}
+
+// Resalta en el menú de arriba el link cuya "pagina" coincida con la
+// que se acaba de cargar. Se recalcula siempre: tanto al hacer click
+// como al volver con la flechita de atrás.
 function actualizarNavActivo(url) {
-    const archivo = url.split('?')[0];
+    const pagina = obtenerPagina(url);
 
     document.querySelectorAll('.nav-pills .nav-link').forEach(function (link) {
-        const archivoLink = (link.getAttribute('href') || '').split('?')[0];
-        const esActivo = archivoLink === archivo;
+        const paginaLink = obtenerPagina(link.getAttribute('href') || '');
+        const esActivo = paginaLink === pagina;
 
         link.classList.toggle('active', esActivo);
         if (esActivo) {
@@ -36,9 +55,9 @@ function actualizarNavActivo(url) {
     });
 }
 
-// Guardamos como "estado inicial" lo que index.php ya cargó de entrada
-// (catalogo.php), sin cambiar la URL que se ve en la barra.
-history.replaceState({ url: 'catalogo.php' }, '', location.href);
+// Guardamos como "estado inicial" la URL con la que index.php ya cargó
+// de entrada, sin cambiar nada en la barra de direcciones.
+history.replaceState({ url: location.pathname + location.search }, '', location.href);
 
 document.addEventListener('click', function (evento) {
 
@@ -74,6 +93,6 @@ document.addEventListener('click', function (evento) {
 
 // Se dispara cuando el usuario toca atrás/adelante en el navegador.
 window.addEventListener('popstate', function (evento) {
-    const url = (evento.state && evento.state.url) ? evento.state.url : 'catalogo.php';
+    const url = (evento.state && evento.state.url) ? evento.state.url : 'index.php?pagina=catalogo';
     cargarContenido(url);
 });

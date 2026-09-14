@@ -12,8 +12,10 @@ if (!isset($_SESSION['usuario_id']) || $_SESSION['rol'] !== 'vendedor') {
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registrar Local - Ituzaingó a un toque</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="img/logo-removebg-preview.png" type="image/png">
 </head>
 <body class="pagina-centrada">
     <div class="fondo"></div>

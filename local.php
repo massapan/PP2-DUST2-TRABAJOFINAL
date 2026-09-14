@@ -93,7 +93,7 @@ $conexion->close();
                     </p>
                 </div>
 
-                <a href="mapa.php" id="ver-en-mapa" class="enlace-interno d-inline-block text-center text-decoration-none">
+                <a href="index.php?pagina=mapa" id="ver-en-mapa" class="enlace-interno d-inline-block text-center text-decoration-none">
                     ver en el mapa
                 </a>
             </div>
@@ -124,7 +124,7 @@ $conexion->close();
                 <?php if (count($productos) > 0): ?>
                     <?php foreach ($productos as $producto): ?>
                         <div class="col-6 col-lg-3">
-                            <a href="prenda.php?id=<?php echo $producto['id']; ?>"
+                            <a href="index.php?pagina=prenda&id=<?php echo $producto['id']; ?>"
                                class="enlace-interno d-block text-decoration-none text-dark">
                                 <div class="card h-100">
                                     <img src="<?php echo htmlspecialchars($producto['imagen_ruta']); ?>"

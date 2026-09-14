@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro - Ituzaingó a un toque</title>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="img/logo-removebg-preview.png" type="image/png">
@@ -21,7 +22,9 @@
         } elseif (isset($_GET['error']) && $_GET['error'] == 'password_corta') {
             echo "<p style='color: red; font-weight: bold; margin-bottom: 15px;'>La contraseña debe tener al menos 8 caracteres.</p>";
         } elseif (isset($_GET['error']) && $_GET['error'] == 'email_invalido') {
-            echo "<p style='color: red; font-weight: bold; margin-bottom: 15px;'>El correo electrónico no tiene un formato válido. Ejemplo: usuario@dominio.com</p>";}
+            echo "<p style='color: red; font-weight: bold; margin-bottom: 15px;'>El correo electrónico no tiene un formato válido. Ejemplo: usuario@dominio.com</p>";
+        } elseif (isset($_GET['error']) && $_GET['error'] == 'password_no_coincide') {
+            echo "<p style='color: red; font-weight: bold; margin-bottom: 15px;'>Las contraseñas no coinciden. Escribí la misma en los dos campos.</p>";}
 
         ?> 
 
@@ -30,6 +33,9 @@
 
         <label for="password">Contraseña:</label>
         <input type="password" id="password" name="password" required minlength="8">
+
+        <label for="password2">Repetir contraseña:</label>
+        <input type="password" id="password2" name="password2" required minlength="8">
 
         <label for="rol">¿Qué tipo de usuario eres?</label>
         <select id="rol" name="rol" required>
@@ -40,5 +46,6 @@
         <button type="submit">Registrarse</button>
     </form>
 </div>
+    <script src="JS/ver-password.js"></script>
 </body>
 </html>

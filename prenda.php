@@ -101,7 +101,7 @@ $conexion->close();
 
                 <p>
                     Vendido por:
-                    <a href="local.php?id=<?php echo $producto['local_id']; ?>" class="enlace-interno fw-bold">
+                    <a href="index.php?pagina=local&id=<?php echo $producto['local_id']; ?>" class="enlace-interno fw-bold">
                         <?php echo htmlspecialchars($producto['nombre_local']); ?>
                     </a>
                 </p>
@@ -142,7 +142,7 @@ $conexion->close();
                 <?php if (count($similares) > 0): ?>
                     <?php foreach ($similares as $similar): ?>
                         <div class="col-6 col-lg-3">
-                            <a href="prenda.php?id=<?php echo $similar['id']; ?>"
+                            <a href="index.php?pagina=prenda&id=<?php echo $similar['id']; ?>"
                                class="enlace-interno d-block text-decoration-none text-dark">
                                 <div class="card h-100">
                                     <img src="<?php echo htmlspecialchars($similar['imagen_ruta']); ?>"
