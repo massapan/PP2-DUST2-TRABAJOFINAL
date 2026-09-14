@@ -18,10 +18,10 @@ $rol = $_SESSION['rol'] ?? null; // 'comprador' | 'vendedor' | null
 
         <?php if ($logueado && $rol === 'vendedor'): ?>
             <li class="nav-item">
-                <a href="productos.php" class="nav-link nav-link-vendedor">Mis Productos</a>
+                <a href="productos.php" class="nav-link nav-link-vendedor" data-recarga-completa>Mis Productos</a>
             </li>
             <li class="nav-item">
-                <a href="SubidaLocal.php" class="nav-link nav-link-vendedor">Mi Local</a>
+                <a href="SubidaLocal.php" class="nav-link nav-link-vendedor" data-recarga-completa>Mi Local</a>
             </li>
         <?php endif; ?>
     </ul>

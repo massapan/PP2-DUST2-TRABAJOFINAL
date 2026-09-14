@@ -18,21 +18,27 @@ if (!isset($_SESSION['usuario_id']) || $_SESSION['rol'] !== 'vendedor') {
 <body class="pagina-centrada">
     <div class="fondo"></div>
     <div class="container">
-        
+
         <h2>Registrar Local</h2>
         <br>
         <p>Completá los datos de tu negocio para empezar a subir productos.</p>
-<br>
-        <form action="guardar_local.php" method="POST">
-            
+        <br>
+        <form action="guardar_local.php" method="POST" enctype="multipart/form-data">
+
             <b><label for="nombre_local">Nombre de tu local:</label></b>
             <input type="text" id="nombre_local" name="nombre_local" required>
 
             <b><label for="direccion">Dirección:</label></b>
             <input type="text" id="direccion" name="direccion" required>
 
+            <b><label for="entre_calles">Entre calles:</label></b>
+            <input type="text" id="entre_calles" name="entre_calles" placeholder="Ej: Av. Rivadavia y Belgrano">
+
             <b><label for="descripcion">Descripción del local:</label></b>
             <textarea id="descripcion" name="descripcion" rows="4" required></textarea>
+
+            <b><label for="imagen_portada">Foto de portada de tu local:</label></b>
+            <input type="file" id="imagen_portada" name="imagen_portada" accept="image/*" required>
 
             <button type="submit">Guardar Local</button>
 
