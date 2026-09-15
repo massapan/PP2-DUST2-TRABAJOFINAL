@@ -6,8 +6,7 @@ include 'conexion.php';
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['email'];
     $password = $_POST['password'];
-    // ?? '' para que no tire warning si el campo no llega (por ejemplo si
-    // alguien manda el POST directo sin pasar por el formulario).
+    
     $password2 = $_POST['password2'] ?? '';
     $rol = $_POST['rol'];
 
@@ -16,8 +15,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     }
 
-    // La verificacion tiene que estar aca y no solo en el navegador: el
-    // required del HTML se saltea mandando el POST a mano.
     if ($password !== $password2) {
         header("Location: registro.php?error=password_no_coincide");
         exit();

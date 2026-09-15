@@ -8,7 +8,7 @@ $rol = $_SESSION['rol'] ?? null; // 'comprador' | 'vendedor' | null
 ?>
 
 <header class="d-flex flex-wrap justify-content-between align-items-center py-3 border-bottom Header">
-    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 link-body-emphasis text-decoration-none">
+    <a class="d-flex align-items-center mb-3 mb-md-0 link-body-emphasis text-decoration-none">
         <span class="fs-4" style="margin-left: 20px;">Ituzaingó a un toque</span>
     </a>
     <ul class="nav nav-pills">

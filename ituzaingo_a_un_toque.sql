@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 08-09-2026 a las 22:32:44
+-- Tiempo de generación: 15-09-2026 a las 00:00:05
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -104,6 +104,24 @@ CREATE TABLE `imagenes_producto` (
   `creado_en` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `imagenes_producto`
+--
+
+INSERT INTO `imagenes_producto` (`id`, `producto_id`, `ruta`, `orden`, `creado_en`) VALUES
+(1, 1, 'https://picsum.photos/seed/prod1/400/400', 0, '2026-09-08 20:41:47'),
+(2, 2, 'https://picsum.photos/seed/prod2/400/400', 0, '2026-09-08 20:41:47'),
+(3, 3, 'https://picsum.photos/seed/prod3/400/400', 0, '2026-09-08 20:41:47'),
+(4, 4, 'https://picsum.photos/seed/prod4/400/400', 0, '2026-09-08 20:41:47'),
+(5, 5, 'https://picsum.photos/seed/prod5/400/400', 0, '2026-09-08 20:41:47'),
+(6, 6, 'https://picsum.photos/seed/prod6/400/400', 0, '2026-09-08 20:41:47'),
+(7, 7, 'https://picsum.photos/seed/prod7/400/400', 0, '2026-09-08 20:41:47'),
+(8, 8, 'https://picsum.photos/seed/prod8/400/400', 0, '2026-09-08 20:41:47'),
+(9, 9, 'https://picsum.photos/seed/prod9/400/400', 0, '2026-09-08 20:41:47'),
+(10, 10, 'https://picsum.photos/seed/prod10/400/400', 0, '2026-09-08 20:41:47'),
+(11, 11, 'https://picsum.photos/seed/prod11/400/400', 0, '2026-09-08 20:41:47'),
+(12, 12, 'https://picsum.photos/seed/prod12/400/400', 0, '2026-09-08 20:41:47');
+
 -- --------------------------------------------------------
 
 --
@@ -115,13 +133,24 @@ CREATE TABLE `locales` (
   `usuario_id` int(11) NOT NULL,
   `nombre_local` varchar(100) NOT NULL,
   `direccion` varchar(255) NOT NULL,
+  `entre_calles` varchar(255) DEFAULT NULL,
   `descripcion` text DEFAULT NULL,
+  `imagen_portada` varchar(255) DEFAULT NULL,
   `latitud` decimal(10,7) DEFAULT NULL,
   `longitud` decimal(10,7) DEFAULT NULL,
   `horario_texto` varchar(255) DEFAULT NULL,
   `categoria_id` int(11) DEFAULT NULL,
   `creado_en` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `locales`
+--
+
+INSERT INTO `locales` (`id`, `usuario_id`, `nombre_local`, `direccion`, `entre_calles`, `descripcion`, `imagen_portada`, `latitud`, `longitud`, `horario_texto`, `categoria_id`, `creado_en`) VALUES
+(1, 41, 'Urban Style Ituzaingó', 'Av. Rivadavia 1200, Ituzaingó', NULL, 'Ropa urbana y streetwear', NULL, -34.6659000, -58.6702000, 'Lun a Sáb 10 a 19hs', 1, '2026-09-08 20:41:47'),
+(2, 45, 'DeporteYa', 'Belgrano 450, Ituzaingó', NULL, 'Indumentaria deportiva y calzado', NULL, -34.6612000, -58.6745000, 'Lun a Sáb 9 a 20hs', 2, '2026-09-08 20:41:47'),
+(3, 46, 'Boutique Elegance', 'San Martín 780, Ituzaingó', NULL, 'Ropa formal y de fiesta', NULL, -34.6690000, -58.6680000, 'Mar a Sáb 11 a 19hs', 4, '2026-09-08 20:41:47');
 
 -- --------------------------------------------------------
 
@@ -159,10 +188,29 @@ CREATE TABLE `productos` (
   `id` int(11) NOT NULL,
   `local_id` int(11) NOT NULL,
   `nombre_producto` varchar(100) NOT NULL,
+  `descripcion` text DEFAULT NULL,
   `precio` decimal(10,2) NOT NULL,
   `categoria_id` int(11) DEFAULT NULL,
   `creado_en` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `productos`
+--
+
+INSERT INTO `productos` (`id`, `local_id`, `nombre_producto`, `descripcion`, `precio`, `categoria_id`, `creado_en`) VALUES
+(1, 1, 'Remera oversize básica', NULL, 8500.00, 1, '2026-09-08 20:41:47'),
+(2, 2, 'Remera estampada', NULL, 7200.00, 1, '2026-09-08 20:41:47'),
+(3, 1, 'Pantalón cargo urbano', NULL, 15000.00, 2, '2026-09-08 20:41:47'),
+(4, 3, 'Jean recto', NULL, 18500.00, 2, '2026-09-08 20:41:47'),
+(5, 1, 'Campera bomber', NULL, 32000.00, 3, '2026-09-08 20:41:47'),
+(6, 2, 'Campera de jean', NULL, 27500.00, 3, '2026-09-08 20:41:47'),
+(7, 3, 'Vestido floreado', NULL, 21000.00, 4, '2026-09-08 20:41:47'),
+(8, 3, 'Vestido de fiesta', NULL, 45000.00, 4, '2026-09-08 20:41:47'),
+(9, 2, 'Zapatillas urbanas', NULL, 38000.00, 5, '2026-09-08 20:41:47'),
+(10, 3, 'Botas de cuero', NULL, 52000.00, 5, '2026-09-08 20:41:47'),
+(11, 1, 'Cinturón de cuero', NULL, 9500.00, 6, '2026-09-08 20:41:47'),
+(12, 2, 'Gorra snapback', NULL, 6000.00, 6, '2026-09-08 20:41:47');
 
 -- --------------------------------------------------------
 
@@ -223,8 +271,12 @@ INSERT INTO `usuarios` (`id`, `email`, `password`, `rol`, `creado_en`) VALUES
 (41, 'gerluchy@gmail.com', '$2y$10$2M./qLKidqOqP5U4zzw3oumKKzqPmhVacZaIQeDDOZTARcCqZcUgu', 'vendedor', '2026-08-24 00:36:12'),
 (43, 'massarigaudi21@gmail.com', '$2y$10$87ZcqtQ2wmCHzc/FBqlcr.L/ce5xFAEc591owSRKM0UImmzjI84mG', 'comprador', '2026-08-24 22:13:30'),
 (44, 'messi@gmail.com', '$2y$10$jYsUro8WV/H5mqpO1nGjDexbncPVOccTYVVSH/V8Nohm9WgcXeE8u', 'comprador', '2026-08-25 17:48:29'),
-(45, 'ger@gmail.com', '$2y$10$mwIJ9SdLvJIL0l8hHiUQd.6MXPkFMvcPjP9tdVZRDHhxiek.i5mIG', 'vendedor', '2026-08-26 22:20:51'),
-(46, 'massa@gmail.com', '$2y$10$P3v4onCJmn2Z6e42p5Gs8eDpM/TPK5xFb0eYSEHlbo3jRzQfcsxEG', 'vendedor', '2026-08-29 01:11:06');
+(45, 'ger@gmail.com', '$2y$10$NaAkuY/I4I3/y1vQwTBebuJp.A/FkGoeMStZj3dA4cHD/isrL9Juu', 'vendedor', '2026-08-26 22:20:51'),
+(46, 'massa@gmail.com', '$2y$10$P3v4onCJmn2Z6e42p5Gs8eDpM/TPK5xFb0eYSEHlbo3jRzQfcsxEG', 'vendedor', '2026-08-29 01:11:06'),
+(47, 'man@gmail.com', '$2y$10$oYj0KlSM8WEWhYboNyAcIO9hA7pFsrdcE7DkvER5Q3USYeO5o/K1e', 'comprador', '2026-09-10 23:06:57'),
+(48, '1@gmail.com', '$2y$10$IiW90BAi5rKfIgAWKrgXluLZBJuJoaCIt6nZ83QdcRGNmLosHrZym', 'comprador', '2026-09-10 23:19:20'),
+(49, 'rossi@gmail.com', '$2y$10$ThtV.os7EfYc4g4I1U3CfOoPr7IYHmAK8SQ5iYVtyurkOimbUBxxm', 'comprador', '2026-09-10 23:34:51'),
+(50, 'profe@gmail.com', '$2y$10$.DVde0ixW.4bgTsG0QacuuGRSb.c8Vf.ru08xK1Tv6/KECDOiOLZu', 'vendedor', '2026-09-14 21:56:49');
 
 --
 -- Índices para tablas volcadas
@@ -340,13 +392,13 @@ ALTER TABLE `categorias_producto`
 -- AUTO_INCREMENT de la tabla `imagenes_producto`
 --
 ALTER TABLE `imagenes_producto`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `locales`
 --
 ALTER TABLE `locales`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `password_resets`
@@ -358,7 +410,7 @@ ALTER TABLE `password_resets`
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `publicos`
@@ -376,7 +428,7 @@ ALTER TABLE `recordarme_tokens`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- Restricciones para tablas volcadas
