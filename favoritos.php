@@ -53,7 +53,7 @@ if ($logueado) {
 <div class="fondo"></div>
 <div class="container-fluid">
     <div class="row">
-        <aside class="col-md-2 border-end bg-white">
+        <aside class="col-md-2 border-end bg-white position-sticky">
             <?php include 'sidebar_prendas_locales.php'; ?>
         </aside>
         <div class="col-md-10 my-3">

@@ -48,9 +48,8 @@ $resultado = $conexion->query($sql);
                 <i class="bi bi-funnel"></i> Filtros
             </button>
         </div>
-        <!-- collapse lo oculta en mobile hasta que se toca el boton;
-             d-md-block lo fuerza visible de 768px para arriba. -->
-        <aside class="col-md-2 border-end bg-white collapse d-md-block" id="panelFiltros">
+        
+        <aside class="col-md-2 border-end bg-white position-sticky collapse d-md-block" id="panelFiltros">
             <?php include 'sidebar_prendas_locales.php'; ?>
         </aside>
         <div class="col-md-10 my-3">
