@@ -49,7 +49,7 @@ $resultado = $conexion->query($sql);
             </button>
         </div>
         
-        <aside class="col-md-2 border-end bg-white position-sticky collapse d-md-block" id="panelFiltros">
+        <aside class="col-md-2 border-end pa bg-white position-sticky align-self-start "style="top: 0; padding-top: 1rem;" id="panelFiltros">
             <?php include 'sidebar_prendas_locales.php'; ?>
         </aside>
         <div class="col-md-10 my-3">
