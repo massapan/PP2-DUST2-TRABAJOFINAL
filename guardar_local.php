@@ -33,6 +33,16 @@ if (!isset($_SESSION['usuario_id']) || $_SESSION['rol'] !== 'vendedor') {
             $direccion    = trim($_POST['direccion']);
             $entre_calles = trim($_POST['entre_calles'] ?? '');
             $descripcion  = trim($_POST['descripcion']);
+            $instagram = trim($_POST['instagram'] ?? '');
+$whatsapp  = trim($_POST['whatsapp'] ?? '');
+$facebook  = trim($_POST['facebook'] ?? '');
+$tiktok    = trim($_POST['tiktok'] ?? '');
+
+// Si vinieron vacíos, los guardamos como NULL (no como string vacío)
+$instagram = $instagram !== '' ? $instagram : null;
+$whatsapp  = $whatsapp  !== '' ? $whatsapp  : null;
+$facebook  = $facebook  !== '' ? $facebook  : null;
+$tiktok    = $tiktok    !== '' ? $tiktok    : null;
 
             // Procesamos la imagen de portada 
             $directorio_subida = "uploads/";
@@ -41,17 +51,17 @@ if (!isset($_SESSION['usuario_id']) || $_SESSION['rol'] !== 'vendedor') {
 
             if (move_uploaded_file($_FILES["imagen_portada"]["tmp_name"], $ruta_imagen)) {
 
-                $sql = "INSERT INTO locales (usuario_id, nombre_local, direccion, entre_calles, descripcion, imagen_portada) VALUES (?, ?, ?, ?, ?, ?)";
-                $stmt = $conexion->prepare($sql);
+                $sql = "INSERT INTO locales (usuario_id, nombre_local, direccion, entre_calles, descripcion, imagen_portada, instagram, whatsapp, facebook, tiktok) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+$stmt = $conexion->prepare($sql);
 
-                if ($stmt) {
-                    $stmt->bind_param("isssss", $usuario_id, $nombre_local, $direccion, $entre_calles, $descripcion, $ruta_imagen);
+if ($stmt) {
+    $stmt->bind_param("isssssssss", $usuario_id, $nombre_local, $direccion, $entre_calles, $descripcion, $ruta_imagen, $instagram, $whatsapp, $facebook, $tiktok);
 
                     if ($stmt->execute()) {
-                        echo "<h2 style='color: #28a745;'>¡Tu local se ha registrado con éxito!</h2>";
-                        echo "<p>El negocio <strong>" . htmlspecialchars($nombre_local) . "</strong> ya está en nuestra base de datos.</p>";
-                        echo "<p>Ya podés empezar a agregar tu mercadería para que la vean los compradores.</p>";
-                        echo "<br><a href='productos.php' style='font-weight: bold;' class='Boton-secundario'>Ir a cargar productos</a>";
+                        $stmt->close();
+                        $conexion->close();
+                        header("Location: index.php");
+                        exit();     
                     } else {
                         echo "<h2 style='color: red;'>Error al registrar</h2>";
                         echo "<p>Hubo un problema: " . $stmt->error . "</p>";

@@ -6,7 +6,7 @@ include 'conexion.php';
 
 $local_id = isset($_GET['id']) ? (int) $_GET['id'] : 0;
 
-$sql = "SELECT id, nombre_local, direccion, entre_calles, descripcion, imagen_portada
+$sql = "SELECT id, nombre_local, direccion, entre_calles, descripcion, imagen_portada, instagram, whatsapp, facebook, tiktok
         FROM locales WHERE id = ?";
 $stmt = $conexion->prepare($sql);
 $stmt->bind_param("i", $local_id);
@@ -47,7 +47,7 @@ if ($local) {
     }
 }
 
-$conexion->close();
+$conexion->close(); 
 ?>
 <div class="fondo"></div>
 
@@ -60,7 +60,7 @@ $conexion->close();
 
     <?php else: ?>
 
-        <div class="superior">
+        <div class="superior">  
 
             <div class="caja1">
                 <div id="nombre-local" class="d-flex align-items-center gap-3">
@@ -92,6 +92,34 @@ $conexion->close();
                             : 'Este local todavía no cargó una descripción.'; ?>
                     </p>
                 </div>
+
+<div id="redes-sociales-local" class="d-flex gap-3 mt-2">
+
+    <?php if (!empty($local['instagram'])): ?>
+        <a href="https://instagram.com/<?php echo htmlspecialchars($local['instagram']); ?>" target="_blank">
+            <i class="bi bi-instagram" style="font-size: 24px; color: #E1306C;"></i>
+        </a>
+    <?php endif; ?>
+
+    <?php if (!empty($local['whatsapp'])): ?>
+        <a href="https://wa.me/<?php echo htmlspecialchars($local['whatsapp']); ?>" target="_blank">
+            <i class="bi bi-whatsapp" style="font-size: 24px; color: #25D366;"></i>
+        </a>
+    <?php endif; ?>
+
+    <?php if (!empty($local['facebook'])): ?>
+        <a href="https://facebook.com/<?php echo htmlspecialchars($local['facebook']); ?>" target="_blank">
+            <i class="bi bi-facebook" style="font-size: 24px; color: #1877F2;"></i>
+        </a>
+    <?php endif; ?>
+
+    <?php if (!empty($local['tiktok'])): ?>
+        <a href="https://tiktok.com/@<?php echo htmlspecialchars($local['tiktok']); ?>" target="_blank">
+            <i class="bi bi-tiktok" style="font-size: 24px; color: #000000;"></i>
+        </a>
+    <?php endif; ?>
+
+</div>
 
                 <a href="index.php?pagina=mapa" id="ver-en-mapa" class="enlace-interno d-inline-block text-center text-decoration-none">
                     ver en el mapa

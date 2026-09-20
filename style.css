@@ -365,36 +365,34 @@ body{
 }
 #ver-en-mapa{
     background-color: #00953cce;
-    border: 1px solid #870303;
     width: 20%;
     color:rgb(255, 255, 255);
 }
 #descripcion-local{
-    border: 1px solid #870303;
     width: 40%;
     margin-bottom:5%;
     padding-bottom:15%;
 }
 #imagen-local{
-    border: 1px solid #870303;
+    border: 1px solid #ccc;
     width: 90%;
     height: 80%;
     margin-bottom:5%;
 }
 #imagen-prenda{
-    border: 1px solid #870303;
+    border: 1px solid #ccc;
     width: 90%;
     height: 80%;
     margin-bottom:5%;
 }
 #mas-imagenes-prenda{
-    border: 1px solid #870303;
+    border: 1px solid #ccc;
     width: 90%;
     height: 15%;
     margin-bottom:5%;
 }
 #mas-imagenes-local{
-    border: 1px solid #870303;
+    border: 1px solid #ccc;
     width: 90%;
     height: 15%;
     margin-bottom:5%;
@@ -514,4 +512,9 @@ body{
 .pagina-auth .ver-password:focus-visible{
     outline: 2px solid #2d77c7;
     outline-offset: -2px;
+}
+
+#descripcion{
+    height: 200px;
+    width: 100%;
 }
