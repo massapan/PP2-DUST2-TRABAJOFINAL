@@ -6,7 +6,7 @@ include 'conexion.php';
 
 $local_id = isset($_GET['id']) ? (int) $_GET['id'] : 0;
 
-$sql = "SELECT id, nombre_local, direccion, entre_calles, descripcion, imagen_portada, instagram, whatsapp, facebook, tiktok
+$sql = "SELECT id, usuario_id, nombre_local, direccion, entre_calles, descripcion, imagen_portada, instagram, whatsapp, facebook, tiktok
         FROM locales WHERE id = ?";
 $stmt = $conexion->prepare($sql);
 $stmt->bind_param("i", $local_id);
@@ -64,15 +64,22 @@ $conexion->close();
 
             <div class="caja1">
                 <div id="nombre-local" class="d-flex align-items-center gap-3">
-                    <h1 class="mb-0"><?php echo htmlspecialchars($local['nombre_local']); ?></h1>
-                    <?php if ($esComprador): ?>
-                        <button type="button" class="btn-favorito btn btn-link fs-4 p-0"
-                                data-tipo="local" data-id="<?php echo $local['id']; ?>"
-                                title="Guardar en favoritos">
-                            <i class="bi <?php echo $esFavorito ? 'bi-heart-fill text-danger' : 'bi-heart'; ?>"></i>
-                        </button>
-                    <?php endif; ?>
-                </div>
+    <h1 class="mb-0"><?php echo htmlspecialchars($local['nombre_local']); ?></h1>
+
+    <?php if (isset($_SESSION['usuario_id']) && $_SESSION['usuario_id'] == $local['usuario_id']): ?>
+        <a href="SubidaLocal.php" title="Editar mi local">
+            <i class="bi bi-pencil-square" style="font-size: 22px;"></i>
+        </a>
+    <?php endif; ?>
+
+    <?php if ($esComprador): ?>
+        <button type="button" class="btn-favorito btn btn-link fs-4 p-0"
+                data-tipo="local" data-id="<?php echo $local['id']; ?>"
+                title="Guardar en favoritos">
+            <i class="bi <?php echo $esFavorito ? 'bi-heart-fill text-danger' : 'bi-heart'; ?>"></i>
+        </button>
+    <?php endif; ?>
+</div>
 
                 <div class="direccion-local">
                     <h5><i class="bi bi-geo-alt"></i> <?php echo htmlspecialchars($local['direccion']); ?></h5>

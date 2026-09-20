@@ -51,7 +51,36 @@ $tiktok    = $tiktok    !== '' ? $tiktok    : null;
 
             if (move_uploaded_file($_FILES["imagen_portada"]["tmp_name"], $ruta_imagen)) {
 
-                $sql = "INSERT INTO locales (usuario_id, nombre_local, direccion, entre_calles, descripcion, imagen_portada, instagram, whatsapp, facebook, tiktok) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                // Buscamos si este vendedor ya tiene un local (y de paso, su imagen actual)
+$sql_check = "SELECT id, imagen_portada FROM locales WHERE usuario_id = ?";
+$stmt_check = $conexion->prepare($sql_check);
+$stmt_check->bind_param("i", $usuario_id);
+$stmt_check->execute();
+$local_existente = $stmt_check->get_result()->fetch_assoc();
+$stmt_check->close();
+
+// Si NO subió una imagen nueva, y ya tenía una, mantenemos la vieja
+if ($_FILES["imagen_portada"]["error"] === UPLOAD_ERR_NO_FILE && $local_existente) {
+    $ruta_imagen = $local_existente['imagen_portada'];
+} else {
+    $directorio_subida = "uploads/";
+    $nombre_archivo = time() . "_" . basename($_FILES["imagen_portada"]["name"]);
+    $ruta_imagen = $directorio_subida . $nombre_archivo;
+    move_uploaded_file($_FILES["imagen_portada"]["tmp_name"], $ruta_imagen);
+}
+
+$sql = "INSERT INTO locales (usuario_id, nombre_local, direccion, entre_calles, descripcion, imagen_portada, instagram, whatsapp, facebook, tiktok)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        ON DUPLICATE KEY UPDATE
+            nombre_local = VALUES(nombre_local),
+            direccion = VALUES(direccion),
+            entre_calles = VALUES(entre_calles),
+            descripcion = VALUES(descripcion),
+            imagen_portada = VALUES(imagen_portada),
+            instagram = VALUES(instagram),
+            whatsapp = VALUES(whatsapp),
+            facebook = VALUES(facebook),
+            tiktok = VALUES(tiktok)";
 $stmt = $conexion->prepare($sql);
 
 if ($stmt) {
@@ -67,7 +96,7 @@ if ($stmt) {
                         echo "<p>Hubo un problema: " . $stmt->error . "</p>";
                         echo "<br><a href='SubidaLocal.php'>Volver a intentar</a>";
                     }
-                    $stmt->close();
+                    
                 } else {
                     echo "<h2 style='color: red;'>Error de base de datos</h2>";
                     echo "<p>" . $conexion->error . "</p>";
