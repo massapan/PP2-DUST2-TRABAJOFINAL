@@ -149,7 +149,7 @@ $conexion->close();
             </div>
 
             <div class="caja2">
-    <div id="imagen-local">
+    <div id="imagen-local-prenda">
         <?php if (count($imagenesLocal) > 0): ?>
             <img id="imagen-local-grande" src="<?php echo htmlspecialchars($imagenesLocal[0]); ?>"
                  alt="<?php echo htmlspecialchars($local['nombre_local']); ?>"

@@ -111,6 +111,11 @@ if (!isset($_SESSION['usuario_id']) || $_SESSION['rol'] !== 'vendedor') {
                             <label for="imagen_portada" style="cursor: pointer; text-align: center; padding: 20px;">
                                 <i class="bi bi-camera" style="font-size: 40px;"></i>
                                 <p class="mb-0">Foto de portada de tu local</p>
+                                  <p class="text-muted" style="font-size: 12px; padding: 0 20px; text-align: center;">
+                            La foto de portada es la que se muestra como principal en todo el sitio —
+                            subila <strong>horizontal (apaisada)</strong>, no vertical, para que no se
+                            recorte mal.
+                        </p>
                             </label>
                             <input type="file" id="imagen_portada" name="imagen_portada"
        accept="image/*" required
@@ -118,9 +123,20 @@ if (!isset($_SESSION['usuario_id']) || $_SESSION['rol'] !== 'vendedor') {
                         </div>
 
                         <div id="mas-imagenes-local" class="d-flex align-items-center justify-content-center">
-                            <p class="mb-0 text-muted">Más fotos: disponible más adelante</p>
+                            <label for="imagenes_adicionales" style="cursor: pointer; text-align: center; padding: 20px;">
+                                <i class="bi bi-images" style="font-size: 40px;"></i>
+                                <p class="mb-0">Más fotos del local (opcional)</p>
+                            </label>
+                            <input type="file" id="imagenes_adicionales" name="imagenes_adicionales[]"
+       accept="image/*" multiple
+       style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;">
                         </div>
-                    
+
+                        <p class="text-muted" style="font-size: 12px; padding: 0 20px; text-align: center;">
+                           En "Más fotos", <strong>el orden en que las elijas es el orden
+                            en que se van a mostrar</strong> en la galería del local.
+                        </p>
+
                     </div>
 
 
