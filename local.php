@@ -6,13 +6,28 @@ include 'conexion.php';
 
 $local_id = isset($_GET['id']) ? (int) $_GET['id'] : 0;
 
-$sql = "SELECT id, usuario_id, nombre_local, direccion, entre_calles, descripcion, imagen_portada, instagram, whatsapp, facebook, tiktok
+$sql = "SELECT id, usuario_id, nombre_local, direccion, entre_calles, descripcion, instagram, whatsapp, facebook, tiktok
         FROM locales WHERE id = ?";
 $stmt = $conexion->prepare($sql);
 $stmt->bind_param("i", $local_id);
 $stmt->execute();
 $local = $stmt->get_result()->fetch_assoc();
 $stmt->close();
+
+// Todas las fotos de la galería de este local, en orden. La de orden 0
+// (la primera) es la que se usa como principal.
+$imagenesLocal = [];
+if ($local) {
+    $sqlImg = "SELECT ruta FROM imagenes_local WHERE local_id = ? ORDER BY orden ASC";
+    $stmtImg = $conexion->prepare($sqlImg);
+    $stmtImg->bind_param("i", $local_id);
+    $stmtImg->execute();
+    $resImg = $stmtImg->get_result();
+    while ($fila = $resImg->fetch_assoc()) {
+        $imagenesLocal[] = $fila['ruta'];
+    }
+    $stmtImg->close();
+}
 
 $productos = [];
 $esComprador = isset($_SESSION['usuario_id']) && $_SESSION['rol'] === 'comprador';
@@ -52,7 +67,7 @@ $conexion->close();
 <div class="fondo"></div>
 
 <div class="caja-local-prenda">
-    <a href="#" class="volver-atras d-inline-block mb-3 text-decoration-none">&larr; Página anterior</a>
+    <a href="#" class="volver-atras d-inline-block mb-3 text-decoration-none">&laquo; Página anterior</a>
 
     <?php if (!$local): ?>
 
@@ -134,19 +149,26 @@ $conexion->close();
             </div>
 
             <div class="caja2">
-                <div id="imagen-local">
-                    <?php if (!empty($local['imagen_portada'])): ?>
-                        <img src="<?php echo htmlspecialchars($local['imagen_portada']); ?>"
-                             alt="<?php echo htmlspecialchars($local['nombre_local']); ?>"
-                             style="width:100%; height:100%; object-fit:cover; border-radius: 8px;">
-                    <?php else: ?>
-                        <p>imagen del local</p>
-                    <?php endif; ?>
-                </div>
-                <div id="mas-imagenes-local">
-                    <p>mas imagenes del local</p>
-                </div>
-            </div>
+    <div id="imagen-local">
+        <?php if (count($imagenesLocal) > 0): ?>
+            <img id="imagen-local-grande" src="<?php echo htmlspecialchars($imagenesLocal[0]); ?>"
+                 alt="<?php echo htmlspecialchars($local['nombre_local']); ?>"
+                 style="width:100%; height:100%; object-fit:cover; border-radius: 8px;">
+        <?php else: ?>
+            <p>imagen del local</p>
+        <?php endif; ?>
+    </div>
+    <?php if (count($imagenesLocal) > 1): ?>
+        <div id="mas-imagenes-local">
+            <?php foreach ($imagenesLocal as $i => $ruta): ?>
+                <img src="<?php echo htmlspecialchars($ruta); ?>"
+                     class="miniatura-galeria <?php echo $i === 0 ? 'activa' : ''; ?>"
+                     data-target="imagen-local-grande"
+                     data-src="<?php echo htmlspecialchars($ruta); ?>">
+            <?php endforeach; ?>
+        </div>
+    <?php endif; ?>
+</div>
 
         </div>
 

@@ -117,7 +117,7 @@ $conexion->close();
             </div>
 
             <div class="caja2">
-                <div id="imagen-prenda">
+                <div id="imagen-local-prenda">
                     <?php if ($imagenPrincipal): ?>
                         <img src="<?php echo htmlspecialchars($imagenPrincipal); ?>"
                              alt="<?php echo htmlspecialchars($producto['nombre_producto']); ?>"

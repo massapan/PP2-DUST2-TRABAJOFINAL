@@ -107,7 +107,7 @@ if (!isset($_SESSION['usuario_id']) || $_SESSION['rol'] !== 'vendedor') {
 
                     <div class="caja2">
 
-                        <div id="imagen-local" class="d-flex align-items-center justify-content-center">
+                        <div id="imagen-local-prenda" class="d-flex align-items-center justify-content-center">
                             <label for="imagen_portada" style="cursor: pointer; text-align: center; padding: 20px;">
                                 <i class="bi bi-camera" style="font-size: 40px;"></i>
                                 <p class="mb-0">Foto de portada de tu local</p>

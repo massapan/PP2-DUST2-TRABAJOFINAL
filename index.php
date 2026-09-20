@@ -54,6 +54,6 @@ if ($esPeticionAjax) {
     <script src="js/navegacion.js"></script>
     <script src="js/filtros.js"></script>
     <script src="js/favoritos.js"></script>
-
+<script src="js/galeria.js"></script>
 </body>
 </html>
