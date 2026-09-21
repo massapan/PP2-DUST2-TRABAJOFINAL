@@ -362,12 +362,6 @@ body{
     margin-bottom:5%;
     color:gray;
 }
-#ver-en-mapa{
-    margin-top:5%;  
-    background-color: #00953cce;
-    width: 20%;
-    color:rgb(255, 255, 255);
-}
 #descripcion-local{
     width: 90%;
     margin-bottom:5%;   
@@ -526,4 +520,14 @@ body{
     color:#fbfbfb;
     border-radius: 10px;
     padding: 10px;
+}
+.boton{
+    margin-top:5%;  
+    background-color: #00953cce;
+    width: 20%;
+    color:rgb(255, 255, 255);
+}
+.boton:hover{
+    background-color: #01ab45ce;
+    color: rgb(255, 255, 255);
 }

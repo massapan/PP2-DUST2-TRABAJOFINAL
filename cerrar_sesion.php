@@ -8,5 +8,5 @@ $_SESSION = [];
 session_destroy();
 
 // Volvemos a la pantalla de inicio
-header("Location: iniciar.html");
+header("Location: index.php");
 exit();

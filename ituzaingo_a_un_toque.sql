@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-09-2026 a las 00:00:05
+-- Tiempo de generación: 20-09-2026 a las 10:03:03
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -90,6 +90,39 @@ CREATE TABLE `favoritos_productos` (
   `creado_en` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `favoritos_productos`
+--
+
+INSERT INTO `favoritos_productos` (`usuario_id`, `producto_id`, `creado_en`) VALUES
+(45, 3, '2026-09-14 22:36:58'),
+(45, 5, '2026-09-14 22:37:48');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `imagenes_local`
+--
+
+CREATE TABLE `imagenes_local` (
+  `id` int(11) NOT NULL,
+  `local_id` int(11) NOT NULL,
+  `ruta` varchar(255) NOT NULL,
+  `orden` int(11) NOT NULL DEFAULT 0,
+  `creado_en` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `imagenes_local`
+--
+
+INSERT INTO `imagenes_local` (`id`, `local_id`, `ruta`, `orden`, `creado_en`) VALUES
+(1, 6, 'uploads/1789891225_voz_chaco.750.jpg', 0, '2026-09-20 08:00:25'),
+(2, 6, 'uploads/1789891225_1_e854d1b28d4966e74b1bdff3aed6c5bf.jpg', 1, '2026-09-20 08:00:25'),
+(3, 6, 'uploads/1789891225_2_Imagen de WhatsApp 2024-03-23 a las 16.34.45_99f91f29.jpg', 2, '2026-09-20 08:00:25'),
+(4, 6, 'uploads/1789891225_3_Imagen de WhatsApp 2024-03-23 a las 16.34.45_1339d102.jpg', 3, '2026-09-20 08:00:25'),
+(5, 6, 'uploads/1789891225_4_Imagen de WhatsApp 2023-11-30 a las 19.31.41_57919e94.jpg', 4, '2026-09-20 08:00:25');
+
 -- --------------------------------------------------------
 
 --
@@ -140,17 +173,24 @@ CREATE TABLE `locales` (
   `longitud` decimal(10,7) DEFAULT NULL,
   `horario_texto` varchar(255) DEFAULT NULL,
   `categoria_id` int(11) DEFAULT NULL,
-  `creado_en` timestamp NOT NULL DEFAULT current_timestamp()
+  `creado_en` timestamp NOT NULL DEFAULT current_timestamp(),
+  `instagram` varchar(255) DEFAULT NULL,
+  `whatsapp` varchar(20) DEFAULT NULL,
+  `facebook` varchar(255) DEFAULT NULL,
+  `tiktok` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `locales`
 --
 
-INSERT INTO `locales` (`id`, `usuario_id`, `nombre_local`, `direccion`, `entre_calles`, `descripcion`, `imagen_portada`, `latitud`, `longitud`, `horario_texto`, `categoria_id`, `creado_en`) VALUES
-(1, 41, 'Urban Style Ituzaingó', 'Av. Rivadavia 1200, Ituzaingó', NULL, 'Ropa urbana y streetwear', NULL, -34.6659000, -58.6702000, 'Lun a Sáb 10 a 19hs', 1, '2026-09-08 20:41:47'),
-(2, 45, 'DeporteYa', 'Belgrano 450, Ituzaingó', NULL, 'Indumentaria deportiva y calzado', NULL, -34.6612000, -58.6745000, 'Lun a Sáb 9 a 20hs', 2, '2026-09-08 20:41:47'),
-(3, 46, 'Boutique Elegance', 'San Martín 780, Ituzaingó', NULL, 'Ropa formal y de fiesta', NULL, -34.6690000, -58.6680000, 'Mar a Sáb 11 a 19hs', 4, '2026-09-08 20:41:47');
+INSERT INTO `locales` (`id`, `usuario_id`, `nombre_local`, `direccion`, `entre_calles`, `descripcion`, `imagen_portada`, `latitud`, `longitud`, `horario_texto`, `categoria_id`, `creado_en`, `instagram`, `whatsapp`, `facebook`, `tiktok`) VALUES
+(1, 41, 'Urban Style Ituzaingó', 'Av. Rivadavia 1200, Ituzaingó', NULL, 'Ropa urbana y streetwear', NULL, -34.6659000, -58.6702000, 'Lun a Sáb 10 a 19hs', 1, '2026-09-08 20:41:47', NULL, NULL, NULL, NULL),
+(2, 45, 'DeporteYa', 'Belgrano 450, Ituzaingó', NULL, 'Indumentaria deportiva y calzado', NULL, -34.6612000, -58.6745000, 'Lun a Sáb 9 a 20hs', 2, '2026-09-08 20:41:47', NULL, NULL, NULL, NULL),
+(3, 46, 'Boutique Elegance', 'San Martín 780, Ituzaingó', NULL, 'Ropa formal y de fiesta', NULL, -34.6690000, -58.6680000, 'Mar a Sáb 11 a 19hs', 4, '2026-09-08 20:41:47', NULL, NULL, NULL, NULL),
+(5, 52, 'probando2022', '', '', 'probando 222222222222222', 'uploads/1789882656_messifondo.jpg', NULL, NULL, NULL, NULL, '2026-09-20 05:37:36', 'probando2022', NULL, NULL, NULL),
+(6, 53, 'Probando local ananashe', 'Justo ahi xd 6769', 'esta y la otra', 'Café El Faro es un rincón acogedor en el corazón de la ciudad, ideal para quienes buscan escapar del ruido diario. Este establecimiento combina una decoración rústica con un ambiente cálido, musicalizado por suaves acordes de jazz de fondo. Es el espacio perfecto para trabajar, leer un buen libro o disfrutar de una charla tranquila.El local se destaca principalmente por:Café de especialidad: Granos seleccionados de origen orgánico.Pastelería artesanal: Horneada cada mañana en el lugar.Espacio cultural: Una pequeña biblioteca libre para los clientes.Terraza verde: Un sector al aire libre lleno de plantas.', 'uploads/1789885428_e854d1b28d4966e74b1bdff3aed6c5bf.jpg', NULL, NULL, NULL, NULL, '2026-09-20 06:23:48', 'amamamamamamaaaaa', '6969696996969+54xd', 'zukember', 'adorni troll'),
+(7, 53, 'Probando local ananashe', 'Justo ahi xd 6769', 'esta y la otra', 'Café El Faro es un rincón acogedor en el corazón de la ciudad, ideal para quienes buscan escapar del ruido diario. Este establecimiento combina una decoración rústica con un ambiente cálido, musicalizado por suaves acordes de jazz de fondo. Es el espacio perfecto para trabajar, leer un buen libro o disfrutar de una charla tranquila.El local se destaca principalmente por:Café de especialidad: Granos seleccionados de origen orgánico.Pastelería artesanal: Horneada cada mañana en el lugar.Espacio cultural: Una pequeña biblioteca libre para los clientes.Terraza verde: Un sector al aire libre lleno de plantas.', 'uploads/1789891225_voz_chaco.750.jpg', NULL, NULL, NULL, NULL, '2026-09-20 08:00:25', 'amamamamamamaaaaa', '6969696996969+54xd', 'zukember', 'adorni troll');
 
 -- --------------------------------------------------------
 
@@ -276,7 +316,10 @@ INSERT INTO `usuarios` (`id`, `email`, `password`, `rol`, `creado_en`) VALUES
 (47, 'man@gmail.com', '$2y$10$oYj0KlSM8WEWhYboNyAcIO9hA7pFsrdcE7DkvER5Q3USYeO5o/K1e', 'comprador', '2026-09-10 23:06:57'),
 (48, '1@gmail.com', '$2y$10$IiW90BAi5rKfIgAWKrgXluLZBJuJoaCIt6nZ83QdcRGNmLosHrZym', 'comprador', '2026-09-10 23:19:20'),
 (49, 'rossi@gmail.com', '$2y$10$ThtV.os7EfYc4g4I1U3CfOoPr7IYHmAK8SQ5iYVtyurkOimbUBxxm', 'comprador', '2026-09-10 23:34:51'),
-(50, 'profe@gmail.com', '$2y$10$.DVde0ixW.4bgTsG0QacuuGRSb.c8Vf.ru08xK1Tv6/KECDOiOLZu', 'vendedor', '2026-09-14 21:56:49');
+(50, 'profe@gmail.com', '$2y$10$.DVde0ixW.4bgTsG0QacuuGRSb.c8Vf.ru08xK1Tv6/KECDOiOLZu', 'vendedor', '2026-09-14 21:56:49'),
+(51, 'correo@gmail.com', '$2y$10$0QCmD.WIGJ3nu5nIQ90u.OhG1MllTN1QXc4lZnSYRiU7KCS/ElAWK', 'comprador', '2026-09-14 22:29:42'),
+(52, 'vendedor@gmail.com', '$2y$10$8m/J4DO6XVGV8.Hb.ltwVuHVH2dCCXk/tYTo1bwn5A.JfCvF.lY22', 'vendedor', '2026-09-17 22:13:32'),
+(53, 'vendedor1@gmail.com', '$2y$10$UZOcMT3sFOajvTuPybZHv.0KzYp.K4yThif/0u2CXAu7cVH/9PS62', 'vendedor', '2026-09-20 06:20:17');
 
 --
 -- Índices para tablas volcadas
@@ -309,6 +352,14 @@ ALTER TABLE `favoritos_locales`
 ALTER TABLE `favoritos_productos`
   ADD PRIMARY KEY (`usuario_id`,`producto_id`),
   ADD KEY `producto_id` (`producto_id`);
+
+--
+-- Indices de la tabla `imagenes_local`
+--
+ALTER TABLE `imagenes_local`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `local_orden` (`local_id`,`orden`),
+  ADD KEY `local_id` (`local_id`);
 
 --
 -- Indices de la tabla `imagenes_producto`
@@ -389,6 +440,12 @@ ALTER TABLE `categorias_producto`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
+-- AUTO_INCREMENT de la tabla `imagenes_local`
+--
+ALTER TABLE `imagenes_local`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT de la tabla `imagenes_producto`
 --
 ALTER TABLE `imagenes_producto`
@@ -398,7 +455,7 @@ ALTER TABLE `imagenes_producto`
 -- AUTO_INCREMENT de la tabla `locales`
 --
 ALTER TABLE `locales`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `password_resets`
@@ -428,7 +485,7 @@ ALTER TABLE `recordarme_tokens`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- Restricciones para tablas volcadas
@@ -447,6 +504,12 @@ ALTER TABLE `favoritos_locales`
 ALTER TABLE `favoritos_productos`
   ADD CONSTRAINT `favoritos_productos_ibfk_1` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `favoritos_productos_ibfk_2` FOREIGN KEY (`producto_id`) REFERENCES `productos` (`id`) ON DELETE CASCADE;
+
+--
+-- Filtros para la tabla `imagenes_local`
+--
+ALTER TABLE `imagenes_local`
+  ADD CONSTRAINT `imagenes_local_ibfk_1` FOREIGN KEY (`local_id`) REFERENCES `locales` (`id`) ON DELETE CASCADE;
 
 --
 -- Filtros para la tabla `imagenes_producto`

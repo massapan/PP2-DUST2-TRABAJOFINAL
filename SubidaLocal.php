@@ -118,7 +118,7 @@ if (!isset($_SESSION['usuario_id']) || $_SESSION['rol'] !== 'vendedor') {
                         </p>
                             </label>
                             <input type="file" id="imagen_portada" name="imagen_portada"
-       accept="image/*" required
+       accept="image/*" <?php echo $local ? '' : 'required'; ?>
        style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;">
                         </div>
 
@@ -142,11 +142,17 @@ if (!isset($_SESSION['usuario_id']) || $_SESSION['rol'] !== 'vendedor') {
 
                     
                 </div>
-                       <div style="text-align: right; margin-top: 15px;">
-                        <button type="submit" id="ver-en-mapa" class="btn d-inline-block text-center">
-                        Guardar Local
-                        </button>
-                </div> 
+                
+                         <div style="text-align: right; margin-top: 15px;">
+    <?php if (!$local): ?>
+        <a href="index.php" class="btn boton text-decoration-none" style="margin-right: 15px;">
+            Omitir por ahora
+        </a>
+    <?php endif; ?>
+    <button type="submit" class="btn d-inline-block text-center boton">
+        Guardar Local
+    </button>
+</div>
             </form>
 
         </div>
