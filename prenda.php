@@ -6,7 +6,7 @@ include 'conexion.php';
 
 $producto_id = isset($_GET['id']) ? (int) $_GET['id'] : 0;
 
-$sql = "SELECT p.id, p.nombre_producto, p.descripcion, p.precio, p.local_id, p.categoria_id,
+$sql = "SELECT p.id, p.nombre_producto, p.descripcion, p.talle, p.precio, p.local_id, p.categoria_id,
                l.nombre_local, c.nombre AS categoria_nombre
         FROM productos p
         INNER JOIN locales l ON p.local_id = l.id
@@ -18,19 +18,22 @@ $stmt->execute();
 $producto = $stmt->get_result()->fetch_assoc();
 $stmt->close();
 
-$imagenPrincipal = null;
+$imagenesProducto = [];
 $similares = [];
 $esComprador = isset($_SESSION['usuario_id']) && $_SESSION['rol'] === 'comprador';
 $esFavorito = false;
 
 if ($producto) {
-    // La imagen principal es la de orden 0: la primera que el vendedor cargó al publicar.
-    $sqlImg = "SELECT ruta FROM imagenes_producto WHERE producto_id = ? ORDER BY orden ASC LIMIT 1";
+    // Todas las fotos, en orden. La de orden 0 (la primera que el vendedor
+    // cargó al publicar) es la que se usa como principal.
+    $sqlImg = "SELECT ruta FROM imagenes_producto WHERE producto_id = ? ORDER BY orden ASC";
     $stmtImg = $conexion->prepare($sqlImg);
     $stmtImg->bind_param("i", $producto_id);
     $stmtImg->execute();
-    $filaImg = $stmtImg->get_result()->fetch_assoc();
-    $imagenPrincipal = $filaImg ? $filaImg['ruta'] : null;
+    $resImg = $stmtImg->get_result();
+    while ($fila = $resImg->fetch_assoc()) {
+        $imagenesProducto[] = $fila['ruta'];
+    }
     $stmtImg->close();
 
     // Prendas similares = misma categoría que esta prenda, sin incluirla a ella misma.
@@ -99,6 +102,10 @@ $conexion->close();
                     $<?php echo number_format($producto['precio'], 2, ',', '.'); ?>
                 </p>
 
+                <?php if (!empty($producto['talle'])): ?>
+                    <p class="mb-2">Talle: <strong><?php echo htmlspecialchars($producto['talle']); ?></strong></p>
+                <?php endif; ?>
+
                 <p>
                     Vendido por:
                     <a href="index.php?pagina=local&id=<?php echo $producto['local_id']; ?>" class="enlace-interno fw-bold">
@@ -118,17 +125,24 @@ $conexion->close();
 
             <div class="caja2">
                 <div id="imagen-local-prenda">
-                    <?php if ($imagenPrincipal): ?>
-                        <img src="<?php echo htmlspecialchars($imagenPrincipal); ?>"
+                    <?php if (count($imagenesProducto) > 0): ?>
+                        <img id="imagen-prenda-grande" src="<?php echo htmlspecialchars($imagenesProducto[0]); ?>"
                              alt="<?php echo htmlspecialchars($producto['nombre_producto']); ?>"
                              style="width:100%; height:100%; object-fit:cover; border-radius: 8px;">
                     <?php else: ?>
                         <p>imagen de la prenda</p>
                     <?php endif; ?>
                 </div>
-                <div id="mas-imagenes-prenda">
-                    <p>mas imagenes de la prenda</p>
-                </div>
+                <?php if (count($imagenesProducto) > 1): ?>
+                    <div id="mas-imagenes-prenda">
+                        <?php foreach ($imagenesProducto as $i => $ruta): ?>
+                            <img src="<?php echo htmlspecialchars($ruta); ?>"
+                                 class="miniatura-galeria <?php echo $i === 0 ? 'activa' : ''; ?>"
+                                 data-target="imagen-prenda-grande"
+                                 data-src="<?php echo htmlspecialchars($ruta); ?>">
+                        <?php endforeach; ?>
+                    </div>
+                <?php endif; ?>
             </div>
 
         </div>

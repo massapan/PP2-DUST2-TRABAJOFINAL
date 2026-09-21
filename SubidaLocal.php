@@ -32,6 +32,8 @@ if (!isset($_SESSION['usuario_id']) || $_SESSION['rol'] !== 'vendedor') {
 </head>
 <body>
 
+    <?php include 'header.php'; ?>
+
     <div id="contenido">
 
         <div class="fondo"></div>
@@ -158,6 +160,8 @@ if (!isset($_SESSION['usuario_id']) || $_SESSION['rol'] !== 'vendedor') {
         </div>
 
     </div>
+
+    <?php include 'footer.php'; ?>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 

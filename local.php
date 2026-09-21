@@ -143,7 +143,7 @@ $conexion->close();
 
 </div>
 
-                <a href="index.php?pagina=mapa" id="ver-en-mapa" class="enlace-interno d-inline-block text-center text-decoration-none">
+                <a href="index.php?pagina=mapa"  class="enlace-interno d-inline-block text-center boton text-decoration-none">
                     ver en el mapa
                 </a>
             </div>
