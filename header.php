@@ -30,6 +30,7 @@ $rol = $_SESSION['rol'] ?? null; // 'comprador' | 'vendedor' | null
             <ul class="dropdown-menu dropdown-menu-end">
                 <?php if ($rol === 'vendedor'): ?>
                     <li><a class="dropdown-item" href="mi_local.php">Mi Local</a></li>
+                    <li><a class="dropdown-item" href="mis_productos.php">Mis Productos</a></li>
                     <li><a class="dropdown-item" href="productos.php">Subir Producto</a></li>
                     <li><hr class="dropdown-divider"></li>
                 <?php endif; ?>

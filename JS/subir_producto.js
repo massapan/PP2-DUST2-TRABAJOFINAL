@@ -28,9 +28,13 @@ document.addEventListener('DOMContentLoaded', function () {
                 titulo.classList.remove('text-success', 'text-danger');
 
                 if (data.exito) {
-                    titulo.textContent = '¡Producto subido con éxito!';
+                    titulo.textContent = form.dataset.modoEdicion === '1'
+                        ? '¡Cambios guardados!'
+                        : '¡Producto subido con éxito!';
                     titulo.classList.add('text-success');
-                    form.reset();
+                    if (form.dataset.modoEdicion !== '1') {
+                        form.reset();
+                    }
                 } else {
                     titulo.textContent = 'No se pudo subir el producto';
                     titulo.classList.add('text-danger');
