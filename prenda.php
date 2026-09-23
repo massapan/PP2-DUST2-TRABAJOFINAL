@@ -20,7 +20,11 @@ $stmt->close();
 
 $imagenesProducto = [];
 $similares = [];
-$esComprador = isset($_SESSION['usuario_id']) && $_SESSION['rol'] === 'comprador';
+// Antes esto exigía rol==='comprador'. Se saca esa restricción para que
+// se comporte igual que en catalogo.php: cualquier usuario logueado
+// (comprador o vendedor) puede marcar favoritos — el backend
+// (toggle_favorito.php) tampoco distingue por rol.
+$esComprador = isset($_SESSION['usuario_id']);
 $esFavorito = false;
 $favoritos_producto_ids = [];
 
