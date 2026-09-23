@@ -74,14 +74,6 @@ if ($logueado) {
                             <?php foreach ($locales_favoritos as $local): ?>
                                 <div class="col-12 col-md-6 col-lg-4 tarjeta-local">
                                     <div class="card h-100 position-relative">
-                                        <button type="button"
-                                                class="btn-favorito position-absolute top-0 end-0 m-2 bg-white rounded-circle"
-                                                data-tipo="local"
-                                                data-id="<?php echo $local['id']; ?>"
-                                                data-contexto="favoritos"
-                                                aria-label="Sacar de favoritos">
-                                            <i class="bi bi-heart-fill text-danger"></i>
-                                        </button>
                                         <div class="info">
                                             <h3 class="h6 text-start">
                                                 <?php echo htmlspecialchars($local['nombre_local']); ?>
@@ -94,9 +86,24 @@ if ($logueado) {
                                                     <?php echo htmlspecialchars($local['descripcion']); ?>
                                                 </p>
                                             <?php endif; ?>
-                                            <?php if (!empty($local['categoria_nombre'])): ?>
-                                                <span><?php echo htmlspecialchars($local['categoria_nombre']); ?></span>
-                                            <?php endif; ?>
+                                            <div class="d-flex justify-content-between align-items-center mt-2">
+                                                <?php if (!empty($local['categoria_nombre'])): ?>
+                                                    <span><?php echo htmlspecialchars($local['categoria_nombre']); ?></span>
+                                                <?php else: ?>
+                                                    <span></span>
+                                                <?php endif; ?>
+                                                <button type="button"
+                                                        class="btn-favorito-inferior activo"
+                                                        data-tipo="local"
+                                                        data-id="<?php echo $local['id']; ?>"
+                                                        data-contexto="favoritos"
+                                                        aria-label="Sacar de favoritos">
+                                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                                                        <line class="linea-tacha" x1="2" y1="2" x2="22" y2="22"></line>
+                                                    </svg>
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -120,30 +127,37 @@ if ($logueado) {
                                      data-categoria="<?php echo htmlspecialchars($categoriaSlug); ?>"
                                      data-precio="<?php echo $producto['precio']; ?>">
                                     <div class="card h-100 position-relative">
-                                        <button type="button"
-                                                class="btn-favorito position-absolute top-0 end-0 m-2 bg-white rounded-circle"
-                                                style="z-index: 3;"
-                                                data-tipo="producto"
-                                                data-id="<?php echo $producto['id']; ?>"
-                                                data-contexto="favoritos"
-                                                aria-label="Sacar de favoritos">
-                                            <i class="bi bi-heart-fill text-danger"></i>
-                                        </button>
-                                        <a href="prenda.php?id=<?php echo $producto['id']; ?>"
-                                           class="nav-link text-decoration-none text-dark stretched-link">
+                                        <a href="index.php?pagina=prenda&id=<?php echo $producto['id']; ?>"
+                                           class="enlace-interno text-decoration-none text-dark stretched-link">
                                             <img src="<?php echo htmlspecialchars($producto['imagen_ruta']); ?>"
                                                  class="card-img-top" style="height:200px; object-fit:cover;"
                                                  alt="<?php echo htmlspecialchars($producto['nombre_producto']); ?>">
-                                            <div class="card-body text-center">
+                                            <div class="card-body text-center pb-0">
                                                 <h3 class="h6 text-start"><?php echo htmlspecialchars($producto['nombre_producto']); ?></h3>
                                                 <p class="text-muted small fst-italic mb-0 text-start">
                                                     Local: <?php echo htmlspecialchars($producto['nombre_local']); ?>
                                                 </p>
-                                                <p class="fw-bold text-success mb-1 text-start ps-0">
-                                                    $<?php echo number_format($producto['precio'], 2, ',', '.'); ?>
-                                                </p>
                                             </div>
                                         </a>
+                                        <div class="card-body pt-0">
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <p class="fw-bold text-success mb-0">
+                                                    $<?php echo number_format($producto['precio'], 2, ',', '.'); ?>
+                                                </p>
+                                                <button type="button"
+                                                        class="btn-favorito-inferior activo position-relative"
+                                                        style="z-index: 2;"
+                                                        data-tipo="producto"
+                                                        data-id="<?php echo $producto['id']; ?>"
+                                                        data-contexto="favoritos"
+                                                        aria-label="Sacar de favoritos">
+                                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                                                        <line class="linea-tacha" x1="2" y1="2" x2="22" y2="22"></line>
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             <?php endforeach; ?>

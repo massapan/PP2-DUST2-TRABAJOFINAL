@@ -67,14 +67,6 @@ $resultado = $conexion->query($sql);
                              data-categoria="<?php echo htmlspecialchars($categoriaSlug); ?>"
                              data-precio="<?php echo $producto['precio']; ?>">
                             <div class="card h-100 position-relative">
-                                <button type="button"
-                                        class="btn-favorito position-absolute top-0 end-0 m-2 bg-white rounded-circle"
-                                        style="z-index: 3;"
-                                        data-tipo="producto"
-                                        data-id="<?php echo $producto['id']; ?>"
-                                        aria-label="Marcar como favorito">
-                                    <i class="bi <?php echo $esFavorito ? 'bi-heart-fill text-danger' : 'bi-heart'; ?>"></i>
-                                </button>
                                 <a href="index.php?pagina=prenda&id=<?php echo $producto['id']; ?>"
                                    class="enlace-interno text-decoration-none text-dark stretched-link">
                                     <img src="<?php echo htmlspecialchars($producto['imagen_ruta']); ?>"
@@ -82,17 +74,30 @@ $resultado = $conexion->query($sql);
                                          alt="<?php echo htmlspecialchars($producto['nombre_producto']); ?>">
                                     <div class="card-body text-center pb-0">
                                         <h3 class="h6 text-start" ><?php echo htmlspecialchars($producto['nombre_producto']); ?></h3>
-                                        <p class="fw-bold text-success mb-1 text-start ps-0">
-                                            $<?php echo number_format($producto['precio'], 2, ',', '.'); ?>
-                                        </p>
                                     </div>
                                 </a>
-                                <div class="card-body pt-0 text-center">
+                                <div class="card-body pt-0">
                                     <a href="index.php?pagina=local&id=<?php echo $producto['local_id']; ?>"
                                        class="enlace-interno position-relative text-muted small fst-italic text-start d-block text-decoration-none"
                                        style="z-index: 2;">
                                         Local: <?php echo htmlspecialchars($producto['nombre_local']); ?>
                                     </a>
+                                    <div class="d-flex justify-content-between align-items-center mt-2">
+                                        <p class="fw-bold text-success mb-0 fs-5">
+                                            $<?php echo number_format($producto['precio'], 2, ',', '.'); ?>
+                                        </p>
+                                        <button type="button"
+                                                class="btn-favorito-inferior position-relative <?php echo $esFavorito ? 'activo' : ''; ?>"
+                                                style="z-index: 2;"
+                                                data-tipo="producto"
+                                                data-id="<?php echo $producto['id']; ?>"
+                                                aria-label="Marcar como favorito">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                                                <line class="linea-tacha" x1="2" y1="2" x2="22" y2="22"></line>
+                                            </svg>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>

@@ -1,5 +1,5 @@
-// Envío del formulario de "Subir Producto" por fetch(), para mostrar el
-// resultado en un modal en vez de navegar a una página aparte.
+// Envío del formulario de "Subir/Editar Producto" por fetch(), para
+// mostrar el resultado en un modal en vez de navegar a una página aparte.
 //
 // Esta página (productos.php) es una carga completa normal, no un
 // fragmento de la SPA, así que un <script> al final del body se ejecuta

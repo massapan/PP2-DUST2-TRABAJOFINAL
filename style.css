@@ -402,18 +402,7 @@ body{
     margin-top:5%;
     
 }
-.btn-favorito {
-    width: 36px;
-    height: 36px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: none;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
-    z-index: 2;
-    cursor: pointer;
-}
-
+/* Botón lápiz para editar un producto propio, en mis_productos.php */
 .btn-editar-producto {
     width: 36px;
     height: 36px;
@@ -426,6 +415,54 @@ body{
 }
 .btn-editar-producto:hover {
     color: #01ab45;
+}
+
+/* Corazón de favoritos: esquina inferior derecha de la card, al lado
+   del precio. Reemplaza al viejo .btn-favorito (círculo blanco sobre
+   la imagen) en catalogo.php, local.php, prenda.php, favoritos.php y
+   mis_productos.php. */
+.btn-favorito-inferior {
+    background: transparent;
+    border: none;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #6c757d;
+    transition: all 0.3s ease;
+    padding: 0;
+}
+
+.btn-favorito-inferior svg {
+    width: 22px;
+    height: 22px;
+}
+
+.btn-favorito-inferior .linea-tacha {
+    transition: transform 0.3s ease, opacity 0.2s ease;
+    transform-origin: center;
+}
+
+.btn-favorito-inferior.activo {
+    color: #dc3545;
+}
+
+.btn-favorito-inferior.activo svg {
+    fill: #dc3545;
+    animation: latido-inferior 0.3s ease-in-out;
+}
+
+.btn-favorito-inferior.activo .linea-tacha {
+    transform: scale(0);
+    opacity: 0;
+}
+
+@keyframes latido-inferior {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
 }
 
 /* ============================================================

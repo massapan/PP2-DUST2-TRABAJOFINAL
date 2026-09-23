@@ -6,7 +6,7 @@
 // ya no existen después de un innerHTML nuevo.
 
 document.addEventListener('click', function (evento) {
-    const boton = evento.target.closest('.btn-favorito');
+    const boton = evento.target.closest('.btn-favorito-inferior');
     if (!boton) return;
 
     evento.preventDefault();
@@ -30,8 +30,6 @@ document.addEventListener('click', function (evento) {
         .then(function (data) {
             if (!data || !data.ok) return;
 
-            const icono = boton.querySelector('i');
-
             // Si el botón está en favoritos.php (data-contexto="favoritos")
             // y se acaba de desmarcar, sacamos la tarjeta entera de la vista.
             if (boton.dataset.contexto === 'favoritos' && !data.favorito) {
@@ -43,13 +41,8 @@ document.addEventListener('click', function (evento) {
                 return;
             }
 
-            // En cualquier otro contexto (ej: catalogo.php), solo
-            // actualizamos el ícono del corazón.
-            if (icono) {
-                icono.classList.toggle('bi-heart-fill', data.favorito);
-                icono.classList.toggle('bi-heart', !data.favorito);
-                icono.classList.toggle('text-danger', data.favorito);
-            }
+            // En cualquier otro contexto, solo prendemos/apagamos el corazón.
+            boton.classList.toggle('activo', data.favorito);
         })
         .catch(function (error) {
             console.error('Error al actualizar favorito:', error);

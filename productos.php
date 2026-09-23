@@ -34,19 +34,24 @@ if (isset($_GET['id'])) {
     $producto = $stmtProd->get_result()->fetch_assoc();
     $stmtProd->close();
 
-    if ($producto) {
-        $modoEdicion = true;
-
-        $sqlImg = "SELECT ruta FROM imagenes_producto WHERE producto_id = ? ORDER BY orden ASC";
-        $stmtImg = $conexion->prepare($sqlImg);
-        $stmtImg->bind_param("i", $producto['id']);
-        $stmtImg->execute();
-        $resImg = $stmtImg->get_result();
-        while ($fila = $resImg->fetch_assoc()) {
-            $imagenesExistentes[] = $fila['ruta'];
-        }
-        $stmtImg->close();
+    if (!$producto) {
+        // No existe, o no es de este vendedor: afuera, directo al catálogo.
+        $conexion->close();
+        header("Location: index.php");
+        exit();
     }
+
+    $modoEdicion = true;
+
+    $sqlImg = "SELECT ruta FROM imagenes_producto WHERE producto_id = ? ORDER BY orden ASC";
+    $stmtImg = $conexion->prepare($sqlImg);
+    $stmtImg->bind_param("i", $producto['id']);
+    $stmtImg->execute();
+    $resImg = $stmtImg->get_result();
+    while ($fila = $resImg->fetch_assoc()) {
+        $imagenesExistentes[] = $fila['ruta'];
+    }
+    $stmtImg->close();
 }
 
 $conexion->close();
@@ -71,12 +76,6 @@ $conexion->close();
         <div class="fondo"></div>
 
         <div class="caja-local-prenda">
-
-            <?php if (isset($_GET['id']) && !$modoEdicion): ?>
-                <div class="alert alert-danger" role="alert" style="margin-bottom: 15px;">
-                    Ese producto no existe o no te pertenece.
-                </div>
-            <?php endif; ?>
 
             <?php if ($modoEdicion): ?>
                 <p class="text-muted mb-2" style="font-size: 14px;">
