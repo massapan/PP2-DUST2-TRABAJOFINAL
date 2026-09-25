@@ -421,6 +421,28 @@ body{
    del precio. Reemplaza al viejo .btn-favorito (círculo blanco sobre
    la imagen) en catalogo.php, local.php, prenda.php, favoritos.php y
    mis_productos.php. */
+/* Vista previa de imagen antes de subir (SubidaLocal.php / productos.php) */
+.preview-principal {
+    display: block;
+    width: 100%;
+    max-height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 8px;
+}
+
+.preview-fila-miniaturas {
+    gap: 6px;
+    margin-top: 8px;
+}
+
+.preview-miniatura {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
 .btn-favorito-inferior {
     background: transparent;
     border: none;

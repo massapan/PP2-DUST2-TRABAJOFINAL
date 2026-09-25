@@ -164,6 +164,7 @@ if (!isset($_SESSION['usuario_id']) || $_SESSION['rol'] !== 'vendedor') {
     <?php include 'footer.php'; ?>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/preview_imagen.js"></script>
 
 </body>
 </html>
