@@ -19,13 +19,15 @@ document.addEventListener('click', function (evento) {
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: 'tipo=' + encodeURIComponent(tipo) + '&id=' + encodeURIComponent(id)
     })
-        .then(function (respuesta) {
+                .then(function (respuesta) {
             if (respuesta.status === 401) {
-                // No hay sesión: mandamos a login.
-                window.location.href = 'login.php';
+                // No hay sesión: en vez de mandar a login.php de una,
+                // mostramos el modal de aviso (A49).
+                mostrarModalLoginFavoritos();
                 return null;
             }
             return respuesta.json();
+        
         })
         .then(function (data) {
             if (!data || !data.ok) return;
@@ -48,6 +50,16 @@ document.addEventListener('click', function (evento) {
             console.error('Error al actualizar favorito:', error);
         });
 });
+
+// Muestra el modal de "iniciá sesión para marcar favoritos" (A49).
+// Vive en header.php, que nunca se destruye con navegacion.js.
+function mostrarModalLoginFavoritos() {
+    const modalEl = document.getElementById('modalLoginFavoritos');
+    if (!modalEl || typeof bootstrap === 'undefined') return;
+    const modal = bootstrap.Modal.getOrCreateInstance(modalEl);
+    modal.show();
+}
+
 
 // Si sacamos la última tarjeta de una grilla de favoritos, mostramos
 // de nuevo el mensaje de "no tenés favoritos".

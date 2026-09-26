@@ -41,3 +41,26 @@ $rol = $_SESSION['rol'] ?? null; // 'comprador' | 'vendedor' | null
         <a href="iniciar.html" class="btn btn-success" style=" margin-right: 20px;">Iniciar sesión / Registrarse</a>
     <?php endif; ?>
 </header>
+
+<!-- A49: Modal de aviso al intentar marcar favoritos sin sesión iniciada.
+     Vive acá (fuera de #contenido) porque header.php no se recarga cuando
+     navegacion.js reemplaza el contenido, así que favoritos.js siempre
+     lo va a encontrar en el DOM sin importar en qué página esté. -->
+     
+<div class="modal fade" id="modalLoginFavoritos" tabindex="-1" aria-labelledby="modalLoginFavoritosLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalLoginFavoritosLabel">Eepa! a donde vas?xdxd</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            <div class="modal-body">
+                <p class="mb-0">Para marcar productos o locales como favoritos necesitás tener una cuenta. Podés iniciar sesión o registrarte en un momento.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Ahora no</button>
+                <a href="iniciar.html" class="btn btn-success">Iniciar sesión / Registrarme</a>
+            </div>
+        </div>
+    </div>
+</div>
