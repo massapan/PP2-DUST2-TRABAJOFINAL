@@ -12,6 +12,7 @@ $paginas_validas = [
     'favoritos' => 'favoritos.php',
     'local'     => 'local.php',
     'prenda'    => 'prenda.php',
+    'busqueda'  => 'busqueda.php',
 ];
 
 $pagina  = $_GET['pagina'] ?? 'catalogo';

@@ -94,3 +94,16 @@ window.addEventListener('popstate', function (evento) {
     const url = (evento.state && evento.state.url) ? evento.state.url : 'index.php?pagina=catalogo';
     cargarContenido(url);
 });
+document.addEventListener('submit', function (evento) {
+    const formulario = evento.target.closest('#formBuscador');
+    if (!formulario) return;
+
+    evento.preventDefault();
+
+    const texto = formulario.querySelector('input[name="q"]').value.trim();
+    if (texto === '') return;
+
+    const url = 'index.php?pagina=busqueda&q=' + encodeURIComponent(texto);
+    history.pushState({ url: url }, '', url);
+    cargarContenido(url);
+});
