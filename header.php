@@ -17,8 +17,11 @@ $rol = $_SESSION['rol'] ?? null; // 'comprador' | 'vendedor' | null
         <li class="nav-item"><a href="index.php?pagina=favoritos" class="nav-link">Favoritos</a></li>
     </ul>
 
-    <form class="d-flex ms-md-4 buscador-wrapper col-md-3" role="search">
-        <input type="search" class="form-control buscador-input" placeholder="Buscar locales o prendas...">
+    <form class="d-flex ms-md-4 buscador-wrapper col-md-3" role="search"
+      action="index.php" method="GET" id="formBuscador">
+    <input type="hidden" name="pagina" value="busqueda">
+    <input type="search" name="q" class="form-control buscador-input"
+           placeholder="Buscar locales o prendas...">
     </form>
 
     <?php if ($logueado): ?>
