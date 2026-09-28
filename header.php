@@ -59,7 +59,7 @@ $rol = $_SESSION['rol'] ?? null; // 'comprador' | 'vendedor' | null
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Ahora no</button>
-                <a href="iniciar.html" class="btn btn-success">Iniciar sesión / Registrarme</a>
+                <a href="iniciar.html" id="btnModalIrALogin" class="btn btn-success">Iniciar sesión / Registrarme</a>
             </div>
         </div>
     </div>

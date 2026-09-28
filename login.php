@@ -13,6 +13,8 @@
         <h1>Iniciar Sesión</h1>
         </div>
         <?php
+        $volver = $_GET['volver'] ?? '';
+
         if (isset($_GET['registro']) && $_GET['registro'] == 'ok') {
             echo "<p style='color: green; font-weight: bold;'>¡Cuenta verificada! Ya podés iniciar sesión.</p>";
         }
@@ -26,7 +28,11 @@
         ?>
 
         <form action="procesar_login.php" method="POST">
-            
+
+            <?php if ($volver !== ''): ?>
+                <input type="hidden" name="volver" value="<?php echo htmlspecialchars($volver); ?>">
+            <?php endif; ?>
+
             <label for="email">Correo Electrónico:</label>
             <input type="email" id="email" name="email" required>
 

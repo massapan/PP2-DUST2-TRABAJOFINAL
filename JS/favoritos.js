@@ -53,11 +53,22 @@ document.addEventListener('click', function (evento) {
 
 // Muestra el modal de "iniciá sesión para marcar favoritos" (A49).
 // Vive en header.php, que nunca se destruye con navegacion.js.
+
 function mostrarModalLoginFavoritos() {
     const modalEl = document.getElementById('modalLoginFavoritos');
     if (!modalEl || typeof bootstrap === 'undefined') return;
+
+    // Le pasamos al botón del modal la ruta actual (path + query string,
+    // NUNCA el origin/dominio) para poder volver acá después del login.
+    const btnIrALogin = document.getElementById('btnModalIrALogin');
+    if (btnIrALogin) {
+        const volver = window.location.pathname + window.location.search;
+        btnIrALogin.href = 'iniciar.html?volver=' + encodeURIComponent(volver);
+    }
+
     const modal = bootstrap.Modal.getOrCreateInstance(modalEl);
     modal.show();
+
 }
 
 

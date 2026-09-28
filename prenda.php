@@ -102,16 +102,14 @@ $conexion->close();
             <div class="caja1">
                 <div id="nombre-prenda" class="d-flex align-items-center gap-3">
                     <h3 class="mb-0"><?php echo htmlspecialchars($producto['nombre_producto']); ?></h3>
-                    <?php if ($esComprador): ?>
-                        <button type="button" class="btn-favorito-inferior <?php echo $esFavorito ? 'activo' : ''; ?>"
-                                data-tipo="producto" data-id="<?php echo $producto['id']; ?>"
-                                title="Guardar en favoritos">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-                                <line class="linea-tacha" x1="2" y1="2" x2="22" y2="22"></line>
-                            </svg>
-                        </button>
-                    <?php endif; ?>
+                    <button type="button" class="btn-favorito-inferior <?php echo $esFavorito ? 'activo' : ''; ?>"
+                            data-tipo="producto" data-id="<?php echo $producto['id']; ?>"
+                            title="Guardar en favoritos">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                            <line class="linea-tacha" x1="2" y1="2" x2="22" y2="22"></line>
+                        </svg>
+                    </button>
                 </div>
 
                 <?php if ($producto['categoria_nombre']): ?>
@@ -192,19 +190,17 @@ $conexion->close();
                                         <p class="fw-bold text-success mb-0">
                                             $<?php echo number_format($similar['precio'], 2, ',', '.'); ?>
                                         </p>
-                                        <?php if ($esComprador): ?>
-                                            <button type="button"
-                                                    class="btn-favorito-inferior position-relative <?php echo $esFavSimilar ? 'activo' : ''; ?>"
-                                                    style="z-index: 2;"
-                                                    data-tipo="producto"
-                                                    data-id="<?php echo $similar['id']; ?>"
-                                                    aria-label="Marcar como favorito">
-                                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-                                                    <line class="linea-tacha" x1="2" y1="2" x2="22" y2="22"></line>
-                                                </svg>
-                                            </button>
-                                        <?php endif; ?>
+                                        <button type="button"
+                                                class="btn-favorito-inferior position-relative <?php echo $esFavSimilar ? 'activo' : ''; ?>"
+                                                style="z-index: 2;"
+                                                data-tipo="producto"
+                                                data-id="<?php echo $similar['id']; ?>"
+                                                aria-label="Marcar como favorito">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                                                <line class="linea-tacha" x1="2" y1="2" x2="22" y2="22"></line>
+                                            </svg>
+                                        </button>
                                     </div>
                                 </div>
                             </div>

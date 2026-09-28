@@ -19,15 +19,32 @@
             <a>Encuentra locales de ropa cerca de tu hogar y descubre nuevos comercios en Ituzaingó.</a>
         </div>
         <div>
-            <a href="login.php">
+            <a href="login.php" id="linkIniciarSesion">
             <button>Iniciar Sesión</button>
             </a>
         </div>
         <div>
-            <a href="registro.php">
+            <a href="registro.php" id="linkRegistrarse">
                 <button>Registrarse</button>
             </a>
         </div>
     </div>
+
+    <script>
+        // A49 (volver): si llegamos acá con ?volver=..., se lo pasamos
+        // a login.php/registro.php para que el flujo de login sepa
+        // adónde mandar al usuario de vuelta al terminar.
+        (function () {
+            const params = new URLSearchParams(window.location.search);
+            const volver = params.get('volver');
+            if (!volver) return;
+
+            const query = '?volver=' + encodeURIComponent(volver);
+            const linkLogin = document.getElementById('linkIniciarSesion');
+            const linkRegistro = document.getElementById('linkRegistrarse');
+            if (linkLogin) linkLogin.href = 'login.php' + query;
+            if (linkRegistro) linkRegistro.href = 'registro.php' + query;
+        })();
+    </script>
 </body>
 </html>
