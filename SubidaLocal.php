@@ -151,9 +151,9 @@ if (!isset($_SESSION['usuario_id']) || $_SESSION['rol'] !== 'vendedor') {
             Omitir por ahora
         </a>
     <?php endif; ?>
-    <button type="submit" class="btn d-inline-block text-center boton">
-        Guardar Local
-    </button>
+      <button type="submit" class="btn d-inline-block text-center boton">
+        <?php echo $local ? 'Guardar Cambios' : 'Guardar Local'; ?>
+      </button>
 </div>
             </form>
 
