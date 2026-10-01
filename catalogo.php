@@ -55,7 +55,7 @@ $resultado = $conexion->query($sql);
         <div class="col-md-10 my-3">
             <div class="contenedor-catalogo">
                 <h2>Catálogo de Productos</h2>
-
+ <hr class="my-3">
                 <div id="grillaProductos" class="row g-3">
                     <?php
                     if ($resultado && $resultado->num_rows > 0):

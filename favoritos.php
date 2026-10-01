@@ -14,7 +14,10 @@ if ($logueado) {
 
     // ---- Locales favoritos del usuario logueado ----
     $sql_locales = "SELECT l.id, l.nombre_local, l.direccion, l.descripcion,
-                            cl.nombre AS categoria_nombre
+                            cl.nombre AS categoria_nombre,
+                            (SELECT il.ruta FROM imagenes_local il
+                             WHERE il.local_id = l.id
+                             ORDER BY il.orden ASC LIMIT 1) AS imagen_ruta
                      FROM favoritos_locales fl
                      INNER JOIN locales l ON fl.local_id = l.id
                      LEFT JOIN categorias_local cl ON l.categoria_id = cl.id
@@ -59,6 +62,7 @@ if ($logueado) {
         <div class="col-md-10 my-3">
             <div class="contenedor-catalogo">
                 <h2>Favoritos</h2>
+                 <hr class="my-3">
 
                 <?php if (!$logueado): ?>
 
@@ -72,38 +76,37 @@ if ($logueado) {
                     <div id="grillaFavLocales" class="row g-3 mb-4">
                         <?php if (count($locales_favoritos) > 0): ?>
                             <?php foreach ($locales_favoritos as $local): ?>
-                                <div class="col-12 col-md-6 col-lg-4 tarjeta-local">
+                                <div class="col-6 col-lg-2 tarjeta-local">
                                     <div class="card h-100 position-relative">
-                                        <div class="info">
-                                            <h3 class="h6 text-start">
-                                                <?php echo htmlspecialchars($local['nombre_local']); ?>
-                                            </h3>
-                                            <p class="text-muted small fst-italic mb-1 text-start">
-                                                <?php echo htmlspecialchars($local['direccion']); ?>
-                                            </p>
-                                            <?php if (!empty($local['descripcion'])): ?>
-                                                <p class="small mb-1 text-start">
-                                                    <?php echo htmlspecialchars($local['descripcion']); ?>
-                                                </p>
+                                        <a href="index.php?pagina=local&id=<?php echo $local['id']; ?>"
+                                           class="enlace-interno text-decoration-none text-dark stretched-link">
+                                            <div class="card-body text-center pb-1">
+                                                <h3 class="h5 mb-2"><?php echo htmlspecialchars($local['nombre_local']); ?></h3>
+                                             </div>
+                                            <?php if (!empty($local['imagen_ruta'])): ?>
+                                                <img src="<?php echo htmlspecialchars($local['imagen_ruta']); ?>"
+                                                     class="card-img-top" style="height:100px; object-fit:cover;"
+                                                     alt="<?php echo htmlspecialchars($local['nombre_local']); ?>">
+                                            <?php else: ?>
+                                                <div class="bg-light d-flex align-items-center justify-content-center"
+                                                     style="height:100px;">
+                                                    <span class="text-muted small">Sin imagen</span>
+                                                </div>
                                             <?php endif; ?>
-                                            <div class="d-flex justify-content-between align-items-center mt-2">
-                                                <?php if (!empty($local['categoria_nombre'])): ?>
-                                                    <span><?php echo htmlspecialchars($local['categoria_nombre']); ?></span>
-                                                <?php else: ?>
-                                                    <span></span>
-                                                <?php endif; ?>
-                                                <button type="button"
-                                                        class="btn-favorito-inferior activo"
-                                                        data-tipo="local"
-                                                        data-id="<?php echo $local['id']; ?>"
-                                                        data-contexto="favoritos"
-                                                        aria-label="Sacar de favoritos">
-                                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-                                                        <line class="linea-tacha" x1="2" y1="2" x2="22" y2="22"></line>
-                                                    </svg>
-                                                </button>
-                                            </div>
+                                        </a>
+                                        <div class="card-body pt-2 d-flex justify-content-end">
+                                            <button type="button"
+                                                    class="btn-favorito-inferior activo position-relative"
+                                                    style="z-index: 2;"
+                                                    data-tipo="local"
+                                                    data-id="<?php echo $local['id']; ?>"
+                                                    data-contexto="favoritos"
+                                                    aria-label="Sacar de favoritos">
+                                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                                                    <line class="linea-tacha" x1="2" y1="2" x2="22" y2="22"></line>
+                                                </svg>
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
