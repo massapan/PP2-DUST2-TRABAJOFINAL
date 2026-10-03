@@ -99,7 +99,7 @@ $conexion->close();
     <h1 class="mb-0"><?php echo htmlspecialchars($local['nombre_local']); ?></h1>
 
     <?php if (isset($_SESSION['usuario_id']) && $_SESSION['usuario_id'] == $local['usuario_id']): ?>
-        <a href="SubidaLocal.php" title="Editar mi local">
+        <a href="index.php?pagina=subir-local" class="enlace-interno" title="Editar mi local">
             <i class="bi bi-pencil-square" style="font-size: 22px;"></i>
         </a>
     <?php endif; ?>

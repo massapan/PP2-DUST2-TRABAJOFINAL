@@ -7,16 +7,46 @@ if (session_status() === PHP_SESSION_NONE) {
 // que venga por GET: si alguien manipulara ?pagina=... a mano, esto evita
 // que pueda hacer un include arbitrario de otro archivo del servidor.
 $paginas_validas = [
-    'catalogo'  => 'catalogo.php',
-    'mapa'      => 'mapa.php',
-    'favoritos' => 'favoritos.php',
-    'local'     => 'local.php',
-    'prenda'    => 'prenda.php',
-    'busqueda'  => 'busqueda.php',
+    'catalogo'       => 'catalogo.php',
+    'mapa'           => 'mapa.php',
+    'favoritos'      => 'favoritos.php',
+    'local'          => 'local.php',
+    'prenda'         => 'prenda.php',
+    'busqueda'       => 'busqueda.php',
+    'subir-local'    => 'SubidaLocal.php',
+    'subir-producto' => 'productos.php',
+    'mis-productos'  => 'mis_productos.php',
 ];
 
 $pagina  = $_GET['pagina'] ?? 'catalogo';
-$archivo = $paginas_validas[$pagina] ?? 'catalogo.php';
+
+// 'mi-local' no es un archivo fijo: antes vivía en mi_local.php haciendo un
+// redirect server-side, pero eso no funciona bien llamado por fetch(). Acá
+// resolvemos la misma decisión ("¿ya tiene local? mostráselo. si no, que lo
+// cree") directamente como parte del router.
+if ($pagina === 'mi-local') {
+    if (isset($_SESSION['usuario_id']) && ($_SESSION['rol'] ?? null) === 'vendedor') {
+        include 'conexion.php';
+        $sql_mi_local = "SELECT id FROM locales WHERE usuario_id = ?";
+        $stmt_mi_local = $conexion->prepare($sql_mi_local);
+        $stmt_mi_local->bind_param("i", $_SESSION['usuario_id']);
+        $stmt_mi_local->execute();
+        $mi_local = $stmt_mi_local->get_result()->fetch_assoc();
+        $stmt_mi_local->close();
+        $conexion->close();
+
+        if ($mi_local) {
+            $_GET['id'] = $mi_local['id'];
+            $archivo = 'local.php';
+        } else {
+            $archivo = 'SubidaLocal.php';
+        }
+    } else {
+        $archivo = 'catalogo.php';
+    }
+} else {
+    $archivo = $paginas_validas[$pagina] ?? 'catalogo.php';
+}
 
 // navegacion.js manda este header en sus fetch(). Si está presente,
 // devolvemos SOLO el fragmento (sin <html>, sin header, sin footer) para
@@ -55,6 +85,8 @@ if ($esPeticionAjax) {
     <script src="js/navegacion.js"></script>
     <script src="js/filtros.js"></script>
     <script src="js/favoritos.js"></script>
-<script src="js/galeria.js"></script>
+    <script src="js/galeria.js"></script>
+    <script src="js/preview_imagen.js"></script>
+    <script src="js/formularios_ajax.js"></script>
 </body>
 </html>

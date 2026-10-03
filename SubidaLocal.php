@@ -1,8 +1,14 @@
 <?php
-ob_start();
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
+
+// Validamos seguridad: Si no hay sesión o no es vendedor, lo mandamos al login
+if (!isset($_SESSION['usuario_id']) || $_SESSION['rol'] !== 'vendedor') {
+    header("Location: login.php");
+    exit();
+}
+
 include 'conexion.php';
 
 $sql = "SELECT nombre_local, direccion, entre_calles, descripcion, imagen_portada, instagram, whatsapp, facebook, tiktok
@@ -13,67 +19,58 @@ $stmt->execute();
 $local = $stmt->get_result()->fetch_assoc(); // null si todavía no tiene local
 $stmt->close();
 $conexion->close();
-// Validamos seguridad: Si no hay sesión o no es vendedor, lo mandamos al login
-if (!isset($_SESSION['usuario_id']) || $_SESSION['rol'] !== 'vendedor') {
-    header("Location: login.php");
-    exit();
-}
+
+$modoEdicion = (bool) $local;
 ?>
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registrar Local - Ituzaingó a un toque</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="img/logo-removebg-preview.png" type="image/png">
-</head>
-<body>
+<div class="fondo"></div>
 
-    <?php include 'header.php'; ?>
+<div class="caja-local-prenda">
 
-    <div id="contenido">
+    <?php if ($modoEdicion): ?>
+        <p class="text-muted mb-2" style="font-size: 14px;">
+            <i class="bi bi-pencil-square"></i> Editando local
+        </p>
+    <?php endif; ?>
 
-        <div class="fondo"></div>
+    <form id="form-subir-local" action="guardar_local.php" method="POST"
+          enctype="multipart/form-data"
+          data-ajax-modal="modalResultadoLocal"
+          data-modo-edicion="<?php echo $modoEdicion ? '1' : '0'; ?>"
+          data-titulo-exito-nuevo="¡Tu local se registró con éxito!"
+          data-titulo-exito-edicion="¡Cambios guardados!">
 
-        <div class="caja-local-prenda">
+        <div class="superior">
 
-            <form action="guardar_local.php" method="POST" enctype="multipart/form-data">
+            <div class="caja1">
 
-                <div class="superior">
-
-                    <div class="caja1">
-
-                        <div id="nombre-local" class="d-flex align-items-center gap-3">
-                            <input type="text" id="nombre_local" name="nombre_local"
+                <div id="nombre-local" class="d-flex align-items-center gap-3">
+                    <input type="text" id="nombre_local" name="nombre_local"
        class="form-control" style="font-size: 32px; border: 2px solid #ccc;"
        placeholder="Nombre de tu local"
        value="<?php echo htmlspecialchars($local['nombre_local'] ?? ''); ?>" required>
-                        </div>
+                </div>
 
-                        <div id="direccion-local" style="margin-bottom: 10px;">
-                            <input type="text" id="direccion" name="direccion"
+                <div id="direccion-local" style="margin-bottom: 10px;">
+                    <input type="text" id="direccion" name="direccion"
        class="form-control" style="border: 1px solid #ccc; color: gray;"
        placeholder="Dirección (opcional)"
        value="<?php echo htmlspecialchars($local['direccion'] ?? ''); ?>">
-                        </div>
+                </div>
 
-                        <div id="entre-calles">
-                            <input type="text" id="entre_calles" name="entre_calles"
+                <div id="entre-calles">
+                    <input type="text" id="entre_calles" name="entre_calles"
        class="form-control" style="border: 1px solid #ccc; color: gray;"
        placeholder="Entre calles (opcional)"
        value="<?php echo htmlspecialchars($local['entre_calles'] ?? ''); ?>">
-                        </div>
+                </div>
 
-                        <div id="descripcion-local">
-                            <textarea id="descripcion" name="descripcion" rows="5"
+                <div id="descripcion-local">
+                    <textarea id="descripcion" name="descripcion" rows="5"
           class="form-control" style="border: 1px solid #ccc; resize: none;"
           placeholder="Descripción del local" required><?php echo htmlspecialchars($local['descripcion'] ?? ''); ?></textarea>
-                        </div>
+                </div>
 
-                       <div id="redes-sociales" class="mt-3">
+               <div id="redes-sociales" class="mt-3">
     <p class="mb-2 text-muted" style="font-size: 14px;">Redes sociales (opcional)</p>
 
     <div class="d-flex align-items-center gap-2 mb-2">
@@ -105,67 +102,74 @@ if (!isset($_SESSION['usuario_id']) || $_SESSION['rol'] !== 'vendedor') {
     </div>
 </div>
 
-                    </div>
+            </div>
 
-                    <div class="caja2">
+            <div class="caja2">
 
-                        <div id="imagen-local-prenda" class="d-flex align-items-center justify-content-center">
-                            <label for="imagen_portada" style="cursor: pointer; text-align: center; padding: 20px;">
-                                <i class="bi bi-camera" style="font-size: 40px;"></i>
-                                <p class="mb-0">Foto de portada de tu local</p>
-                                  <p class="text-muted" style="font-size: 12px; padding: 0 20px; text-align: center;">
-                            La foto de portada es la que se muestra como principal en todo el sitio —
-                            subila <strong>horizontal (apaisada)</strong>, no vertical, para que no se
-                            recorte mal.
-                        </p>
-                            </label>
-                            <input type="file" id="imagen_portada" name="imagen_portada"
+                <div id="imagen-local-prenda" class="d-flex align-items-center justify-content-center">
+                    <label for="imagen_portada" style="cursor: pointer; text-align: center; padding: 20px;">
+                        <i class="bi bi-camera" style="font-size: 40px;"></i>
+                        <p class="mb-0">Foto de portada de tu local</p>
+                          <p class="text-muted" style="font-size: 12px; padding: 0 20px; text-align: center;">
+                    La foto de portada es la que se muestra como principal en todo el sitio —
+                    subila <strong>horizontal (apaisada)</strong>, no vertical, para que no se
+                    recorte mal.
+                </p>
+                    </label>
+                    <input type="file" id="imagen_portada" name="imagen_portada"
        accept="image/*" <?php echo $local ? '' : 'required'; ?>
        style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;">
-                        </div>
+                </div>
 
-                        <div id="mas-imagenes-local" class="d-flex align-items-center justify-content-center">
-                            <label for="imagenes_adicionales" style="cursor: pointer; text-align: center; padding: 20px;">
-                                <i class="bi bi-images" style="font-size: 40px;"></i>
-                                <p class="mb-0">Más fotos del local (opcional)</p>
-                            </label>
-                            <input type="file" id="imagenes_adicionales" name="imagenes_adicionales[]"
+                <div id="mas-imagenes-local" class="d-flex align-items-center justify-content-center">
+                    <label for="imagenes_adicionales" style="cursor: pointer; text-align: center; padding: 20px;">
+                        <i class="bi bi-images" style="font-size: 40px;"></i>
+                        <p class="mb-0">Más fotos del local (opcional)</p>
+                    </label>
+                    <input type="file" id="imagenes_adicionales" name="imagenes_adicionales[]"
        accept="image/*" multiple
        style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;">
-                        </div>
-
-                        <p class="text-muted" style="font-size: 12px; padding: 0 20px; text-align: center;">
-                           En "Más fotos", <strong>el orden en que las elijas es el orden
-                            en que se van a mostrar</strong> en la galería del local.
-                        </p>
-
-                    </div>
-
-
-                    
                 </div>
-                
-                         <div style="text-align: right; margin-top: 15px;">
-    <?php if (!$local): ?>
-        <a href="index.php" class="btn boton text-decoration-none" style="margin-right: 15px;">
-            Omitir por ahora
-        </a>
-    <?php endif; ?>
-    <button type="submit" class="btn d-inline-block text-center boton">
-        Guardar Local
-    </button>
-</div>
-            </form>
+
+                <p class="text-muted" style="font-size: 12px; padding: 0 20px; text-align: center;">
+                   En "Más fotos", <strong>el orden en que las elijas es el orden
+                    en que se van a mostrar</strong> en la galería del local.
+                </p>
+
+            </div>
 
         </div>
 
+        <div style="text-align: right; margin-top: 15px;">
+            <?php if (!$local): ?>
+                <a href="index.php" class="enlace-interno btn boton text-decoration-none" style="margin-right: 15px;">
+                    Omitir por ahora
+                </a>
+            <?php endif; ?>
+            <button type="submit" class="btn d-inline-block text-center boton">
+                Guardar Local
+            </button>
+        </div>
+    </form>
+
+</div>
+
+<!-- Modal de resultado (se completa con JS según la respuesta del servidor) -->
+<div class="modal fade" id="modalResultadoLocal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body text-center p-4">
+                <h4 class="modal-resultado-titulo mb-3"></h4>
+                <p class="modal-resultado-mensaje text-muted mb-0"></p>
+            </div>
+            <div class="modal-footer justify-content-center border-0 pb-4">
+                <a href="index.php?pagina=mi-local" class="enlace-interno btn boton text-decoration-none" data-bs-dismiss="modal">
+                    Ver mi local
+                </a>
+                <a href="index.php" class="enlace-interno btn btn-outline-secondary" data-bs-dismiss="modal">
+                    Ir a catálogo
+                </a>
+            </div>
+        </div>
     </div>
-
-    <?php include 'footer.php'; ?>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/preview_imagen.js"></script>
-
-</body>
-</html>
-<?php ob_end_flush(); ?>
+</div>
