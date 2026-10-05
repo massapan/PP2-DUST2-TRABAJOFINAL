@@ -52,7 +52,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Todavía no tiene local → SIEMPRE lo mandamos a crearlo,
             // sin importar de dónde venía (no tiene sentido volver a
             // favoritos si todavía no completó su alta de local).
-            header("Location: SubidaLocal.php");
+            header("Location: index.php?pagina=subir-local");
         }
         $stmt_local->close();
 
