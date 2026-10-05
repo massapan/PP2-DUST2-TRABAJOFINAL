@@ -178,7 +178,7 @@ body{
 .sidebar-sticky{
     position: sticky;
     align-self: start;
-    top: calc(var(--alto-header) + 16px);
+    top: var(--alto-header);
 }
 
 
