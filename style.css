@@ -172,7 +172,14 @@ body{
     flex-direction: column;
 }
 
-
+:root{
+    --alto-header: 73px; /* poné acá el número que mediste */
+}
+.sidebar-sticky{
+    position: sticky;
+    align-self: start;
+    top: calc(var(--alto-header) + 16px);
+}
 
 
 .sanguche{
