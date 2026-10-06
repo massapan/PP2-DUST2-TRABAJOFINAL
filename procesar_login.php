@@ -19,6 +19,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST['password'];
     $volver = $_POST['volver'] ?? '';
 
+    // NUEVO: si hay un "volver" válido, lo reenviamos a login.php cuando
+    // el login falla, para no perder el destino. urlencode() porque la
+    // ruta puede traer "?" y "&" propios (ej: index.php?pagina=favoritos).
+    $volver_param = es_ruta_interna_valida($volver)
+        ? '&volver=' . urlencode($volver)
+        : '';
+
     $sql = "SELECT id, password, rol FROM usuarios WHERE email = ?";
     $stmt = $conexion->prepare($sql);
     $stmt->bind_param("s", $email);
@@ -29,45 +36,57 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $usuario = $resultado->fetch_assoc();
 
         if (password_verify($password, $usuario['password'])) {
-    $_SESSION['usuario_id'] = $usuario['id'];
-    $_SESSION['rol']        = $usuario['rol'];
+            $_SESSION['usuario_id'] = $usuario['id'];
+            $_SESSION['rol']        = $usuario['rol'];
 
-    if ($_SESSION['rol'] === 'vendedor') {
+            if ($_SESSION['rol'] === 'vendedor') {
 
-        // Chequeamos si este vendedor ya tiene un local registrado
-        $sql_local = "SELECT id FROM locales WHERE usuario_id = ?";
-        $stmt_local = $conexion->prepare($sql_local);
-        $stmt_local->bind_param("i", $usuario['id']);
-        $stmt_local->execute();
-        $resultado_local = $stmt_local->get_result();
+                // Chequeamos si este vendedor ya tiene un local registrado
+                $sql_local = "SELECT id FROM locales WHERE usuario_id = ?";
+                $stmt_local = $conexion->prepare($sql_local);
+                $stmt_local->bind_param("i", $usuario['id']);
+                $stmt_local->execute();
+                $resultado_local = $stmt_local->get_result();
 
-        if ($resultado_local->num_rows > 0) {
-            // Ya tiene local → volvemos adonde estaba (o index.php)
-            if (es_ruta_interna_valida($volver)) {
-                header("Location: $volver");
+                if ($resultado_local->num_rows > 0) {
+                    // Ya tiene local → volvemos adonde estaba (o index.php)
+                    if (es_ruta_interna_valida($volver)) {
+                        header("Location: $volver");
+                    } else {
+                        header("Location: index.php");
+                    }
+                } else {
+                    // Todavía no tiene local → SIEMPRE lo mandamos a crearlo
+                    header("Location: index.php?pagina=subir-local");
+                }
+                $stmt_local->close();
+
             } else {
-                header("Location: index.php");
+                // Es comprador → volvemos adonde estaba (o index.php)
+                if (es_ruta_interna_valida($volver)) {
+                    header("Location: $volver");
+                } else {
+                    header("Location: index.php");
+                }
             }
+            exit();
+
         } else {
-            // Todavía no tiene local → SIEMPRE lo mandamos a crearlo,
-            // sin importar de dónde venía (no tiene sentido volver a
-            // favoritos si todavía no completó su alta de local).
-            header("Location: index.php?pagina=subir-local");
+            // Contraseña incorrecta (conserva "volver")
+            header("Location: login.php?error=incorrecta" . $volver_param);
+            exit();
         }
-        $stmt_local->close();
 
     } else {
-        // Es comprador → volvemos adonde estaba (o index.php)
-        if (es_ruta_interna_valida($volver)) {
-            header("Location: $volver");
-        } else {
-            header("Location: index.php");
-        }
+        // El email no existe (conserva "volver")
+        header("Location: login.php?error=no_existe" . $volver_param);
+        exit();
     }
 
+} else {
+    // Entraron por URL sin mandar el formulario
+    header("Location: login.php");
     exit();
-    }
-}
 }
 ob_end_flush();
 ?>
