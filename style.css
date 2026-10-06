@@ -99,6 +99,9 @@ body{
 
 .Header{
     background: #fbfbfb;
+    position: sticky;
+    top: 0;
+    z-index: 1020;
 }
 
 .avatar-circulo{
@@ -130,7 +133,26 @@ body{
 .Header span{
     color: #000000ce;
 }
+/* Dropdown del avatar */
+.Header .dropdown-menu {
+    --bs-dropdown-min-width: 220px;
+    --bs-dropdown-padding-x: 8px;
+    --bs-dropdown-padding-y: 8px;
+    --bs-dropdown-border-width: 0;
+    --bs-dropdown-border-radius: 14px;
+    --bs-dropdown-box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+    --bs-dropdown-link-color: #000000ce;
+    --bs-dropdown-link-hover-bg: #00953c;
+    --bs-dropdown-link-hover-color: #fbfbfb;
+    --bs-dropdown-link-active-bg: #00953c;
+    --bs-dropdown-link-active-color: #fbfbfb;
+}
 
+.Header .dropdown-item {
+    padding: 10px 14px;
+    border-radius: 8px;
+    transition: background-color 0.15s ease, color 0.15s ease;
+}
 .buscador-wrapper{
     position: relative;
 }
@@ -150,7 +172,14 @@ body{
     flex-direction: column;
 }
 
-
+:root{
+    --alto-header: 73px; /* poné acá el número que mediste */
+}
+.sidebar-sticky{
+    position: sticky;
+    align-self: start;
+    top: var(--alto-header);
+}
 
 
 .sanguche{
