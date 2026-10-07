@@ -68,6 +68,9 @@ if ($esPeticionAjax) {
     <title>Ituzaingó a un Toque</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- OpenLayers: mapa open source. Version fija a proposito para que
+         una actualizacion del CDN no rompa el mapa sin aviso. -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@10.2.1/ol.css">
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="img/logo-removebg-preview.png" type="image/png">
 </head>
@@ -82,11 +85,13 @@ if ($esPeticionAjax) {
     <?php include 'footer.php'; ?>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/ol@10.2.1/dist/ol.js"></script>
     <script src="js/navegacion.js"></script>
     <script src="js/filtros.js"></script>
     <script src="js/favoritos.js"></script>
     <script src="js/galeria.js"></script>
     <script src="js/preview_imagen.js"></script>
     <script src="js/formularios_ajax.js"></script>
+    <script src="js/mapa.js"></script>
 </body>
 </html>
