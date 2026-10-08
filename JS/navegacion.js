@@ -59,6 +59,10 @@ function actualizarNavActivo(url) {
 // de entrada, sin cambiar nada en la barra de direcciones.
 history.replaceState({ url: location.pathname + location.search }, '', location.href);
 
+// Marca el link activo también en la carga inicial (F5, entrar por URL,
+// volver del login), no solo cuando se navega por click.
+actualizarNavActivo(location.href);
+
 document.addEventListener('click', function (evento) {
 
     // Botón "Página anterior" (local.php / prenda.php): como ahora sí

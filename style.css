@@ -108,6 +108,33 @@ body{
     background: #00953cce; 
     margin-top:1;
 }
+/* Hover del menú (Mapa / Catálogo / Favoritos) */
+.Header .nav-link {
+    transition: color 0.2s ease, background-color 0.2s ease, transform 0.2s ease;
+}
+
+.Header .nav-link:hover {
+    transform: translateY(-2px);
+}
+
+.Header .nav-link:not(.active):hover {
+    color: #00953c;
+    background: rgba(0, 149, 60, 0.12);
+}
+
+/* Hover del avatar */
+.avatar-circulo {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.avatar-circulo:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 0 4px rgba(0, 149, 60, 0.25);
+}
+
+.avatar-vendedor:hover {
+    box-shadow: 0 0 0 4px rgba(220, 53, 69, 0.25);
+}
 .Header .buscador-input{
     padding: 6px 12px 6px 35px;
     margin-bottom: 0;
