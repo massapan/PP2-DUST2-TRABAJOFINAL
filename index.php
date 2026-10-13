@@ -88,5 +88,6 @@ if ($esPeticionAjax) {
 <script src="JS/galeria.js"></script>
 <script src="JS/preview_imagen.js"></script>
 <script src="JS/formularios_ajax.js"></script>
+<script src="JS/eliminar_producto.js"></script>
 </body>
 </html>

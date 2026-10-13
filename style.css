@@ -473,6 +473,24 @@ body{
     color: #01ab45;
 }
 
+/* Tachito de "Mis productos": mismo círculo que el lápiz, pero a la
+   izquierda y en rojo. Es un <button>, por eso lleva padding:0 y cursor. */
+.btn-eliminar-producto {
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+    color: #dc3545;
+    cursor: pointer;
+}
+.btn-eliminar-producto:hover {
+    color: #a71d2a;
+}
+
 /* Corazón de favoritos: esquina inferior derecha de la card, al lado
    del precio. Reemplaza al viejo .btn-favorito (círculo blanco sobre
    la imagen) en catalogo.php, local.php, prenda.php, favoritos.php y
