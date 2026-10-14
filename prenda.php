@@ -7,7 +7,7 @@ include 'conexion.php';
 $producto_id = isset($_GET['id']) ? (int) $_GET['id'] : 0;
 
 $sql = "SELECT p.id, p.nombre_producto, p.descripcion, p.talle, p.precio, p.local_id, p.categoria_id,
-               l.nombre_local, c.nombre AS categoria_nombre
+               l.nombre_local, l.usuario_id AS dueno_id, c.nombre AS categoria_nombre
         FROM productos p
         INNER JOIN locales l ON p.local_id = l.id
         LEFT JOIN categorias_producto c ON p.categoria_id = c.id
@@ -102,6 +102,14 @@ $conexion->close();
             <div class="caja1">
                 <div id="nombre-prenda" class="d-flex align-items-center gap-3">
                     <h3 class="mb-0"><?php echo htmlspecialchars($producto['nombre_producto']); ?></h3>
+
+                    <?php if (isset($_SESSION['usuario_id']) && $_SESSION['usuario_id'] == $producto['dueno_id']): ?>
+                        <a href="index.php?pagina=subir-producto&id=<?php echo $producto['id']; ?>"
+                           class="enlace-interno" title="Editar mi producto">
+                            <i class="bi bi-pencil-square" style="font-size: 22px;"></i>
+                        </a>
+                    <?php endif; ?>
+
                     <button type="button" class="btn-favorito-inferior <?php echo $esFavorito ? 'activo' : ''; ?>"
                             data-tipo="producto" data-id="<?php echo $producto['id']; ?>"
                             title="Guardar en favoritos">

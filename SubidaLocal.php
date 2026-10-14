@@ -11,7 +11,7 @@ if (!isset($_SESSION['usuario_id']) || $_SESSION['rol'] !== 'vendedor') {
 
 include 'conexion.php';
 
-$sql = "SELECT nombre_local, direccion, entre_calles, descripcion, imagen_portada, instagram, whatsapp, facebook, tiktok
+$sql = "SELECT nombre_local, direccion, entre_calles, descripcion, imagen_portada, instagram, whatsapp, facebook, tiktok, latitud, longitud
         FROM locales WHERE usuario_id = ?";
 $stmt = $conexion->prepare($sql);
 $stmt->bind_param("i", $_SESSION['usuario_id']);
@@ -62,6 +62,36 @@ $modoEdicion = (bool) $local;
        class="form-control" style="border: 1px solid #ccc; color: gray;"
        placeholder="Entre calles (opcional)"
        value="<?php echo htmlspecialchars($local['entre_calles'] ?? ''); ?>">
+                </div>
+
+                <!-- Ubicacion en el mapa. Los valores viajan en campos
+                     ocultos: al vendedor no se le pide escribir coordenadas,
+                     las completa JS/mapa-selector.js cuando toca el mapa. -->
+                <div id="ubicacion-local" class="mt-3">
+                    <p class="mb-2 text-muted" style="font-size: 14px;">
+                        Ubicación en el mapa (opcional)
+                    </p>
+                    <p class="mb-2 text-muted" style="font-size: 12px;">
+                        Tocá el mapa para marcar dónde está tu local. Sin esto,
+                        tu local no aparece en la pestaña Mapa.
+                    </p>
+
+                    <div id="selectorMapa" class="selector-mapa">
+                        <p class="mapa-aviso">Cargando el mapa…</p>
+                    </div>
+
+                    <div class="d-flex align-items-center gap-2 mt-2">
+                        <span id="selectorMapaEstado" class="text-muted" style="font-size: 13px;"></span>
+                        <button type="button" id="selectorMapaBorrar"
+                                class="btn btn-sm btn-outline-secondary ms-auto" hidden>
+                            Quitar ubicación
+                        </button>
+                    </div>
+
+                    <input type="hidden" id="latitud" name="latitud"
+                           value="<?php echo htmlspecialchars($local['latitud'] ?? ''); ?>">
+                    <input type="hidden" id="longitud" name="longitud"
+                           value="<?php echo htmlspecialchars($local['longitud'] ?? ''); ?>">
                 </div>
 
                 <div id="descripcion-local">

@@ -229,6 +229,7 @@ CREATE TABLE `productos` (
   `local_id` int(11) NOT NULL,
   `nombre_producto` varchar(100) NOT NULL,
   `descripcion` text DEFAULT NULL,
+  `talle` varchar(50) DEFAULT NULL,
   `precio` decimal(10,2) NOT NULL,
   `categoria_id` int(11) DEFAULT NULL,
   `creado_en` timestamp NOT NULL DEFAULT current_timestamp()
