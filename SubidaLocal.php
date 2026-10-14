@@ -130,31 +130,25 @@ $modoEdicion = (bool) $local;
        accept="image/*" multiple
        style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;">
                 </div>
-                
-                         <div style="text-align: right; margin-top: 15px;">
-    <?php if (!$local): ?>
-        <a href="index.php" class="btn boton text-decoration-none" style="margin-right: 15px;">
-            Omitir por ahora
-        </a>
-    <?php endif; ?>
-      <button type="submit" class="btn d-inline-block text-center boton">
-        <?php echo $local ? 'Guardar Cambios' : 'Guardar Local'; ?>
-      </button>
-</div>
-            </form>
 
-        </div>
+            </div><!-- /caja2 -->
 
-        <div style="text-align: right; margin-top: 15px;">
-            <?php if (!$local): ?>
-                <a href="index.php" class="enlace-interno btn boton text-decoration-none" style="margin-right: 15px;">
+        </div><!-- /superior -->
+
+        <!-- Único bloque de botones, DENTRO del form y FUERA de caja2/superior -->
+        <div class="d-flex justify-content-end align-items-center gap-3 mt-3">
+            <?php if (!$modoEdicion): ?>
+                <a href="index.php" class="enlace-interno btn boton text-decoration-none"
+                   style="white-space: nowrap; flex-shrink: 0;">
                     Omitir por ahora
                 </a>
             <?php endif; ?>
-            <button type="submit" class="btn d-inline-block text-center boton">
-                Guardar Local
+            <button type="submit" class="btn boton"
+                    style="width: auto; min-width: 180px; white-space: nowrap; flex-shrink: 0;">
+                <?php echo $modoEdicion ? 'Guardar Cambios' : 'Guardar Local'; ?>
             </button>
         </div>
+
     </form>
 
 </div>
