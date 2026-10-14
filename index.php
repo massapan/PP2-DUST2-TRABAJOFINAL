@@ -85,13 +85,15 @@ if ($esPeticionAjax) {
     <?php include 'footer.php'; ?>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- OpenLayers: lo usa JS/mapa.js -->
     <script src="https://cdn.jsdelivr.net/npm/ol@10.2.1/dist/ol.js"></script>
-    <script src="js/navegacion.js"></script>
-    <script src="js/filtros.js"></script>
-    <script src="js/favoritos.js"></script>
-    <script src="js/galeria.js"></script>
-    <script src="js/preview_imagen.js"></script>
-    <script src="js/formularios_ajax.js"></script>
-    <script src="js/mapa.js"></script>
+    <script src="JS/navegacion.js"></script>
+    <script src="JS/filtros.js"></script>
+    <script src="JS/favoritos.js"></script>
+    <script src="JS/galeria.js"></script>
+    <script src="JS/preview_imagen.js"></script>
+    <script src="JS/formularios_ajax.js"></script>
+    <script src="JS/eliminar_producto.js"></script>
+    <script src="JS/mapa.js"></script>
 </body>
 </html>

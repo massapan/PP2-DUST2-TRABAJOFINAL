@@ -96,6 +96,16 @@ $conexion->close();
                                 <i class="bi bi-pencil-square"></i>
                             </a>
 
+                            <button type="button"
+                                    class="btn-eliminar-producto position-absolute top-0 start-0 m-2 bg-white rounded-circle"
+                                    style="z-index: 3;"
+                                    data-id="<?php echo $producto['id']; ?>"
+                                    data-nombre="<?php echo htmlspecialchars($producto['nombre_producto']); ?>"
+                                    title="Eliminar producto"
+                                    aria-label="Eliminar producto">
+                                <i class="bi bi-trash"></i>
+                            </button>
+
                             <a href="index.php?pagina=prenda&id=<?php echo $producto['id']; ?>"
                                class="enlace-interno text-decoration-none text-dark stretched-link">
                                 <img src="<?php echo htmlspecialchars($producto['imagen_ruta']); ?>"
@@ -132,5 +142,27 @@ $conexion->close();
 
         <?php endif; ?>
 
+    </div>
+</div>
+
+<!-- Modal de confirmación para borrar (lo abre y completa JS/eliminar_producto.js) -->
+<div class="modal fade" id="modalConfirmarEliminar" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body text-center p-4">
+                <i class="bi bi-exclamation-triangle text-danger" style="font-size: 40px;"></i>
+                <h4 class="mt-2 mb-3">¿Eliminar este producto?</h4>
+                <p class="mb-1 fw-bold modal-nombre-producto"></p>
+                <p class="text-muted mb-0">
+                    Se borran también sus fotos y se saca de los favoritos de los
+                    usuarios. Esta acción no se puede deshacer.
+                </p>
+                <p class="text-danger small mt-3 mb-0 modal-error-eliminar d-none"></p>
+            </div>
+            <div class="modal-footer justify-content-center border-0 pb-4">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-danger" id="btnConfirmarEliminar">Sí, eliminar</button>
+            </div>
+        </div>
     </div>
 </div>

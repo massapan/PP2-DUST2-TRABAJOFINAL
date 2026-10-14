@@ -1,9 +1,19 @@
 <?php
 // Parámetros de la base de datos
-$servidor = "localhost";
-$usuario = "root";
-$password = ""; 
-$base_datos = "ituzaingo_a_un_toque"; 
+// Parámetros de la base de datos
+if ($_SERVER['HTTP_HOST'] === 'localhost') {
+    // XAMPP (cada uno en su compu)
+    $servidor   = "localhost";
+    $usuario    = "root";
+    $password   = "";
+    $base_datos = "ituzaingo_a_un_toque";
+} else {
+    // InfinityFree 
+    $servidor   = "xxx";
+    $usuario    = "xxx";
+    $password   = "xxx";
+    $base_datos = "xxx";
+}
 
 //Crear la conexión usando mysqli
 $conexion = new mysqli($servidor, $usuario, $password, $base_datos);
