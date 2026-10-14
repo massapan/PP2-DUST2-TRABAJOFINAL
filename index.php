@@ -95,5 +95,6 @@ if ($esPeticionAjax) {
     <script src="JS/formularios_ajax.js"></script>
     <script src="JS/eliminar_producto.js"></script>
     <script src="JS/mapa.js"></script>
+    <script src="JS/mapa-selector.js"></script>
 </body>
 </html>
