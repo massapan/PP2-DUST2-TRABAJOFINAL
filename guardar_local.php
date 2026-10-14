@@ -28,6 +28,29 @@ $whatsapp  = trim($_POST['whatsapp'] ?? '');
 $facebook  = trim($_POST['facebook'] ?? '');
 $tiktok    = trim($_POST['tiktok'] ?? '');
 
+// Coordenadas del local. Vienen de los campos ocultos que completa el
+// mapa de JS/mapa-selector.js al tocar la ubicacion.
+//
+// Se validan igual del lado del servidor: el formulario puede saltearse
+// mandando el POST a mano, y una coordenada fuera de rango dejaria el
+// marcador en cualquier parte del mundo. Si no son validas se guarda
+// NULL, que es como el mapa representa "este local no es ubicable".
+$latitud  = null;
+$longitud = null;
+
+$lat_post = trim($_POST['latitud'] ?? '');
+$lon_post = trim($_POST['longitud'] ?? '');
+
+if (is_numeric($lat_post) && is_numeric($lon_post)) {
+    $lat_num = (float) $lat_post;
+    $lon_num = (float) $lon_post;
+
+    if ($lat_num >= -90 && $lat_num <= 90 && $lon_num >= -180 && $lon_num <= 180) {
+        $latitud  = $lat_num;
+        $longitud = $lon_num;
+    }
+}
+
 // Si vinieron vacíos, los guardamos como NULL (no como string vacío)
 $instagram = $instagram !== '' ? $instagram : null;
 $whatsapp  = $whatsapp  !== '' ? $whatsapp  : null;
@@ -71,8 +94,8 @@ if (!$subio_portada_nueva && $local_existente) {
     }
 }
 
-$sql = "INSERT INTO locales (usuario_id, nombre_local, direccion, entre_calles, descripcion, imagen_portada, instagram, whatsapp, facebook, tiktok)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+$sql = "INSERT INTO locales (usuario_id, nombre_local, direccion, entre_calles, descripcion, imagen_portada, instagram, whatsapp, facebook, tiktok, latitud, longitud)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         ON DUPLICATE KEY UPDATE
             nombre_local = VALUES(nombre_local),
             direccion = VALUES(direccion),
@@ -82,7 +105,9 @@ $sql = "INSERT INTO locales (usuario_id, nombre_local, direccion, entre_calles, 
             instagram = VALUES(instagram),
             whatsapp = VALUES(whatsapp),
             facebook = VALUES(facebook),
-            tiktok = VALUES(tiktok)";
+            tiktok = VALUES(tiktok),
+            latitud = VALUES(latitud),
+            longitud = VALUES(longitud)";
 $stmt = $conexion->prepare($sql);
 
 if (!$stmt) {
@@ -91,7 +116,7 @@ if (!$stmt) {
     exit();
 }
 
-$stmt->bind_param("isssssssss", $usuario_id, $nombre_local, $direccion, $entre_calles, $descripcion, $ruta_imagen, $instagram, $whatsapp, $facebook, $tiktok);
+$stmt->bind_param("isssssssssdd", $usuario_id, $nombre_local, $direccion, $entre_calles, $descripcion, $ruta_imagen, $instagram, $whatsapp, $facebook, $tiktok, $latitud, $longitud);
 
 if (!$stmt->execute()) {
     $error = $stmt->error;
